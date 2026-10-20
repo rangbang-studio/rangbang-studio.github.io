@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>RANGBANG · Order form</title>
+<link rel="icon" href="../magazine/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../magazine/fonts/fonts.css">
+</head>
+<body>
+
+<!-- 주문서 설정: endpoint가 비어 있으면 보내지 않고 미리보기 안내만 한다 -->
+<script type="application/json" id="order-config">
+{
+  "endpoint": "",
+  "domain": "https://rangbang-studio.github.io",
+  "turnaround": "3 business days"
+}
+</script>
+
+<style>
+/* RANGBANG 주문서 — Magazine 템플릿과 같은 지면 체계. 한 줄로 이어지는 양식, 섹션마다 번호 */
+:root{
+  --ink:#141414; --paper:#FFFFFF; --stock:#F1F0EC; --graphite:#5E5E5E; --rule:#D6D5D0; --accent:#A61C2C;
+  --display:'Bodoni Moda','Bodoni 72',Didot,Georgia,serif;
+  --text:'Archivo','Helvetica Neue',Arial,sans-serif;
+  color-scheme:light;
+}
+*{ box-sizing:border-box }
+html,body{ background:var(--stock) }
+body{ margin:0; font-family:var(--text); font-size:17px; line-height:1.55; color:var(--ink); -webkit-text-size-adjust:100% }
+p,h1,h2,h3,fieldset{ margin:0 }
+fieldset{ border:0; padding:0; min-width:0 }
+.wrap{ max-width:640px; margin:0 auto; background:var(--paper); padding-inline:20px; padding-block:28px 120px; min-height:100vh }
+.brand{ display:flex; justify-content:space-between; font-size:12px; font-weight:600; font-stretch:72%; letter-spacing:.14em; text-transform:uppercase; padding-bottom:8px; border-bottom:1.5px solid var(--ink) }
+h1{ font-family:var(--display); font-weight:500; font-size:40px; line-height:1.08; margin:24px 0 10px; text-wrap:balance }
+.lead{ font-family:var(--display); font-style:italic; font-size:20px; line-height:1.4 }
+.meta{ margin-top:14px; color:var(--graphite); font-size:15px }
+.sec{ margin-top:44px; display:grid; gap:18px }
+.sec-h{ display:grid; gap:2px; padding-bottom:8px; border-bottom:1.5px solid var(--ink) }
+.sec-h span{ font-size:13px; font-weight:600; font-stretch:72%; letter-spacing:.14em; text-transform:uppercase; color:var(--accent) }
+.sec-h h2{ font-family:var(--display); font-weight:500; font-size:28px; line-height:1.15 }
+.sec-h p{ color:var(--graphite); font-size:15px; margin-top:4px }
+.f{ display:grid; gap:6px; min-width:0 }
+.f > label,.f > .lab{ font-size:15px; font-weight:600 }
+.opt{ font-weight:400; color:var(--graphite) }
+.hint{ font-size:14px; color:var(--graphite); margin-top:-2px }
+.in{ width:100%; font:17px/1.4 var(--text); color:var(--ink); background:transparent; border:0; border-bottom:1.5px solid var(--ink); border-radius:0; padding:9px 0; -webkit-appearance:none; appearance:none }
+select.in{ background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%); background-position:calc(100% - 12px) 55%,calc(100% - 7px) 55%; background-size:5px 5px; background-repeat:no-repeat; padding-right:24px }
+textarea.in{ min-height:84px; resize:vertical }
+.in:focus{ outline:none; border-bottom-color:var(--accent); box-shadow:0 1.5px 0 var(--accent) }
+.row2{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px }
+.row3{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px }
+@media (max-width:420px){ .row3{ grid-template-columns:repeat(2,minmax(0,1fr)) } .row3 > :last-child{ grid-column:1/-1 } }
+.card{ border:1.5px solid var(--rule); padding:16px; display:grid; gap:14px }
+.card.off > :not(.card-h){ display:none }
+.card-h{ display:flex; align-items:center; justify-content:space-between; gap:12px }
+.card-h b{ font-family:var(--display); font-weight:500; font-size:22px }
+.toggle{ display:flex; align-items:center; gap:8px; font-size:15px; font-weight:600; cursor:pointer; min-height:44px }
+.toggle input,.choice input{ width:20px; height:20px; margin:0; accent-color:var(--ink) }
+.choices{ display:grid; gap:8px }
+.choices.inline{ grid-template-columns:repeat(auto-fit,minmax(130px,1fr)) }
+.choice{ display:flex; align-items:center; gap:10px; min-height:48px; padding:10px 12px; border:1.5px solid var(--rule); cursor:pointer }
+.choice:has(input:checked){ border-color:var(--ink); background:var(--stock) }
+.choice:has(input:focus-visible),.toggle:has(input:focus-visible){ outline:2px solid var(--accent); outline-offset:2px }
+.sw{ width:22px; height:22px; border-radius:50%; flex:none }
+.err{ color:var(--accent); font-size:14px; font-weight:600 }
+.err:empty{ display:none }
+.drop{ position:relative; display:grid; place-items:center; gap:4px; min-height:110px; padding:16px; border:1.5px dashed var(--ink); text-align:center; cursor:pointer }
+.drop input{ position:absolute; inset:0; opacity:0; cursor:pointer }
+.drop:has(input:focus-visible){ outline:2px solid var(--accent); outline-offset:3px }
+.thumbs{ display:grid; gap:12px }
+.thumb{ display:grid; grid-template-columns:72px minmax(0,1fr) auto; gap:12px; align-items:center }
+.thumb img{ width:72px; height:72px; object-fit:cover; display:block }
+.x{ width:44px; height:44px; border:1.5px solid var(--rule); background:none; cursor:pointer; font-size:18px }
+.btn{ display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:12px 20px; font:600 17px/1.2 var(--text); color:var(--paper); background:var(--ink); border:0; border-radius:0; cursor:pointer; width:100% }
+.btn[disabled]{ opacity:.55; cursor:progress }
+.add{ justify-self:start; background:none; border:0; padding:6px 0; font:600 15px var(--text); text-decoration:underline; text-underline-offset:3px; cursor:pointer; color:var(--ink) }
+.submit{ margin-top:48px; display:grid; gap:12px }
+.done{ display:grid; gap:14px; margin-top:32px }
+.done h2{ font-family:var(--display); font-weight:500; font-size:36px; line-height:1.1 }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:3px }
+</style>
+
+<main class="wrap">
+  <div class="brand"><span>RANGBANG</span><span>Order form</span></div>
+  <h1>Your invitation details</h1>
+  <p class="lead">Fill this in once and we build the whole invitation from it.</p>
+  <p class="meta">About 15 minutes. Your answers save on this device as you go, so you can come back later. Only the starred fields are required. Anything you leave blank is simply left out.</p>
+
+  <form id="order" novalidate>
+
+    <section class="sec">
+      <div class="sec-h"><span>1 of 12</span><h2>Your order</h2></div>
+      <div class="row2">
+        <div class="f"><label for="o-order">Etsy order number *</label><input class="in" id="o-order" name="order" inputmode="numeric" autocomplete="off"><p class="err" data-err="order"></p></div>
+        <div class="f"><label for="o-email">Your email *</label><input class="in" id="o-email" name="email" type="email" autocomplete="email"><p class="err" data-err="email"></p></div>
+      </div>
+      <p class="hint">We send your preview through Etsy messages. The email is for your RSVP sheet.</p>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>2 of 12</span><h2>The two of you</h2><p>First names go on the cover, as big as they fit.</p></div>
+      <div class="row2">
+        <div class="f"><label for="c-a">First name *</label><input class="in" id="c-a" name="firstA" autocomplete="off"><p class="err" data-err="firstA"></p></div>
+        <div class="f"><label for="c-b">First name *</label><input class="in" id="c-b" name="firstB" autocomplete="off"><p class="err" data-err="firstB"></p></div>
+        <div class="f"><label for="c-af">Full name *</label><input class="in" id="c-af" name="fullA" autocomplete="off"><p class="err" data-err="fullA"></p></div>
+        <div class="f"><label for="c-bf">Full name *</label><input class="in" id="c-bf" name="fullB" autocomplete="off"><p class="err" data-err="fullB"></p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>3 of 12</span><h2>The day</h2></div>
+      <div class="row3">
+        <div class="f"><label for="d-date">Wedding date *</label><input class="in" id="d-date" name="date" type="date"><p class="err" data-err="date"></p></div>
+        <div class="f"><label for="d-time">Ceremony starts *</label><input class="in" id="d-time" name="time" type="time"><p class="err" data-err="time"></p></div>
+        <div class="f"><label for="d-end">Party ends</label><input class="in" id="d-end" name="end" type="time"></div>
+      </div>
+      <div class="row2">
+        <div class="f"><label for="d-tz">Time zone *</label>
+          <select class="in" id="d-tz" name="tz">
+            <option value="America/New_York">Eastern (ET)</option>
+            <option value="America/Chicago">Central (CT)</option>
+            <option value="America/Denver">Mountain (MT)</option>
+            <option value="America/Phoenix">Arizona (MST)</option>
+            <option value="America/Los_Angeles">Pacific (PT)</option>
+            <option value="America/Anchorage">Alaska (AKT)</option>
+            <option value="Pacific/Honolulu">Hawaii (HT)</option>
+            <option value="other">Somewhere else</option>
+          </select>
+        </div>
+        <div class="f"><label for="d-city">City and state *</label><input class="in" id="d-city" name="city" placeholder="Chicago, Illinois" autocomplete="off"><p class="err" data-err="city"></p></div>
+      </div>
+      <div class="f" id="tzOtherBox" hidden><label for="d-tzo">Which time zone?</label><input class="in" id="d-tzo" name="tzOther" placeholder="Europe/Rome, or the city name"></div>
+      <div class="row2">
+        <div class="f"><label for="v-name">Venue name *</label><input class="in" id="v-name" name="venue" autocomplete="off"><p class="err" data-err="venue"></p></div>
+        <div class="f"><label for="v-addr">Venue address *</label><input class="in" id="v-addr" name="address" autocomplete="off"><p class="err" data-err="address"></p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>4 of 12</span><h2>The weekend</h2><p>Turn off anything you’re not hosting. The ceremony is filled in from above.</p></div>
+      <div id="events"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>5 of 12</span><h2>Getting there</h2></div>
+      <div class="f"><label for="g-park">Parking <span class="opt">(optional)</span></label><input class="in" id="g-park" name="parking" placeholder="Valet at the entrance, $30"></div>
+      <div class="f"><label for="g-transit">Public transit <span class="opt">(optional)</span></label><input class="in" id="g-transit" name="transit"></div>
+      <div class="f"><label for="g-ride">Rideshare drop-off <span class="opt">(optional)</span></label><input class="in" id="g-ride" name="rideshare"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>6 of 12</span><h2>Where to stay</h2><p>Room blocks and nearby airports. Leave blank to skip.</p></div>
+      <div id="hotels"></div>
+      <div id="airports"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>7 of 12</span><h2>Reply card</h2></div>
+      <div class="row2">
+        <div class="f"><label for="r-by">Reply by *</label><input class="in" id="r-by" name="rsvpBy" type="date"><p class="err" data-err="rsvpBy"></p></div>
+        <div class="f"><span class="lab">Guests can bring a plus-one</span>
+          <div class="choices inline"><label class="choice"><input type="radio" name="plusOne" value="yes" checked> Yes</label><label class="choice"><input type="radio" name="plusOne" value="no"> No</label></div>
+        </div>
+      </div>
+      <div class="f"><label for="r-meals">Dinner choices <span class="opt">(one per line, optional)</span></label><textarea class="in" id="r-meals" name="meals" rows="3" placeholder="Braised short rib&#10;Seared halibut&#10;Mushroom risotto (vegetarian)"></textarea></div>
+      <label class="toggle"><input type="checkbox" name="song" checked> Ask guests for a song request</label>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>8 of 12</span><h2>Gifts</h2><p>Registry or cash fund links. Leave blank to skip the page.</p></div>
+      <div id="gifts"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>9 of 12</span><h2>Your words</h2><p>A short note to guests and the story of how you met. Rough is fine. We edit for length and flow and show you before anything goes live.</p></div>
+      <div class="f"><label for="w-letter">A note to your guests <span class="opt">(optional)</span></label><textarea class="in" id="w-letter" name="letter" rows="4"></textarea></div>
+      <div class="f"><label for="w-story">How you met <span class="opt">(optional)</span></label><textarea class="in" id="w-story" name="story" rows="6" placeholder="Where, when, what happened. A few sentences is plenty."></textarea></div>
+      <label class="toggle"><input type="checkbox" name="writeForUs"> Please write the story for us from these notes</label>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>10 of 12</span><h2>Dress code and Q&amp;A</h2></div>
+      <div class="row2">
+        <div class="f"><label for="s-code">Dress code <span class="opt">(optional)</span></label><input class="in" id="s-code" name="dress" placeholder="Black tie optional"></div>
+        <div class="f"><label for="s-weather">Weather note <span class="opt">(optional)</span></label><input class="in" id="s-weather" name="weather" placeholder="Evenings are cool, bring a coat"></div>
+      </div>
+      <div class="row2">
+        <div class="f"><label for="s-yes">Yes, please <span class="opt">(one per line)</span></label><textarea class="in" id="s-yes" name="dressYes" rows="3"></textarea></div>
+        <div class="f"><label for="s-skip">Maybe skip <span class="opt">(one per line)</span></label><textarea class="in" id="s-skip" name="dressSkip" rows="3"></textarea></div>
+      </div>
+      <div id="faq"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>11 of 12</span><h2>Photos</h2><p>One cover photo, then up to eight for the photo pages. Your phone’s original photos are best. We resize them here before sending.</p></div>
+      <div class="f"><span class="lab">Cover photo</span><label class="drop"><input type="file" id="p-cover" accept="image/jpeg,image/png,image/webp"><b>Choose the cover photo</b><span class="hint">Portrait (tall) photos work best</span></label><div class="thumbs" id="t-cover"></div></div>
+      <div class="f"><span class="lab">Story photo <span class="opt">(optional)</span></span><label class="drop"><input type="file" id="p-feature" accept="image/jpeg,image/png,image/webp"><b>Choose a photo for your story</b><span class="hint">Landscape (wide) works best</span></label><div class="thumbs" id="t-feature"></div></div>
+      <div class="f"><span class="lab">Photo pages <span class="opt">(up to 8, add a caption to each)</span></span><label class="drop"><input type="file" id="p-gallery" accept="image/jpeg,image/png,image/webp" multiple><b>Choose photos</b><span class="hint">You can pick several at once</span></label><div class="thumbs" id="t-gallery"></div></div>
+      <p class="err" id="photoErr"></p>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><span>12 of 12</span><h2>The finishing touches</h2></div>
+      <div class="f"><span class="lab">Accent color</span>
+        <div class="choices inline">
+          <label class="choice"><input type="radio" name="accent" value="crimson" checked><span class="sw" style="background:#A61C2C"></span> Crimson</label>
+          <label class="choice"><input type="radio" name="accent" value="cobalt"><span class="sw" style="background:#2B44C4"></span> Cobalt</label>
+          <label class="choice"><input type="radio" name="accent" value="oxblood"><span class="sw" style="background:#6D1A27"></span> Oxblood</label>
+        </div>
+      </div>
+      <div class="f"><label for="x-slug">Web address</label><input class="in" id="x-slug" name="slug" autocomplete="off"><p class="hint" id="slugHint"></p></div>
+      <div class="f"><label for="x-notes">Anything else we should know? <span class="opt">(optional)</span></label><textarea class="in" id="x-notes" name="notes" rows="3"></textarea></div>
+    </section>
+
+    <div class="submit">
+      <button class="btn" type="submit" id="send">Send my details</button>
+      <p class="err" id="sendErr"></p>
+      <p class="hint">We reply with a preview link within <span id="turn"></span>. You can ask for changes before it goes live.</p>
+    </div>
+  </form>
+
+  <div class="done" id="done" hidden tabindex="-1"></div>
+</main>
+
+<script>
+(() => {
+  'use strict';
+  const CFG = JSON.parse(document.getElementById('order-config').textContent);
+  const $ = (s, el) => (el || document).querySelector(s);
+  const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
+  const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  const form = $('#order');
+  const KEY = 'rangbang-order-draft';
+  $('#turn').textContent = CFG.turnaround;
+
+  /* ── 반복 칸 ── */
+  const EVENTS = [
+    { id: 'welcome', name: 'Welcome Drinks', on: false },
+    { id: 'ceremony', name: 'The Ceremony', on: true, main: true },
+    { id: 'reception', name: 'Dinner & Dancing', on: true },
+    { id: 'brunch', name: 'Farewell Brunch', on: false }
+  ];
+  $('#events').innerHTML = EVENTS.map(e => `
+    <div class="card${e.on ? '' : ' off'}" data-event="${e.id}">
+      <div class="card-h"><b>${esc(e.name)}</b><label class="toggle"><input type="checkbox" name="ev-${e.id}-on"${e.on ? ' checked' : ''}> Include</label></div>
+      <div class="f"><label for="ev-${e.id}-name">Name on the page</label><input class="in" id="ev-${e.id}-name" name="ev-${e.id}-name" value="${esc(e.name)}"></div>
+      <div class="row3">
+        <div class="f"><label for="ev-${e.id}-date">Date</label><input class="in" id="ev-${e.id}-date" name="ev-${e.id}-date" type="date"></div>
+        <div class="f"><label for="ev-${e.id}-start">Starts</label><input class="in" id="ev-${e.id}-start" name="ev-${e.id}-start" type="time"></div>
+        <div class="f"><label for="ev-${e.id}-end">Ends</label><input class="in" id="ev-${e.id}-end" name="ev-${e.id}-end" type="time"></div>
+      </div>
+      <div class="row2">
+        <div class="f"><label for="ev-${e.id}-place">Place</label><input class="in" id="ev-${e.id}-place" name="ev-${e.id}-place"></div>
+        <div class="f"><label for="ev-${e.id}-address">Address</label><input class="in" id="ev-${e.id}-address" name="ev-${e.id}-address"></div>
+      </div>
+      <div class="row2">
+        <div class="f"><label for="ev-${e.id}-attire">Attire</label><input class="in" id="ev-${e.id}-attire" name="ev-${e.id}-attire"></div>
+        <div class="f"><label for="ev-${e.id}-note">Note for guests</label><input class="in" id="ev-${e.id}-note" name="ev-${e.id}-note"></div>
+      </div>
+    </div>`).join('');
+  $('#hotels').innerHTML = [1, 2].map(i => `
+    <div class="card"><div class="card-h"><b>Hotel ${i}</b></div>
+      <div class="row2"><div class="f"><label for="h${i}-name">Hotel name</label><input class="in" id="h${i}-name" name="h${i}-name"></div><div class="f"><label for="h${i}-rate">Rate</label><input class="in" id="h${i}-rate" name="h${i}-rate" placeholder="$289 a night"></div></div>
+      <div class="f"><label for="h${i}-note">A line about it</label><input class="in" id="h${i}-note" name="h${i}-note" placeholder="Five minutes from the venue"></div>
+      <div class="row3"><div class="f"><label for="h${i}-code">Booking code</label><input class="in" id="h${i}-code" name="h${i}-code"></div><div class="f"><label for="h${i}-by">Book by</label><input class="in" id="h${i}-by" name="h${i}-by" type="date"></div><div class="f"><label for="h${i}-url">Booking link</label><input class="in" id="h${i}-url" name="h${i}-url" type="url" placeholder="https://"></div></div>
+    </div>`).join('');
+  $('#airports').innerHTML = `<div class="card"><div class="card-h"><b>Airports</b></div>${[1, 2].map(i => `
+      <div class="row3"><div class="f"><label for="a${i}-code">Code</label><input class="in" id="a${i}-code" name="a${i}-code" placeholder="ORD" maxlength="4"></div><div class="f"><label for="a${i}-name">Airport</label><input class="in" id="a${i}-name" name="a${i}-name"></div><div class="f"><label for="a${i}-time">Travel time</label><input class="in" id="a${i}-time" name="a${i}-time" placeholder="35 min by car"></div></div>`).join('')}</div>`;
+  $('#gifts').innerHTML = [['Registry', 'Open the registry'], ['Honeymoon fund', 'Add to the fund']].map((g, i) => `
+    <div class="card"><div class="card-h"><b>${g[0]}</b></div>
+      <div class="row2"><div class="f"><label for="gf${i}-name">Where</label><input class="in" id="gf${i}-name" name="gf${i}-name" placeholder="${i ? 'Lisbon & Porto' : 'Zola'}"></div><div class="f"><label for="gf${i}-url">Link</label><input class="in" id="gf${i}-url" name="gf${i}-url" type="url" placeholder="https://"></div></div>
+      <div class="f"><label for="gf${i}-note">A line about it</label><input class="in" id="gf${i}-note" name="gf${i}-note"></div>
+      <input type="hidden" name="gf${i}-label" value="${g[0]}"><input type="hidden" name="gf${i}-button" value="${g[1]}">
+    </div>`).join('');
+  const FAQ = [
+    ['Can I bring a guest?', ''], ['Are children welcome?', ''], ['What time should I arrive?', ''],
+    ['Can I take photos during the ceremony?', ''], ['Is the venue accessible?', ''], ['', '']
+  ];
+  $('#faq').innerHTML = `<div class="card"><div class="card-h"><b>Questions guests ask</b></div><p class="hint">Answer the ones that apply. Blank answers are left out.</p>${FAQ.map((q, i) => `
+      <div class="f"><label for="q${i}-q">Question</label><input class="in" id="q${i}-q" name="q${i}-q" value="${esc(q[0])}"></div>
+      <div class="f"><label for="q${i}-a">Answer</label><textarea class="in" id="q${i}-a" name="q${i}-a" rows="2"></textarea></div>`).join('')}</div>`;
+
+  /* ── 입력 연동 ── */
+  form.addEventListener('change', e => {
+    const t = e.target;
+    const m = /^ev-(\w+)-on$/.exec(t.name || '');
+    if (m) t.closest('.card').classList.toggle('off', !t.checked);
+    if (t.name === 'tz') $('#tzOtherBox').hidden = t.value !== 'other';
+  });
+  const slugify = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  let slugTouched = false;
+  $('#x-slug').addEventListener('input', () => { slugTouched = true; showSlug(); });
+  function showSlug() {
+    const v = slugify($('#x-slug').value) || 'your-names';
+    $('#slugHint').textContent = CFG.domain.replace(/^https?:\/\//, '') + '/' + v;
+  }
+  form.addEventListener('input', e => {
+    const n = e.target.name;
+    if ((n === 'firstA' || n === 'firstB') && !slugTouched) {
+      $('#x-slug').value = slugify([form.firstA.value, form.firstB.value].filter(Boolean).join('-'));
+    }
+    if (n === 'date' || n === 'time' || n === 'end' || n === 'venue' || n === 'address') {
+      const map = { date: 'date', time: 'start', end: 'end', venue: 'place', address: 'address' };
+      ['ceremony', 'reception'].forEach(id => {
+        const key = map[n];
+        if (id === 'reception' && key === 'start') return;
+        if (id === 'ceremony' && key === 'end') return;
+        const el = form['ev-' + id + '-' + key];
+        if (el && (!el.value || el.dataset.auto === '1')) { el.value = e.target.value; el.dataset.auto = '1'; }
+      });
+    }
+    saveDraft();
+  });
+  showSlug();
+
+  /* ── 임시 저장 (이 기기에만) ── */
+  let saveTimer = 0;
+  function saveDraft() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      const data = {};
+      $$('input,select,textarea', form).forEach(el => {
+        if (!el.name || el.type === 'file') return;
+        if (el.type === 'checkbox') data[el.name] = el.checked;
+        else if (el.type === 'radio') { if (el.checked) data[el.name] = el.value; }
+        else data[el.name] = el.value;
+      });
+      try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) { /* 저장이 막힌 브라우저는 그냥 넘어간다 */ }
+    }, 400);
+  }
+  form.addEventListener('change', saveDraft);
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (d) $$('input,select,textarea', form).forEach(el => {
+      if (!el.name || el.type === 'file' || !(el.name in d)) return;
+      if (el.type === 'checkbox') { el.checked = !!d[el.name]; const m = /^ev-(\w+)-on$/.exec(el.name); if (m) el.closest('.card').classList.toggle('off', !el.checked); }
+      else if (el.type === 'radio') el.checked = d[el.name] === el.value;
+      else el.value = d[el.name];
+    });
+    if (d && d.slug) slugTouched = true;
+    $('#tzOtherBox').hidden = form.tz.value !== 'other';
+    showSlug();
+  } catch (e) { /* 저장된 초안이 없거나 읽을 수 없음 */ }
+
+  /* ── 사진: 브라우저에서 줄여 보낸다 ── */
+  const photos = { cover: [], feature: [], gallery: [] };
+  const LIMIT = { cover: 1, feature: 1, gallery: 8 };
+  async function shrink(file) {
+    const url = URL.createObjectURL(file);
+    try {
+      const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url; });
+      const scale = Math.min(1, 2000 / Math.max(img.naturalWidth, img.naturalHeight));
+      const w = Math.round(img.naturalWidth * scale), h = Math.round(img.naturalHeight * scale);
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      const dataUrl = c.toDataURL('image/jpeg', 0.86);
+      return { dataUrl, w, h };
+    } finally { URL.revokeObjectURL(url); }
+  }
+  function renderThumbs(kind) {
+    $('#t-' + kind).innerHTML = photos[kind].map((p, i) => `
+      <div class="thumb"><img src="${p.dataUrl}" alt="">
+        ${kind === 'gallery' ? `<div class="f"><label for="cap-${i}">Caption</label><input class="in" id="cap-${i}" data-cap="${i}" value="${esc(p.caption || '')}" placeholder="Where and when"></div>` : `<span class="hint">${p.w} × ${p.h}</span>`}
+        <button class="x" type="button" data-rm="${kind}:${i}" aria-label="Remove photo">✕</button></div>`).join('');
+  }
+  ['cover', 'feature', 'gallery'].forEach(kind => {
+    $('#p-' + kind).addEventListener('change', async e => {
+      $('#photoErr').textContent = '';
+      for (const f of Array.from(e.target.files)) {
+        if (photos[kind].length >= LIMIT[kind]) { if (kind !== 'gallery') photos[kind] = []; else { $('#photoErr').textContent = 'Up to 8 photos for the photo pages.'; break; } }
+        try { photos[kind].push(await shrink(f)); }
+        catch (err) { $('#photoErr').textContent = 'One photo couldn’t be read. Please use JPG or PNG.'; }
+      }
+      e.target.value = '';
+      renderThumbs(kind);
+    });
+  });
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-rm]'); if (!b) return;
+    const [kind, i] = b.dataset.rm.split(':'); photos[kind].splice(+i, 1); renderThumbs(kind);
+  });
+  document.addEventListener('input', e => { const i = e.target.dataset && e.target.dataset.cap; if (i != null) photos.gallery[+i].caption = e.target.value; });
+
+  /* ── 설정으로 바꾸기: 키 이름이 청첩장 설정 블록과 같다 ── */
+  const val = n => String((form[n] && form[n].value) || '').trim();
+  const lines = n => val(n).split(/\n+/).map(s => s.trim()).filter(Boolean);
+  const paras = n => val(n).split(/\n\s*\n|\n/).map(s => s.trim()).filter(Boolean);
+  const TZ_LABEL = { 'America/New_York': 'ET', 'America/Chicago': 'CT', 'America/Denver': 'MT', 'America/Phoenix': 'MST', 'America/Los_Angeles': 'PT', 'America/Anchorage': 'AKT', 'Pacific/Honolulu': 'HT' };
+  function utcOffset(tz, ymd, hm) {
+    try {
+      const [y, m, d] = ymd.split('-').map(Number), [H, M] = (hm || '12:00').split(':').map(Number);
+      const guess = Date.UTC(y, m - 1, d, H, M);
+      const parts = new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date(guess));
+      const g = t => +parts.find(p => p.type === t).value;
+      const off = Math.round((Date.UTC(g('year'), g('month') - 1, g('day'), g('hour') % 24, g('minute')) - guess) / 60000);
+      const a = Math.abs(off);
+      return (off < 0 ? '-' : '+') + String(Math.floor(a / 60)).padStart(2, '0') + ':' + String(a % 60).padStart(2, '0');
+    } catch (e) { return ''; }
+  }
+  const addMinutes = (hm, n) => { const [h, m] = hm.split(':').map(Number); const t = Math.min(h * 60 + m + n, 23 * 60 + 59); return String(Math.floor(t / 60)).padStart(2, '0') + ':' + String(t % 60).padStart(2, '0'); };
+  const nextDay = ymd => { const [y, m, d] = ymd.split('-').map(Number); const t = new Date(Date.UTC(y, m - 1, d + 1)); return t.toISOString().slice(0, 10); };
+  const ratioOf = p => { const r = p.w / p.h; const opts = [['4/5', .8], ['1/1', 1], ['3/2', 1.5], ['2/3', .667], ['16/9', 1.778]]; return opts.reduce((a, b) => (Math.abs(b[1] - r) < Math.abs(a[1] - r) ? b : a))[0]; };
+  const MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const WD = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  function buildConfig() {
+    const tz = form.tz.value === 'other' ? val('tzOther') : form.tz.value;
+    const date = val('date'), time = val('time'), end = val('end');
+    const slug = slugify(val('slug')) || slugify(val('firstA') + '-' + val('firstB'));
+    const [y, m, d] = date.split('-').map(Number);
+    const long = WD[new Date(Date.UTC(y, m - 1, d)).getUTCDay()] + ', ' + MON[m - 1] + ' ' + d + ', ' + y;
+    const events = EVENTS.filter(e => form['ev-' + e.id + '-on'].checked).map(e => {
+      const g = k => val('ev-' + e.id + '-' + k);
+      const ed = g('date') || date;
+      // 리셉션 시작을 비우면 예식 1시간 뒤로 둔다
+      const start = g('start') || (e.id === 'reception' ? addMinutes(time, 60) : time);
+      const endDate = g('end') && g('end') < start ? nextDay(ed) : ed;
+      return { id: e.id, show: true, main: !!e.main, name: g('name') || e.name, start: ed + 'T' + start, end: g('end') ? endDate + 'T' + g('end') : '', place: g('place'), address: g('address'), attire: g('attire'), note: g('note') };
+    });
+    const hotels = [1, 2].map(i => ({ name: val('h' + i + '-name'), note: val('h' + i + '-note'), rate: val('h' + i + '-rate'), code: val('h' + i + '-code'), bookBy: val('h' + i + '-by'), url: val('h' + i + '-url') })).filter(h => h.name);
+    const airports = [1, 2].map(i => ({ code: val('a' + i + '-code').toUpperCase(), name: val('a' + i + '-name'), time: val('a' + i + '-time') })).filter(a => a.code || a.name);
+    const registry = [0, 1].map(i => ({ label: val('gf' + i + '-label'), name: val('gf' + i + '-name'), note: val('gf' + i + '-note'), button: val('gf' + i + '-button'), url: val('gf' + i + '-url') })).filter(g => g.name || g.url);
+    const faq = [0, 1, 2, 3, 4, 5].map(i => ({ q: val('q' + i + '-q'), a: val('q' + i + '-a') })).filter(f => f.q && f.a);
+    const A = val('firstA'), B = val('firstB');
+    const cfg = {
+      draft: false, lang: 'en', accent: (form.querySelector('input[name=accent]:checked') || {}).value || 'crimson',
+      couple: { first: [A, B], full: [val('fullA'), val('fullB')] },
+      issue: { vol: '01', title: 'The Wedding Issue' },
+      date: date + 'T' + time,
+      dateEnd: end ? (end < time ? nextDay(date) : date) + 'T' + end : '',
+      utcOffset: utcOffset(tz, date, time), timezone: tz, tzLabel: TZ_LABEL[tz] || '',
+      city: val('city'), rsvpBy: val('rsvpBy'),
+      photos: { cover: photos.cover.length ? 'images/cover.jpg' : '', feature: photos.feature.length ? 'images/feature.jpg' : '', credit: '' },
+      letter: val('letter') ? { title: 'A note from us', body: paras('letter'), signoff: 'Love,' } : null,
+      story: val('story') ? { headline: '', deck: '', byline: 'As told to their friends', body: paras('story'), quote: '', photoCaption: '' } : null,
+      events,
+      venue: { name: val('venue'), address: val('address'), mapQuery: val('venue') + ', ' + val('address'), lat: null, lng: null, parking: val('parking'), transit: val('transit'), rideshare: val('rideshare') },
+      stay: { hotels, airports },
+      rsvp: { endpoint: '', meals: lines('meals'), plusOne: (form.querySelector('input[name=plusOne]:checked') || {}).value !== 'no', song: form.song.checked },
+      registry,
+      gallery: { headline: 'Our story in pictures', items: photos.gallery.map((p, i) => ({ src: 'images/g' + String(i + 1).padStart(2, '0') + '.jpg', ratio: ratioOf(p), caption: p.caption || '' })) },
+      style: val('dress') ? { code: val('dress'), deck: '', yes: lines('dressYes'), skip: lines('dressSkip'), weather: val('weather') } : null,
+      faq,
+      submissions: { show: false, endpoint: '' }, // 하객 사진 업로드는 실제 수신 기능을 만든 뒤에 켠다
+      music: { src: '', title: '', artist: '' },
+      share: { url: CFG.domain + '/' + slug, title: A + ' & ' + B + ' · The Wedding Issue', description: long + ' · ' + val('city'), image: 'images/og.jpg' },
+      calendarFile: 'calendar.ics', footer: 'Made with RANGBANG'
+    };
+    Object.keys(cfg).forEach(k => { if (cfg[k] === null) delete cfg[k]; });
+    return { slug, cfg };
+  }
+
+  /* ── 보내기 ── */
+  const REQUIRED = { order: v => /^\d{6,14}$/.test(v) || 'Please enter the order number from your Etsy receipt (numbers only).', email: v => /^\S+@\S+\.\S+$/.test(v) || 'Please enter a valid email.', firstA: 1, firstB: 1, fullA: 1, fullB: 1, date: 1, time: 1, city: 1, venue: 1, address: 1, rsvpBy: 1 };
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    let first = null;
+    Object.entries(REQUIRED).forEach(([n, rule]) => {
+      const v = val(n);
+      const ok = typeof rule === 'function' ? rule(v) : !!v;
+      const msg = ok === true ? '' : (typeof ok === 'string' ? ok : 'Required.');
+      const box = $('[data-err="' + n + '"]'); if (box) box.textContent = msg;
+      if (msg && !first) first = form[n];
+    });
+    if (first) { first.focus(); return; }
+    const { slug, cfg } = buildConfig();
+    const pics = [];
+    if (photos.cover[0]) pics.push(['cover.jpg', photos.cover[0]]);
+    if (photos.feature[0]) pics.push(['feature.jpg', photos.feature[0]]);
+    photos.gallery.forEach((p, i) => pics.push(['g' + String(i + 1).padStart(2, '0') + '.jpg', p]));
+    const payload = {
+      type: 'order', order: val('order'), email: val('email'), slug, submittedAt: new Date().toISOString(),
+      config: cfg,
+      notes: { writeStoryForUs: form.writeForUs.checked, other: val('notes') },
+      photos: pics.map(([name, p]) => ({ name, mime: 'image/jpeg', b64: p.dataUrl.split(',')[1] }))
+    };
+    window.__lastOrder = payload; // 확인용
+    const btn = $('#send');
+    const finish = sent => {
+      form.hidden = true;
+      const done = $('#done');
+      done.hidden = false;
+      done.innerHTML = `<h2>Thank you, ${esc(val('firstA'))} and ${esc(val('firstB'))}.</h2>
+        <p>We have everything we need. Your preview link arrives in your Etsy messages within ${esc(CFG.turnaround)}.</p>
+        <p class="hint">Your web address will be ${esc(cfg.share.url.replace(/^https?:\/\//, ''))}.</p>
+        ${sent ? '' : '<p class="hint">This is a preview of the order form, so nothing was sent.</p>'}`;
+      done.focus();
+      try { localStorage.removeItem(KEY); } catch (err) { /* 무시 */ }
+    };
+    if (!CFG.endpoint) { finish(false); return; }
+    btn.disabled = true; btn.textContent = 'Sending…'; $('#sendErr').textContent = '';
+    try {
+      await fetch(CFG.endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+      finish(true);
+    } catch (err) {
+      btn.disabled = false; btn.textContent = 'Send my details';
+      $('#sendErr').textContent = 'That didn’t go through. Check your connection and try again. Your answers are still here.';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

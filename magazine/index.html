@@ -1,0 +1,1172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#141414">
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Nora &amp; Theo · The Wedding Issue</title>
+<meta name="description" content="Saturday, October 16, 2027 · Chicago">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rangbang-studio.github.io/magazine/">
+<meta property="og:title" content="Nora &amp; Theo · The Wedding Issue">
+<meta property="og:description" content="Saturday, October 16, 2027 · Chicago">
+<meta property="og:image" content="https://rangbang-studio.github.io/magazine/images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts/fonts.css">
+</head>
+<body>
+
+<!-- ==================================================================
+     RANGBANG · Magazine 템플릿 설정 블록
+     이 JSON만 고치면 화면 전체가 바뀐다. build.py도 같은 블록을 읽는다.
+     - draft: true면 사진이 빈 칸에 회색 자리표시를 보여 준다
+     - lang: 지금은 "en"만. 문구 자리에 {"en": "...", "ko": "..."}를 넣으면 두 언어 전환 구조로 쓸 수 있다
+     - accent: "crimson" | "cobalt" | "oxblood"
+     - date·start·end: 예식장 현지 시각. utcOffset은 그날의 현지 오프셋(서머타임 반영)
+     - 행사(events)는 show가 false면 일정·목차·회신 엽서에서 모두 빠진다
+     - 링크(url)·endpoint가 비어 있으면 누를 때 '미리보기' 안내만 띄운다
+     ================================================================== -->
+<script type="application/json" id="invite-config">
+{
+  "draft": false,
+  "lang": "en",
+  "accent": "crimson",
+  "couple": {
+    "first": [
+      "Nora",
+      "Theo"
+    ],
+    "full": [
+      "Nora Ellison",
+      "Theo Marchetti"
+    ]
+  },
+  "issue": {
+    "vol": "01",
+    "title": "The Wedding Issue"
+  },
+  "date": "2027-10-16T18:00",
+  "dateEnd": "2027-10-17T00:00",
+  "utcOffset": "-05:00",
+  "timezone": "America/Chicago",
+  "tzLabel": "CT",
+  "city": "Chicago, Illinois",
+  "rsvpBy": "2027-09-01",
+  "photos": {
+    "cover": "images/cover.jpg",
+    "feature": "images/feature.jpg",
+    "credit": "Demo photographs are AI-generated"
+  },
+  "letter": {
+    "title": "A note from us",
+    "body": [
+      "We wanted this to feel like the magazine you pick up at the airport: a little glossy, easy to flip through, and full of everything you need for the weekend.",
+      "Inside you’ll find the schedule, where to stay, what to wear, and a reply card. Please send it back by September 1 so we can save you a seat and a plate.",
+      "We can’t wait to celebrate with you in Chicago."
+    ],
+    "signoff": "Love,"
+  },
+  "story": {
+    "headline": "Eight years, two apartments, one kitchen",
+    "deck": "How a dinner-party argument about steak turned into a wedding by the river.",
+    "byline": "As told to their friends",
+    "body": [
+      "Nora was hosting. Theo was a friend of a friend who arrived with a bag of lemons and a lot of opinions. By the time the steak came off the pan, they had argued about resting times, deep-dish pizza, and whether the Cubs count as a personality.",
+      "He called the next week to admit she was right about the steak. She still brings it up.",
+      "Eight years and two apartments later, they cook in a slightly bigger kitchen in Logan Square. This October they’re making it official, and they would love for you to be there."
+    ],
+    "quote": "She was right about the steak. She still brings it up.",
+    "photoCaption": "The slightly bigger kitchen, Logan Square."
+  },
+  "events": [
+    {
+      "id": "welcome",
+      "show": true,
+      "name": "Welcome Drinks",
+      "start": "2027-10-15T19:00",
+      "end": "2027-10-15T21:30",
+      "place": "The Lantern Bar",
+      "address": "River North, Chicago, IL",
+      "attire": "Come as you are",
+      "note": "For everyone arriving early. Drop by any time."
+    },
+    {
+      "id": "ceremony",
+      "show": true,
+      "main": true,
+      "name": "The Ceremony",
+      "start": "2027-10-16T18:00",
+      "end": "2027-10-16T18:40",
+      "place": "The Halden Room",
+      "address": "Chicago Riverwalk, Chicago, IL",
+      "attire": "Black tie optional",
+      "note": "Doors open at 5:30 PM. Please be seated by 5:45 PM."
+    },
+    {
+      "id": "reception",
+      "show": true,
+      "name": "Dinner & Dancing",
+      "start": "2027-10-16T19:00",
+      "end": "2027-10-17T00:00",
+      "place": "The Halden Room",
+      "address": "Chicago Riverwalk, Chicago, IL",
+      "attire": "Black tie optional",
+      "note": "Dinner, a few toasts, then dancing until midnight."
+    },
+    {
+      "id": "brunch",
+      "show": true,
+      "name": "Farewell Brunch",
+      "start": "2027-10-17T10:30",
+      "end": "2027-10-17T12:30",
+      "place": "Garden Room, Hotel Halden",
+      "address": "Wacker Drive, Chicago, IL",
+      "attire": "Casual",
+      "note": "Coffee, eggs, and goodbyes. Kids welcome."
+    }
+  ],
+  "venue": {
+    "name": "The Halden Room",
+    "address": "Chicago Riverwalk, Chicago, IL",
+    "mapQuery": "Chicago Riverwalk",
+    "lat": 41.8876,
+    "lng": -87.6263,
+    "parking": "Valet at the main entrance, $30. Self-parking in the Wacker Drive garage.",
+    "transit": "State/Lake station on the ‘L’ is a six-minute walk.",
+    "rideshare": "Ask your driver for the Riverwalk entrance at Wabash Avenue."
+  },
+  "stay": {
+    "hotels": [
+      {
+        "name": "Hotel Halden",
+        "note": "Our room block, a five-minute walk from the venue. Brunch is here on Sunday.",
+        "rate": "$289 a night",
+        "code": "NORATHEO",
+        "bookBy": "2027-09-15",
+        "url": ""
+      },
+      {
+        "name": "The Wren Inn",
+        "note": "A quieter option in Lincoln Park, about 15 minutes by car.",
+        "rate": "From $219 a night",
+        "code": "",
+        "bookBy": "",
+        "url": ""
+      }
+    ],
+    "airports": [
+      {
+        "code": "ORD",
+        "name": "O’Hare International",
+        "time": "35–60 min by car"
+      },
+      {
+        "code": "MDW",
+        "name": "Midway International",
+        "time": "25–40 min by car"
+      }
+    ]
+  },
+  "rsvp": {
+    "endpoint": "",
+    "meals": [
+      "Braised short rib",
+      "Seared halibut",
+      "Wild mushroom risotto (vegetarian)"
+    ],
+    "plusOne": true,
+    "song": true
+  },
+  "registry": [
+    {
+      "label": "Registry",
+      "name": "Zola",
+      "note": "Home things we’ll actually use.",
+      "button": "Open the registry",
+      "url": ""
+    },
+    {
+      "label": "Honeymoon fund",
+      "name": "Lisbon & Porto",
+      "note": "Ten days of tiles, trams, and pastéis de nata.",
+      "button": "Add to the fund",
+      "url": ""
+    }
+  ],
+  "gallery": {
+    "headline": "Eight years in pictures",
+    "items": [
+      {
+        "src": "images/g01.jpg",
+        "ratio": "4/5",
+        "caption": "Pilsen, 2019. The kitchen in question."
+      },
+      {
+        "src": "images/g02.jpg",
+        "ratio": "1/1",
+        "caption": "First trip together, Door County."
+      },
+      {
+        "src": "images/g03.jpg",
+        "ratio": "1/1",
+        "caption": "Logan Square, moving day two."
+      },
+      {
+        "src": "images/g04.jpg",
+        "ratio": "3/2",
+        "caption": "The proposal, Montrose Beach, 2026."
+      },
+      {
+        "src": "images/g05.jpg",
+        "ratio": "4/5",
+        "caption": "Saturday market run."
+      },
+      {
+        "src": "images/g06.jpg",
+        "ratio": "1/1",
+        "caption": "Her parents’ porch in Ohio."
+      },
+      {
+        "src": "images/g07.jpg",
+        "ratio": "1/1",
+        "caption": "His grandmother’s ravioli, attempt four."
+      },
+      {
+        "src": "images/g08.jpg",
+        "ratio": "4/5",
+        "caption": "Engagement photos on the Riverwalk."
+      }
+    ]
+  },
+  "style": {
+    "code": "Black tie optional",
+    "deck": "Dress up for an evening by the river. Tuxedos are welcome, never required.",
+    "yes": [
+      "A dark suit and tie, or a tuxedo",
+      "Floor-length or cocktail dresses",
+      "Jewel tones, black, and navy",
+      "Shoes you can dance in"
+    ],
+    "skip": [
+      "White, ivory, or cream",
+      "Jeans and sneakers",
+      "Stilettos on the Riverwalk paving"
+    ],
+    "weather": "Mid-October evenings in Chicago run 45–60°F. Everything is indoors, but bring a coat for the walk."
+  },
+  "faq": [
+    {
+      "q": "Can I bring a guest?",
+      "a": "If your invitation says “and guest,” yes. Add their name on the reply card so we can save a seat."
+    },
+    {
+      "q": "Are children welcome?",
+      "a": "We love your kids, but Saturday is an adults-only evening. The Sunday brunch is open to the whole family."
+    },
+    {
+      "q": "What time should I arrive?",
+      "a": "Doors open at 5:30 PM. Please be seated by 5:45 PM; the ceremony starts at 6 PM."
+    },
+    {
+      "q": "Can I take photos during the ceremony?",
+      "a": "We’re asking for an unplugged ceremony. Our photographer will share everything afterward. At dinner, snap away."
+    },
+    {
+      "q": "Is the venue accessible?",
+      "a": "Yes. Step-free entry, an elevator down to the river level, and accessible restrooms. Tell us on the reply card if you need anything else."
+    },
+    {
+      "q": "I have a dietary restriction.",
+      "a": "Note it on the reply card. The kitchen can handle most allergies and preferences."
+    }
+  ],
+  "submissions": {
+    "show": false,
+    "endpoint": ""
+  },
+  "music": {
+    "src": "",
+    "title": "",
+    "artist": ""
+  },
+  "share": {
+    "url": "https://rangbang-studio.github.io/magazine/",
+    "title": "Nora & Theo · The Wedding Issue",
+    "description": "Saturday, October 16, 2027 · Chicago",
+    "image": "images/og.jpg"
+  },
+  "calendarFile": "calendar.ics",
+  "footer": "Made with RANGBANG"
+}
+</script>
+
+<style>
+/* ==================================================================
+   Magazine — 흑백 지면 + 강조색 1개. 표지·밤 지면·교차 지면이 번갈아 넘어간다.
+   폰은 화면 가득, 큰 화면은 가운데 480px 지면에 바깥은 잉크색.
+   ================================================================== */
+:root{
+  --ink:#141414; --paper:#FFFFFF; --stock:#F1F0EC; --graphite:#5E5E5E; --rule:#D6D5D0;
+  --night-muted:#B3B2AD; --night-line:#3A3A38;
+  --ph1:#E4E3DF; --ph2:#C9C8C3; --ph3:#ADACA7;
+  --accent:#A61C2C; --accent-night:#E0606C;
+  --display:'Bodoni Moda','Bodoni 72',Didot,Georgia,serif;
+  --text:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --cond:72%;
+  --m:20px;
+  color-scheme:light;
+}
+:root[data-accent="cobalt"]{ --accent:#2B44C4; --accent-night:#8C9DF5 }
+:root[data-accent="oxblood"]{ --accent:#6D1A27; --accent-night:#D98A95 }
+@media (prefers-reduced-motion:no-preference){ html{ scroll-behavior:smooth } }
+
+*{ box-sizing:border-box }
+html,body{ background:var(--ink) }
+body{ margin:0; font-family:var(--text); font-size:17px; line-height:1.6; color:var(--ink); -webkit-text-size-adjust:100%; -webkit-font-smoothing:antialiased }
+p,h1,h2,h3,h4,ul,ol,dl,dd,figure,fieldset,blockquote{ margin:0 }
+ul,ol{ padding:0; list-style:none }
+fieldset{ border:0; padding:0; min-width:0 }
+img{ display:block; width:100%; max-width:100%; object-fit:cover }
+a{ color:inherit }
+button{ font:inherit; color:inherit }
+:focus-visible{ outline:2px solid var(--acc,var(--accent)); outline-offset:3px }
+
+.issue{ max-width:480px; margin:0 auto; background:var(--ink); overflow-x:clip; padding-bottom:calc(72px + env(safe-area-inset-bottom,0px)) }
+
+/* ── 지면 공통 ── */
+.pg{ --bg:var(--paper); --fg:var(--ink); --muted:var(--graphite); --line:var(--rule); --acc:var(--accent);
+  background:var(--bg); color:var(--fg); padding:22px var(--m) 72px; position:relative; scroll-margin-top:0 }
+.pg--stock{ --bg:var(--stock) }
+.pg--night{ --bg:var(--ink); --fg:var(--paper); --muted:var(--night-muted); --line:var(--night-line); --acc:var(--accent-night) }
+.folio{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; font-size:12px; font-weight:600; font-stretch:var(--cond); letter-spacing:.14em; text-transform:uppercase; padding-bottom:8px; border-bottom:1px solid var(--fg); margin-bottom:32px }
+.folio b{ color:var(--acc); font-size:13px; font-variant-numeric:tabular-nums }
+.kicker{ font-size:13px; font-weight:600; font-stretch:var(--cond); letter-spacing:.14em; text-transform:uppercase; color:var(--acc); margin-bottom:10px }
+.h2{ font-family:var(--display); font-weight:500; font-size:40px; line-height:1.08; letter-spacing:-.01em; margin-bottom:12px; text-wrap:balance }
+.h3{ font-family:var(--display); font-weight:500; font-size:28px; line-height:1.15; text-wrap:balance }
+.deck{ font-family:var(--display); font-style:italic; font-size:20px; line-height:1.4; margin-bottom:28px; text-wrap:pretty }
+.body p + p{ margin-top:14px }
+.muted{ color:var(--muted) }
+.label{ font-size:13px; font-weight:600; font-stretch:var(--cond); letter-spacing:.12em; text-transform:uppercase; color:var(--muted) }
+.cap{ font-size:14px; line-height:1.45; color:var(--muted); margin-top:8px }
+.rule{ border:0; border-top:1px solid var(--line); margin:32px 0 }
+.stack{ display:grid; gap:12px }
+
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:48px; padding:10px 18px; font:600 16px/1.2 var(--text); text-align:center; text-decoration:none; color:var(--fg); background:transparent; border:1.5px solid var(--fg); border-radius:0; cursor:pointer }
+.btn--solid{ background:var(--fg); color:var(--bg) }
+.btn--wide{ width:100% }
+.btns{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px }
+.btns > :last-child:nth-child(odd){ grid-column:1/-1 }
+.btn svg{ width:18px; height:18px; flex:none }
+.textbtn{ background:none; border:0; padding:6px 0; font-size:15px; font-weight:600; text-decoration:underline; text-underline-offset:3px; cursor:pointer; color:var(--fg) }
+
+/* 사진 자리 */
+.ph{ position:relative; width:100%; max-width:100%; background:linear-gradient(165deg,var(--ph1) 0%,var(--ph2) 55%,var(--ph3) 100%) }
+.ph .cm{ position:absolute; width:14px; height:14px; border:0 solid var(--graphite) }
+.ph .cm:nth-child(1){ top:10px; left:10px; border-top-width:1px; border-left-width:1px }
+.ph .cm:nth-child(2){ top:10px; right:10px; border-top-width:1px; border-right-width:1px }
+.ph .cm:nth-child(3){ bottom:10px; left:10px; border-bottom-width:1px; border-left-width:1px }
+.ph .cm:nth-child(4){ bottom:10px; right:10px; border-bottom-width:1px; border-right-width:1px }
+.ph-l{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font:500 11px/1.5 ui-monospace,Menlo,Consolas,monospace; letter-spacing:.08em; color:var(--graphite); white-space:nowrap }
+
+/* ── 01 표지 ── */
+.cover{ padding:0 0 28px; container-type:inline-size }
+.cover-top{ padding:16px var(--m) 0 }
+.issue-line{ display:flex; justify-content:space-between; gap:8px; font-size:11px; font-weight:600; font-stretch:var(--cond); letter-spacing:.14em; text-transform:uppercase; padding-bottom:7px; border-bottom:1.5px solid var(--fg) }
+.mast{ margin:10px 0 12px; font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:-.005em; line-height:.9; text-align:center; white-space:nowrap }
+.fit{ display:inline-block; font-size:17cqi }
+.amp{ font-style:italic; font-weight:400; color:var(--acc); padding-inline:.04em }
+.cover-photo{ position:relative }
+.cover-photo img,.cover-photo .ph{ aspect-ratio:4/5 }
+.sticker{ position:absolute; right:16px; bottom:18px; width:96px; aspect-ratio:1; border-radius:50%; background:var(--acc); color:var(--paper); display:grid; place-content:center; text-align:center; transform:rotate(-8deg); font-stretch:var(--cond); text-transform:uppercase; text-decoration:none }
+.sticker small{ display:block; font-size:11px; font-weight:600; letter-spacing:.14em }
+.sticker b{ display:block; font-size:23px; line-height:1; font-weight:800 }
+.cover-lines{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px 16px; padding:16px var(--m) 0; align-items:end }
+.cover-date{ grid-column:1/-1; font-family:var(--display); font-weight:500; font-size:31px; line-height:1.05; text-wrap:balance }
+.cover-date em{ font-style:italic }
+.cover-city{ grid-column:1/-1; font-size:15px; font-weight:600; font-stretch:var(--cond); text-transform:uppercase; letter-spacing:.12em; border-top:1px solid var(--fg); padding-top:8px }
+.teasers{ display:grid; gap:4px; min-width:0 }
+.teasers a{ display:flex; align-items:baseline; gap:10px; min-height:32px; text-decoration:none; font-size:16px; line-height:1.3 }
+.teasers b{ color:var(--acc); font-weight:700; font-variant-numeric:tabular-nums }
+.barcode{ display:grid; justify-items:center; gap:2px }
+.barcode svg{ width:70px; height:40px; display:block; fill:currentColor }
+.barcode span{ font:500 9px ui-monospace,Menlo,Consolas,monospace; letter-spacing:.12em }
+
+/* ── 02 목차 ── */
+.toc{ border-top:1.5px solid var(--fg) }
+.toc a{ display:grid; grid-template-columns:52px minmax(0,1fr); gap:2px 12px; padding:14px 0; border-bottom:1px solid var(--line); text-decoration:none; align-items:baseline }
+.toc .no{ grid-row:1/3; font-size:30px; font-weight:600; font-stretch:var(--cond); line-height:1; color:var(--acc); font-variant-numeric:tabular-nums }
+.toc .t{ font-family:var(--display); font-size:22px; line-height:1.2; font-weight:500 }
+.toc .d{ font-size:15px; color:var(--muted); line-height:1.4 }
+.facts{ margin-top:36px; border-top:1.5px solid var(--fg); border-bottom:1.5px solid var(--fg) }
+.facts div{ display:grid; grid-template-columns:92px minmax(0,1fr); gap:12px; padding:12px 0; align-items:baseline }
+.facts div + div{ border-top:1px solid var(--line) }
+.facts dd{ font-weight:600; line-height:1.45 }
+
+/* ── 03 편집자의 글 ── */
+.sign{ margin-top:28px; font-family:var(--display); font-style:italic; font-size:30px; line-height:1.1 }
+.sign small{ display:block; font-family:var(--text); font-style:normal; font-size:15px; color:var(--muted); margin-bottom:6px }
+
+/* ── 04 피처 ── */
+.byline{ font-size:13px; font-weight:600; font-stretch:var(--cond); letter-spacing:.12em; text-transform:uppercase; margin:-12px 0 28px }
+.dropcap::first-letter{ float:left; font-family:var(--display); font-weight:600; font-size:78px; line-height:.78; padding:8px 10px 0 0; color:var(--acc) }
+.pull{ font-family:var(--display); font-style:italic; font-size:28px; line-height:1.25; padding:20px 0; margin:30px 0; border-top:1.5px solid var(--fg); border-bottom:1.5px solid var(--fg); text-wrap:balance }
+.pull::before{ content:"“"; display:block; font-size:64px; line-height:.6; height:28px; color:var(--acc); font-style:normal }
+.feature-photo{ margin:30px calc(var(--m) * -1) }
+.feature-photo img,.feature-photo .ph{ aspect-ratio:3/2 }
+.feature-photo figcaption{ padding:0 var(--m) }
+
+/* ── 05 날짜 (밤 지면) ── */
+.date-block{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:0 16px; align-items:end; margin:8px 0 20px }
+.date-day{ font-family:var(--display); font-weight:500; font-size:150px; line-height:.8; letter-spacing:-.03em }
+.date-side{ display:grid; gap:4px; padding-bottom:6px }
+.date-side .label{ color:var(--acc) }
+.date-mon{ font-family:var(--display); font-style:italic; font-size:30px; line-height:1.05 }
+.date-time{ font-size:17px; font-weight:600; border-top:1px solid var(--fg); padding-top:12px; margin-bottom:28px }
+.dday{ display:flex; align-items:baseline; gap:12px; margin-bottom:28px }
+.dday b{ font-family:var(--display); font-weight:500; font-size:56px; line-height:1; color:var(--acc); font-variant-numeric:tabular-nums }
+.dday span{ font-size:17px }
+.cal{ margin-bottom:28px }
+.cal-head{ display:flex; justify-content:space-between; margin-bottom:8px }
+.cal-grid{ display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); text-align:center; font-size:15px; font-variant-numeric:tabular-nums; row-gap:4px }
+.cal-grid .wd{ font-size:12px; font-weight:600; font-stretch:var(--cond); letter-spacing:.1em; color:var(--muted); padding-bottom:4px }
+.cal-grid span{ display:grid; place-items:center; height:36px }
+.cal-grid .on{ position:relative; color:var(--ink); font-weight:700 }
+.cal-grid .on::before{ content:""; position:absolute; width:34px; height:34px; border-radius:50%; background:var(--acc); z-index:0 }
+.cal-grid .on i{ position:relative; font-style:normal }
+
+/* ── 06 일정 ── */
+.ev{ display:grid; grid-template-columns:72px minmax(0,1fr); gap:4px 16px; padding:20px 0; border-top:1px solid var(--line) }
+.ev:last-child{ border-bottom:1px solid var(--line) }
+.ev-when{ display:grid; align-content:start }
+.ev-when .label{ color:var(--fg) }
+.ev-date{ font-size:22px; font-weight:600; font-stretch:var(--cond); line-height:1.1; text-transform:uppercase }
+.ev-body{ display:grid; gap:4px; min-width:0 }
+.ev-main{ color:var(--acc) }
+.ev-name{ font-family:var(--display); font-weight:500; font-size:27px; line-height:1.12 }
+.ev-time{ font-weight:600 }
+.ev-place a{ text-decoration-thickness:1px; text-underline-offset:3px }
+.ev-note{ font-size:15px; color:var(--muted); line-height:1.5 }
+.tag{ justify-self:start; margin-top:6px; font-size:12px; font-weight:600; font-stretch:var(--cond); letter-spacing:.12em; text-transform:uppercase; border:1px solid var(--fg); padding:3px 8px }
+
+/* ── 07 시티 가이드 ── */
+.addr{ font-size:17px; margin:8px 0 18px; user-select:all }
+.rows{ border-top:1px solid var(--line) }
+.rows div{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:12px; padding:12px 0; border-bottom:1px solid var(--line); align-items:baseline }
+.rows dd{ min-width:0 }
+.sub{ font-size:13px; font-weight:600; font-stretch:var(--cond); letter-spacing:.14em; text-transform:uppercase; margin:44px 0 14px; padding-bottom:8px; border-bottom:1.5px solid var(--fg) }
+.hotel{ padding:4px 0 24px }
+.hotel + .hotel{ border-top:1px solid var(--line); padding-top:20px }
+.hotel .rows{ margin:14px 0 16px }
+.code{ font-family:ui-monospace,Menlo,Consolas,monospace; font-size:16px; letter-spacing:.06em }
+.airport{ display:grid; grid-template-columns:72px minmax(0,1fr); gap:0 16px; padding:12px 0; border-bottom:1px solid var(--line); align-items:baseline }
+.airport b{ font-size:26px; font-weight:600; font-stretch:var(--cond); line-height:1 }
+
+/* ── 08 회신 엽서 ── */
+.tear{ display:flex; align-items:center; gap:10px; margin-bottom:14px; font-size:12px; font-weight:600; font-stretch:var(--cond); letter-spacing:.14em; text-transform:uppercase; color:var(--muted) }
+.tear::after{ content:""; flex:1; border-top:1.5px dashed var(--muted) }
+.card{ position:relative; background:var(--paper); border:1.5px solid var(--ink); padding:24px 18px 26px; color:var(--ink) }
+.stamp{ position:absolute; top:16px; right:16px; width:70px; height:82px; border:1.5px dashed var(--accent); color:var(--accent); display:grid; place-content:center; text-align:center; transform:rotate(3deg); text-transform:uppercase; font-stretch:var(--cond); line-height:1.05 }
+.stamp small{ font-size:11px; font-weight:700; letter-spacing:.14em }
+.stamp b{ font-weight:800; font-size:30px; line-height:1 }
+.card-h{ padding-right:84px; margin-bottom:24px }
+.card-h .h3{ font-size:32px }
+.card-h p{ font-weight:600; margin-top:6px }
+.field{ display:grid; gap:6px; margin-bottom:24px }
+.field > label,.field > legend{ font-size:15px; font-weight:600; padding:0; margin-bottom:6px }
+.field .hint{ font-size:14px; color:var(--graphite); margin-top:-4px }
+.input{ width:100%; font:17px/1.4 var(--text); color:var(--ink); background:transparent; border:0; border-bottom:1.5px solid var(--ink); border-radius:0; padding:10px 0; -webkit-appearance:none; appearance:none }
+textarea.input{ min-height:76px; resize:vertical }
+.input:focus{ outline:none; border-bottom-color:var(--accent); box-shadow:0 1.5px 0 var(--accent) }
+.choices{ display:grid; gap:10px }
+.choice{ display:flex; gap:12px; align-items:center; min-height:52px; padding:12px 14px; border:1.5px solid var(--rule); cursor:pointer; font-size:17px; line-height:1.3 }
+.choice input{ width:20px; height:20px; margin:0; flex:none; accent-color:var(--ink) }
+.choice:has(input:checked){ border-color:var(--ink); background:var(--stock) }
+.choice:has(input:focus-visible){ outline:2px solid var(--accent); outline-offset:2px }
+.choices--2{ grid-template-columns:repeat(2,minmax(0,1fr)) }
+.err{ color:var(--accent); font-size:15px; font-weight:600 }
+.err:empty{ display:none }
+.sent{ display:grid; gap:12px; text-align:left }
+.sent .h3{ font-size:32px }
+
+/* ── 09 기프트 가이드 ── */
+.gift{ padding:22px 0; border-top:1px solid var(--line); display:grid; gap:6px }
+.gift:last-child{ border-bottom:1px solid var(--line) }
+.gift .btn{ margin-top:10px; justify-self:start }
+
+/* ── 10 화보 (밤 지면) ── */
+.gallery{ display:grid; gap:14px; margin:0 calc(var(--m) * -1) }
+.g-row{ display:grid; gap:8px; grid-template-columns:minmax(0,1fr) }
+.g-row--2{ grid-template-columns:repeat(2,minmax(0,1fr)); padding:0 var(--m) }
+.g-item{ display:block; width:100%; padding:0; border:0; background:none; cursor:zoom-in; text-align:left }
+.g-item .g-cap{ display:flex; gap:8px; padding:8px var(--m) 0; font-size:14px; line-height:1.4; color:var(--muted) }
+.g-row--2 .g-item .g-cap{ padding:8px 0 0 }
+.g-cap b{ color:var(--acc); font-variant-numeric:tabular-nums; font-weight:600 }
+.credit{ margin-top:22px }
+
+/* ── 11 스타일 노트 ── */
+.dos{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-bottom:28px }
+.dos h3{ font-size:13px; font-weight:600; font-stretch:var(--cond); letter-spacing:.14em; text-transform:uppercase; padding-bottom:8px; border-bottom:1.5px solid var(--fg); margin-bottom:10px }
+.dos li{ padding:8px 0; border-bottom:1px solid var(--line); font-size:16px; line-height:1.4 }
+.forecast{ border:1.5px solid var(--fg); padding:16px }
+.forecast .label{ color:var(--acc); margin-bottom:6px }
+
+/* ── 12 Q&A ── */
+.qa details{ border-top:1px solid var(--line) }
+.qa details:last-child{ border-bottom:1px solid var(--line) }
+.qa summary{ list-style:none; display:grid; grid-template-columns:28px minmax(0,1fr) 20px; gap:8px; align-items:baseline; min-height:56px; padding:15px 0; cursor:pointer; font-weight:600 }
+.qa summary::-webkit-details-marker{ display:none }
+.qa summary::before{ content:"Q."; font-family:var(--display); font-style:italic; color:var(--acc); font-size:19px }
+.qa summary::after{ content:"+"; font-size:22px; line-height:1; justify-self:end }
+.qa details[open] summary::after{ content:"–" }
+.qa .a{ padding:0 0 18px 36px }
+
+/* ── 13 독자 투고 ── */
+.drop{ display:grid; place-items:center; gap:6px; min-height:150px; padding:20px; border:1.5px dashed var(--fg); text-align:center; cursor:pointer }
+.drop input{ position:absolute; width:1px; height:1px; opacity:0 }
+.drop:has(input:focus-visible){ outline:2px solid var(--acc); outline-offset:3px }
+.drop b{ font-size:17px }
+.thumbs{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; margin-top:12px }
+.thumbs img{ aspect-ratio:1 }
+
+/* ── 14 뒤표지 (밤 지면) ── */
+.qr{ display:grid; grid-template-columns:120px minmax(0,1fr); gap:16px; align-items:center; margin-top:28px }
+.qr-box{ background:var(--paper); padding:8px; aspect-ratio:1 }
+.qr-box svg{ display:block; width:100%; height:100% }
+.colophon{ margin-top:44px; padding-top:14px; border-top:1px solid var(--fg); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:end }
+.colophon p{ font-size:13px; font-weight:600; font-stretch:var(--cond); letter-spacing:.12em; text-transform:uppercase; line-height:1.7 }
+.made{ margin-top:28px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); text-align:center }
+
+/* ── 아래 막대: 사운드트랙 + 목차 ── */
+.dock{ position:fixed; left:50%; bottom:0; transform:translateX(-50%); width:min(480px,100%); z-index:20; background:var(--ink); color:var(--paper); border-top:1px solid var(--night-line); padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px)); display:flex; align-items:center; gap:12px }
+.play{ flex:none; width:44px; height:44px; border-radius:50%; border:1.5px solid var(--paper); background:transparent; display:grid; place-items:center; cursor:pointer; color:var(--paper) }
+.play svg{ width:16px; height:16px; fill:currentColor }
+.now{ min-width:0; flex:1; line-height:1.25 }
+.now small{ display:block; font-size:11px; font-weight:600; font-stretch:var(--cond); letter-spacing:.14em; text-transform:uppercase; color:var(--accent-night) }
+.now span{ display:block; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.dock .btn{ --fg:var(--paper); min-height:44px; padding:8px 14px; font-size:14px; flex:none }
+/* 음원이 없으면 음악 부분을 숨기고 목차 버튼만 오른쪽 아래에 띄운다 */
+.dock--nomusic{ left:auto; right:max(12px, calc(50vw - 228px)); transform:none; width:auto; background:transparent; border:0; padding:0 0 calc(12px + env(safe-area-inset-bottom,0px)) }
+.dock--nomusic .play,.dock--nomusic .now{ display:none }
+.dock--nomusic .btn{ background:var(--ink); border-color:var(--paper); box-shadow:0 4px 14px rgba(0,0,0,.25) }
+.dock--nomusic{ transition:opacity .25s }
+.dock--nomusic.dock--away{ opacity:0; pointer-events:none }
+
+/* ── 크게 보기 ── */
+.lb{ position:fixed; inset:0; z-index:40; background:rgba(12,12,12,.97); color:var(--paper); display:grid; grid-template-rows:auto minmax(0,1fr) auto; padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px) }
+.lb[hidden]{ display:none }
+.lb-top{ display:flex; justify-content:space-between; align-items:center; padding:8px 12px; font-size:13px; font-weight:600; font-stretch:var(--cond); letter-spacing:.14em; text-transform:uppercase }
+.lb-stage{ display:grid; place-items:center; padding:0 12px; min-height:0 }
+.lb-stage img,.lb-stage .ph{ max-height:100%; width:auto; max-width:100%; object-fit:contain }
+.lb-stage .ph{ width:min(100%,420px) }
+.lb-cap{ padding:12px 20px 16px; font-size:15px; text-align:center; min-height:52px }
+.lb-nav{ display:flex; justify-content:space-between; padding:0 12px 12px }
+.icon-btn{ width:48px; height:48px; display:grid; place-items:center; border:1.5px solid var(--paper); background:transparent; color:var(--paper); cursor:pointer; font-size:20px; line-height:1 }
+
+.toast{ position:fixed; left:50%; bottom:calc(84px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); width:min(440px,calc(100% - 32px)); z-index:50; background:var(--paper); color:var(--ink); border:1.5px solid var(--ink); padding:12px 16px; font-size:15px; line-height:1.4; text-align:center }
+.toast[hidden]{ display:none }
+.sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap }
+</style>
+
+<main class="issue" id="app" aria-live="off"></main>
+
+<div class="dock" id="dock" role="region" aria-label="Soundtrack and contents">
+  <button class="play" id="play" type="button" aria-label="Play music"></button>
+  <p class="now"><small>Now playing</small><span id="nowTitle"></span></p>
+  <a class="btn" href="#contents">Contents</a>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="lb-top"><span id="lbCount"></span><button class="icon-btn" type="button" id="lbClose" aria-label="Close">✕</button></div>
+  <div class="lb-stage" id="lbStage"></div>
+  <p class="lb-cap" id="lbCap"></p>
+  <div class="lb-nav"><button class="icon-btn" type="button" id="lbPrev" aria-label="Previous photo">‹</button><button class="icon-btn" type="button" id="lbNext" aria-label="Next photo">›</button></div>
+</div>
+
+<p class="toast" id="toast" role="status" hidden></p>
+<audio id="audio" preload="none"></audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+(() => {
+  'use strict';
+  const C = JSON.parse(document.getElementById('invite-config').textContent);
+  const doc = document;
+  const root = doc.documentElement;
+  const $ = (s, el) => (el || doc).querySelector(s);
+  const $$ = (s, el) => Array.from((el || doc).querySelectorAll(s));
+  const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  const has = v => (typeof v === 'string' ? v.trim() !== '' : Array.isArray(v) ? v.length > 0 : v != null && v !== false);
+  const pad = n => (n < 10 ? '0' : '') + n;
+  // 문구 자리는 문자열 또는 {"en": "...", "ko": "..."} — 두 언어 전환 구조
+  const tx = v => (v && typeof v === 'object' && !Array.isArray(v) ? (v[C.lang] != null ? v[C.lang] : v.en) : v);
+  const T = v => esc(tx(v));
+
+  const UI = {
+    en: {
+      contents: 'Contents', inThisIssue: 'In this issue', when: 'When', where: 'Where', replyBy: 'Reply by',
+      letter: 'From the couple', feature: 'The Feature', saveDate: 'Save the date', weekend: 'The Weekend',
+      guide: 'City Guide', reply: 'Reply Card', gifts: 'The Gift Guide', editorial: 'The Editorial',
+      style: 'Style Notes', faq: 'Q&A', submissions: 'Reader Submissions', back: 'Share this issue',
+      preview: 'This is a preview, so nothing was sent.'
+    },
+    ko: {}
+  };
+  const t = k => (UI[C.lang] && UI[C.lang][k]) || UI.en[k];
+  root.lang = C.lang || 'en';
+  root.dataset.accent = C.accent || 'crimson';
+
+  /* ── 날짜: 설정의 현지 시각 문자열을 그대로 읽어, 보는 사람의 시간대와 무관하게 표시 ── */
+  const WD = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const P = s => { const m = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}))?/.exec(s || ''); return m ? { y: +m[1], mo: +m[2], d: +m[3], h: m[4] ? +m[4] : 0, mi: m[5] ? +m[5] : 0 } : null; };
+  const wday = p => new Date(Date.UTC(p.y, p.mo - 1, p.d)).getUTCDay();
+  const clock = p => (p.h % 12 || 12) + (p.mi ? ':' + pad(p.mi) : '');
+  const ampm = p => (p.h < 12 ? 'AM' : 'PM');
+  const time = p => clock(p) + ' ' + ampm(p);
+  const range = (s, e) => {
+    if (!e) return time(s);
+    if (e.h === 0 && e.mi === 0) return time(s) + ' – midnight';
+    return ampm(s) === ampm(e) ? clock(s) + '–' + time(e) : time(s) + ' – ' + time(e);
+  };
+  const monDay = p => MON[p.mo - 1] + ' ' + p.d;
+  const fullDate = p => monDay(p) + ', ' + p.y;
+  const longDate = p => WD[wday(p)] + ', ' + fullDate(p);
+  const short = p => MON[p.mo - 1].slice(0, 3) + (p.mo === 9 ? 't' : '') + ' ' + p.d;
+
+  const W = P(C.date), WE = P(C.dateEnd), R = P(C.rsvpBy);
+  const N = C.couple.first.map(tx);
+  const pair = N[0] + ' & ' + N[1];
+  const CITY = String(tx(C.city) || '').split(',')[0].trim();
+  const events = (C.events || []).filter(e => e.show !== false).map(e => Object.assign({}, e, { s: P(e.start), e: P(e.end) }));
+  const gallery = ((C.gallery && C.gallery.items) || []).filter(g => has(g.src) || C.draft);
+  const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  const cap1 = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  const photo = (src, ratio, alt) => has(src)
+    ? `<img src="${esc(src)}" alt="${esc(alt || '')}" loading="lazy" decoding="async" style="aspect-ratio:${esc(ratio)}">`
+    : C.draft ? `<div class="ph" style="aspect-ratio:${esc(ratio)}" role="img" aria-label="Photo placeholder"><span class="cm"></span><span class="cm"></span><span class="cm"></span><span class="cm"></span><span class="ph-l">PHOTO ${esc(ratio.replace('/', ':'))}</span></div>` : '';
+
+  const ICON = {
+    play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10l8-5z"/></svg>',
+    pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z"/></svg>'
+  };
+
+  /* ── 지면 목록: 켜진 지면만 순서대로 쪽 번호를 받는다 ── */
+  const SECTIONS = [
+    { id: 'cover', on: true, tone: '' },
+    { id: 'contents', on: true, tone: '' },
+    { id: 'letter', on: has(C.letter), tone: 'stock', title: tx(C.letter && C.letter.title), dek: 'Before you turn the page' },
+    { id: 'feature', on: has(C.story), tone: '', title: tx(C.story && C.story.headline), dek: 'How it started' },
+    { id: 'date', on: true, tone: 'night', title: 'Save the date', dek: 'Countdown and calendar' },
+    { id: 'weekend', on: events.length > 0, tone: '', title: 'The weekend', dek: events.length ? cap1(words[events.length] || String(events.length)) + (events.length > 1 ? ' events, ' : ' event, ') + WD[wday(events[0].s)] + (events.length > 1 ? ' to ' + WD[wday(events[events.length - 1].s)] : '') : '' },
+    { id: 'guide', on: has(C.venue), tone: '', title: 'City guide', dek: 'Getting there and where to stay' },
+    { id: 'reply', on: true, tone: 'stock', title: 'Reply card', dek: 'Please reply by ' + fullDate(R) },
+    { id: 'gifts', on: has(C.registry), tone: '', title: 'Gift guide', dek: (C.registry || []).map((r, i) => (i ? String(tx(r.label)).toLowerCase() : tx(r.label))).join(' and ') },
+    { id: 'editorial', on: gallery.length > 0, tone: 'night', title: 'The editorial', dek: tx(C.gallery && C.gallery.headline) },
+    { id: 'style', on: has(C.style), tone: '', title: 'Style notes', dek: tx(C.style && C.style.code) },
+    { id: 'faq', on: has(C.faq), tone: 'stock', title: 'Q&A', dek: 'Kids, arrival, photos, and more' },
+    { id: 'submissions', on: !!(C.submissions && C.submissions.show), tone: '', title: 'Reader submissions', dek: 'Send us your photos' },
+    { id: 'back', on: true, tone: 'night', title: 'Share this issue', dek: 'Text, WhatsApp, link, and QR' }
+  ].filter(s => s.on);
+  SECTIONS.forEach((s, i) => { s.no = pad(i + 1); });
+  const NO = id => (SECTIONS.find(s => s.id === id) || {}).no || '';
+  const folio = no => `<div class="folio" aria-hidden="true"><span>${esc(pair)}</span><b>${no}</b><span>${MON[W.mo - 1].slice(0, 3)} ${W.y}</span></div>`;
+  const ampName = (a, b) => `${esc(a)} <span class="amp">&amp;</span> ${esc(b)}`;
+
+  const R_ = {};
+
+  R_.cover = () => {
+    const teasers = [
+      NO('weekend') && [NO('weekend'), '#weekend', cap1(words[events.length] || String(events.length)) + (events.length > 1 ? ' events, one weekend' : ' event')],
+      NO('guide') && [NO('guide'), '#guide', 'Where to stay'],
+      [NO('reply'), '#reply', 'Your reply card']
+    ].filter(Boolean);
+    return `
+    <div class="cover-top">
+      <div class="issue-line"><span>Vol. ${esc(C.issue.vol)}</span><span>${T(C.issue.title)}</span><span>${MON[W.mo - 1].slice(0, 3)} ${W.y}</span></div>
+      <h1 class="mast" id="cover-h"><span class="fit" data-max="124">${ampName(N[0], N[1])}</span></h1>
+    </div>
+    <div class="cover-photo">
+      ${photo(C.photos.cover, '4/5', pair) || ''}
+      <a class="sticker" href="#reply" aria-label="Reply by ${esc(fullDate(R))}"><small>Reply by</small><b>${esc(short(R))}</b></a>
+    </div>
+    <div class="cover-lines">
+      <p class="cover-date"><em>${WD[wday(W)]},</em><br>${esc(fullDate(W))}</p>
+      <p class="cover-city">${T(C.city)}</p>
+      <nav class="teasers" aria-label="Cover lines">${teasers.map(x => `<a href="${x[1]}"><b>${x[0]}</b>${esc(x[2])}</a>`).join('')}</nav>
+      <div class="barcode" aria-hidden="true"><svg class="bars" data-digits="${W.y}${pad(W.mo)}${pad(W.d)}"></svg><span>${W.y} ${pad(W.mo)}${pad(W.d)}</span></div>
+    </div>`;
+  };
+
+  R_.contents = no => `
+    ${folio(no)}
+    <p class="kicker">${t('inThisIssue')}</p>
+    <h2 class="h2" id="contents-h">${t('contents')}</h2>
+    <nav class="toc" aria-label="${t('contents')}">
+      ${SECTIONS.filter(s => s.title).map(s => `<a href="#${s.id}"><span class="no">${s.no}</span><span class="t">${esc(s.title)}</span><span class="d">${esc(s.dek)}</span></a>`).join('')}
+    </nav>
+    <dl class="facts">
+      <div><dt class="label">${t('when')}</dt><dd>${esc(longDate(W))}<br>${esc(time(W))} ${esc(C.tzLabel || '')}</dd></div>
+      <div><dt class="label">${t('where')}</dt><dd>${T(C.venue.name)}<br><span class="muted">${T(C.venue.address)}</span></dd></div>
+      <div><dt class="label">${t('replyBy')}</dt><dd><a href="#reply">${esc(fullDate(R))}</a></dd></div>
+    </dl>`;
+
+  R_.letter = no => `
+    ${folio(no)}
+    <p class="kicker">${t('letter')}</p>
+    <h2 class="h2" id="letter-h">${T(C.letter.title)}</h2>
+    <div class="body">${C.letter.body.map(p => `<p>${T(p)}</p>`).join('')}</div>
+    <p class="sign"><small>${T(C.letter.signoff)}</small>${ampName(N[0], N[1])}</p>`;
+
+  R_.feature = no => {
+    const body = C.story.body.map(tx);
+    const ph = photo(C.photos.feature, '3/2', '');
+    return `
+    ${folio(no)}
+    <p class="kicker">${t('feature')}</p>
+    <h2 class="h2" id="feature-h">${T(C.story.headline)}</h2>
+    <p class="deck">${T(C.story.deck)}</p>
+    <p class="byline">${T(C.story.byline)}</p>
+    <div class="body">
+      <p class="dropcap">${esc(body[0] || '')}</p>
+      ${body.slice(1, 2).map(p => `<p>${esc(p)}</p>`).join('')}
+      ${ph ? `<figure class="feature-photo">${ph}<figcaption class="cap">${T(C.story.photoCaption)}</figcaption></figure>` : ''}
+      ${has(C.story.quote) ? `<blockquote class="pull">${T(C.story.quote)}</blockquote>` : ''}
+      ${body.slice(2).map(p => `<p>${esc(p)}</p>`).join('')}
+    </div>`;
+  };
+
+  R_.date = no => {
+    const first = new Date(Date.UTC(W.y, W.mo - 1, 1)).getUTCDay();
+    const days = new Date(Date.UTC(W.y, W.mo, 0)).getUTCDate();
+    let cells = ['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d => `<span class="wd">${d}</span>`).join('');
+    for (let i = 0; i < first; i++) cells += '<span></span>';
+    for (let d = 1; d <= days; d++) cells += d === W.d ? `<span class="on"><i>${d}</i></span>` : `<span>${d}</span>`;
+    return `
+    ${folio(no)}
+    <p class="kicker">${t('saveDate')}</p>
+    <h2 class="sr" id="date-h">${esc(longDate(W))}</h2>
+    <div class="date-block" aria-hidden="true">
+      <p class="date-day">${W.d}</p>
+      <div class="date-side"><p class="label">${WD[wday(W)]}</p><p class="date-mon">${MON[W.mo - 1]}<br>${W.y}</p></div>
+    </div>
+    <p class="date-time">${esc(time(W))} ${esc(C.tzLabel || '')} · ${T(C.venue.name)}, ${esc(CITY)}</p>
+    <p class="dday" id="dday"></p>
+    <div class="cal" aria-label="${MON[W.mo - 1]} ${W.y} calendar">
+      <div class="cal-head"><span class="label">${MON[W.mo - 1]}</span><span class="label">${W.y}</span></div>
+      <div class="cal-grid">${cells}</div>
+    </div>
+    <div class="btns">
+      <a class="btn btn--solid" id="gcal" target="_blank" rel="noopener">Google Calendar</a>
+      <a class="btn" id="ical" href="${esc(C.calendarFile || 'calendar.ics')}">Apple Calendar</a>
+    </div>`;
+  };
+
+  R_.weekend = no => `
+    ${folio(no)}
+    <p class="kicker">${t('weekend')}</p>
+    <h2 class="h2" id="weekend-h">${esc(cap1(words[events.length] || String(events.length)))} ${events.length > 1 ? 'events' : 'event'}, one guide</h2>
+    <p class="deck">All times are ${esc(CITY)} time. Tap a place for directions.</p>
+    <div>${events.map(e => `
+      <article class="ev">
+        <div class="ev-when"><span class="label">${WD[wday(e.s)].slice(0, 3)}</span><span class="ev-date">${esc(short(e.s))}</span></div>
+        <div class="ev-body">
+          ${e.main ? '<p class="label ev-main">The main event</p>' : ''}
+          <h3 class="ev-name">${T(e.name)}</h3>
+          <p class="ev-time">${esc(range(e.s, e.e))}</p>
+          <p class="ev-place"><a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(tx(e.place) + ', ' + tx(e.address))}" target="_blank" rel="noopener">${T(e.place)}</a><br><span class="muted">${T(e.address)}</span></p>
+          ${has(e.note) ? `<p class="ev-note">${T(e.note)}</p>` : ''}
+          ${has(e.attire) ? `<span class="tag">${T(e.attire)}</span>` : ''}
+        </div>
+      </article>`).join('')}
+    </div>`;
+
+  R_.guide = no => {
+    const v = C.venue, S = C.stay || {};
+    const q = encodeURIComponent(tx(v.mapQuery) || tx(v.address));
+    const ll = v.lat != null ? v.lat + ',' + v.lng : '';
+    const apple = 'https://maps.apple.com/?q=' + encodeURIComponent(tx(v.name)) + (ll ? '&ll=' + ll : '&address=' + q);
+    const uber = 'https://m.uber.com/ul/?action=setPickup&pickup=my_location'
+      + (ll ? '&dropoff[latitude]=' + v.lat + '&dropoff[longitude]=' + v.lng : '')
+      + '&dropoff[nickname]=' + encodeURIComponent(tx(v.name)) + '&dropoff[formatted_address]=' + encodeURIComponent(tx(v.address));
+    const row = (k, val) => has(val) ? `<div><dt class="label">${k}</dt><dd>${T(val)}</dd></div>` : '';
+    return `
+    ${folio(no)}
+    <p class="kicker">${t('guide')}</p>
+    <h2 class="h2" id="guide-h">Getting there</h2>
+    <h3 class="h3">${T(v.name)}</h3>
+    <p class="addr" id="venueAddr">${T(v.address)}</p>
+    <div class="btns">
+      <a class="btn btn--solid" href="https://www.google.com/maps/search/?api=1&amp;query=${q}" target="_blank" rel="noopener">Google Maps</a>
+      <a class="btn" href="${esc(apple)}" target="_blank" rel="noopener">Apple Maps</a>
+      <a class="btn" href="${esc(uber)}" target="_blank" rel="noopener">Uber</a>
+      <button class="btn" type="button" data-copy="${esc(tx(v.address))}" data-msg="Address copied.">Copy address</button>
+    </div>
+    <dl class="rows" style="margin-top:24px">${row('Parking', v.parking)}${row('Transit', v.transit)}${row('Rideshare', v.rideshare)}</dl>
+    ${has(S.hotels) ? `<h3 class="sub">Where to stay</h3>${S.hotels.map(h => `
+      <div class="hotel">
+        <h4 class="h3">${T(h.name)}</h4>
+        <p class="muted" style="margin-top:6px">${T(h.note)}</p>
+        <dl class="rows">
+          ${row('Rate', h.rate)}
+          ${has(h.code) ? `<div><dt class="label">Code</dt><dd><span class="code">${esc(h.code)}</span> <button class="textbtn" type="button" data-copy="${esc(h.code)}" data-msg="Booking code copied.">Copy</button></dd></div>` : ''}
+          ${has(h.bookBy) ? `<div><dt class="label">Book by</dt><dd>${esc(fullDate(P(h.bookBy)))}</dd></div>` : ''}
+        </dl>
+        <a class="btn btn--wide" ${has(h.url) ? `href="${esc(h.url)}" target="_blank" rel="noopener"` : 'href="#" data-demo="The couple’s booking link goes here."'}>${has(h.code) ? 'Book the room block' : 'See the hotel'}</a>
+      </div>`).join('')}` : ''}
+    ${has(S.airports) ? `<h3 class="sub">Flying in</h3>${S.airports.map(a => `
+      <div class="airport"><b>${esc(a.code)}</b><p>${T(a.name)}<br><span class="muted">${T(a.time)}</span></p></div>`).join('')}` : ''}`;
+  };
+
+  R_.reply = no => {
+    const r = C.rsvp || {};
+    const meals = (r.meals || []).map(tx);
+    const mealChoices = name => meals.map(m => `<label class="choice"><input type="radio" name="${name}" value="${esc(m)}"> ${esc(m)}</label>`).join('');
+    const evChoices = events.map(e => `<label class="choice"><input type="checkbox" name="events" value="${esc(e.id)}"${e.id === 'ceremony' || e.id === 'reception' || e.main ? ' checked' : ''}> ${T(e.name)} <span class="muted">· ${WD[wday(e.s)].slice(0, 3)}</span></label>`).join('');
+    return `
+    ${folio(no)}
+    <p class="kicker">${t('reply')}</p>
+    <h2 class="h2" id="reply-h">Save us a seat</h2>
+    <p class="deck">Fill in the card below. It goes straight to us.</p>
+    <p class="tear" aria-hidden="true">Detach and return</p>
+    <div class="card" id="card">
+      <div class="stamp" aria-hidden="true"><small>RSVP</small><b>${R.d}</b><small>${MON[R.mo - 1].slice(0, 3)}</small></div>
+      <div class="card-h"><h3 class="h3">Kindly reply</h3><p>by ${esc(longDate(R))}</p></div>
+      <form id="rsvp" novalidate>
+        <div class="field"><label for="f-name">Your full name</label><input class="input" id="f-name" name="name" type="text" autocomplete="name" required><p class="err" id="e-name"></p></div>
+        <div class="field"><label for="f-email">Email <span class="muted">(for updates)</span></label><input class="input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email"></div>
+        <fieldset class="field"><legend>Will you be there?</legend>
+          <div class="choices"><label class="choice"><input type="radio" name="attending" value="yes"> Joyfully accepts</label><label class="choice"><input type="radio" name="attending" value="no"> Regretfully declines</label></div>
+          <p class="err" id="e-att"></p>
+        </fieldset>
+        <div id="yesOnly" hidden>
+          ${events.length > 1 ? `<fieldset class="field"><legend>Which events?</legend><div class="choices">${evChoices}</div></fieldset>` : ''}
+          ${meals.length ? `<fieldset class="field"><legend>Your dinner</legend><div class="choices">${mealChoices('meal')}</div></fieldset>` : ''}
+          ${r.plusOne ? `<fieldset class="field"><legend>Bringing a guest?</legend><p class="hint">Only if your invitation says “and guest.”</p>
+            <div class="choices choices--2"><label class="choice"><input type="radio" name="plus" value="no" checked> Just me</label><label class="choice"><input type="radio" name="plus" value="yes"> Yes</label></div></fieldset>
+          <div id="guestOnly" hidden>
+            <div class="field"><label for="f-guest">Guest’s full name</label><input class="input" id="f-guest" name="guest" type="text" autocomplete="off"></div>
+            ${meals.length ? `<fieldset class="field"><legend>Guest’s dinner</legend><div class="choices">${mealChoices('guestMeal')}</div></fieldset>` : ''}
+          </div>` : ''}
+          <div class="field"><label for="f-diet">Allergies or dietary needs</label><textarea class="input" id="f-diet" name="dietary" rows="2"></textarea></div>
+          ${r.song ? `<div class="field"><label for="f-song">Song request <span class="muted">(optional)</span></label><p class="hint">We’ll play it if it’s danceable.</p><input class="input" id="f-song" name="song" type="text" autocomplete="off"></div>` : ''}
+        </div>
+        <div class="field"><label for="f-note">A note for us <span class="muted">(optional)</span></label><textarea class="input" id="f-note" name="note" rows="2"></textarea></div>
+        <button class="btn btn--solid btn--wide" type="submit" id="rsvpBtn">Send reply</button>
+        <p class="err" id="e-send" style="margin-top:12px"></p>
+      </form>
+    </div>`;
+  };
+
+  R_.gifts = no => `
+    ${folio(no)}
+    <p class="kicker">${t('gifts')}</p>
+    <h2 class="h2" id="gifts-h">If you’d like to give something</h2>
+    <p class="deck">Having you there is plenty. If you’d like to do more, here are two ideas.</p>
+    <div>${C.registry.map(g => `
+      <div class="gift">
+        <p class="label" style="color:var(--acc)">${T(g.label)}</p>
+        <h3 class="h3">${T(g.name)}</h3>
+        <p class="muted">${T(g.note)}</p>
+        <a class="btn btn--solid" ${has(g.url) ? `href="${esc(g.url)}" target="_blank" rel="noopener"` : 'href="#" data-demo="The couple’s registry link goes here."'}>${T(g.button || 'Open')}</a>
+      </div>`).join('')}
+    </div>`;
+
+  R_.editorial = no => {
+    const rows = [];
+    for (let i = 0; i < gallery.length; i++) {
+      if (gallery[i].ratio === '1/1' && gallery[i + 1] && gallery[i + 1].ratio === '1/1') { rows.push([i, i + 1]); i++; } else rows.push([i]);
+    }
+    const item = i => `<button class="g-item" type="button" data-lb="${i}" aria-label="View photo ${i + 1}">${photo(gallery[i].src, gallery[i].ratio || '4/5', tx(gallery[i].caption))}<span class="g-cap"><b>${pad(i + 1)}</b>${T(gallery[i].caption)}</span></button>`;
+    return `
+    ${folio(no)}
+    <p class="kicker">${t('editorial')}</p>
+    <h2 class="h2" id="editorial-h">${T(C.gallery.headline)}</h2>
+    <p class="deck">Tap any photo to see it large.</p>
+    <div class="gallery">${rows.map(r => `<div class="g-row${r.length === 2 ? ' g-row--2' : ''}">${r.map(item).join('')}</div>`).join('')}</div>
+    ${has(C.photos.credit) ? `<p class="label credit">${T(C.photos.credit)}</p>` : ''}`;
+  };
+
+  R_.style = no => `
+    ${folio(no)}
+    <p class="kicker">${t('style')}</p>
+    <h2 class="h2" id="style-h">${T(C.style.code)}</h2>
+    <p class="deck">${T(C.style.deck)}</p>
+    <div class="dos">
+      <div><h3>Yes, please</h3><ul>${C.style.yes.map(x => `<li>${T(x)}</li>`).join('')}</ul></div>
+      <div><h3>Maybe skip</h3><ul>${C.style.skip.map(x => `<li>${T(x)}</li>`).join('')}</ul></div>
+    </div>
+    ${has(C.style.weather) ? `<div class="forecast"><p class="label">Forecast</p><p>${T(C.style.weather)}</p></div>` : ''}`;
+
+  R_.faq = no => `
+    ${folio(no)}
+    <p class="kicker">${t('faq')}</p>
+    <h2 class="h2" id="faq-h">Your questions, answered</h2>
+    <div class="qa">${C.faq.map(f => `<details><summary><span>${T(f.q)}</span></summary><p class="a">${T(f.a)}</p></details>`).join('')}</div>`;
+
+  R_.submissions = no => `
+    ${folio(no)}
+    <p class="kicker">${t('submissions')}</p>
+    <h2 class="h2" id="submissions-h">Send us your photos</h2>
+    <p class="deck">After the party, add the pictures you took. They go straight to our shared album.</p>
+    <label class="drop"><input type="file" id="upFiles" accept="image/*,video/*" multiple><b>Choose photos or videos</b><span class="muted">From your camera roll. Up to 20 at a time.</span></label>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="field" style="margin-top:22px"><label for="up-name">Your name <span class="muted">(so we know who to thank)</span></label><input class="input" id="up-name" type="text" autocomplete="name"></div>
+    <button class="btn btn--solid btn--wide" type="button" id="upBtn">Upload</button>`;
+
+  R_.back = no => `
+    ${folio(no)}
+    <p class="kicker">${t('back')}</p>
+    <h2 class="h2" id="back-h">Pass it on</h2>
+    <p class="deck">Send this issue to anyone who should have a copy.</p>
+    <div class="btns" id="shareBtns">
+      <a class="btn btn--solid" id="sh-sms">Text message</a>
+      <a class="btn" id="sh-wa" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="btn" type="button" id="sh-ig">Instagram</button>
+      <button class="btn" type="button" id="sh-copy">Copy link</button>
+    </div>
+    <div class="qr"><div class="qr-box" id="qr" aria-label="QR code for this invitation" role="img"></div><p>Scan to open this issue on another phone.<br><span class="muted" style="overflow-wrap:anywhere">${esc(String(C.share.url || '').replace(/^https?:\/\//, ''))}</span></p></div>
+    <div class="colophon">
+      <p>Vol. ${esc(C.issue.vol)} · ${T(C.issue.title)}<br>Published by ${C.couple.full.map(T).join(' &amp; ')}<br>${esc(CITY)} · ${MON[W.mo - 1]} ${W.y}</p>
+      <div class="barcode" aria-hidden="true"><svg class="bars" data-digits="${W.y}${pad(W.mo)}${pad(W.d)}"></svg><span>${W.y} ${pad(W.mo)}${pad(W.d)}</span></div>
+    </div>
+    ${has(C.footer) ? `<p class="made">${T(C.footer)}</p>` : ''}`;
+
+  const app = $('#app');
+  app.innerHTML = SECTIONS.map(s => `<section class="pg${s.tone ? ' pg--' + s.tone : ''}${s.id === 'cover' ? ' cover' : ''}" id="${s.id}" aria-labelledby="${s.id}-h">${R_[s.id](s.no)}</section>`).join('');
+
+  /* ── 공통 동작 ── */
+  const toastEl = $('#toast');
+  let toastTimer = 0;
+  function toast(msg, ms) {
+    toastEl.textContent = msg; toastEl.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { toastEl.hidden = true; }, ms || 2600);
+  }
+  function legacyCopy(text) {
+    const ta = doc.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    doc.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = doc.execCommand('copy'); } catch (e) { ok = false; }
+    ta.remove(); return ok;
+  }
+  function copy(text, msg) {
+    const done = () => toast(msg || 'Copied.');
+    const fail = () => (legacyCopy(text) ? done() : toast('Couldn’t copy. Press and hold to copy: ' + text, 5000));
+    try { navigator.clipboard.writeText(text).then(done, fail); } catch (e) { fail(); }
+  }
+  doc.addEventListener('click', e => {
+    const c = e.target.closest('[data-copy]');
+    if (c) { copy(c.dataset.copy, c.dataset.msg); return; }
+    const d = e.target.closest('[data-demo]');
+    if (d) { e.preventDefault(); toast('Preview: ' + d.dataset.demo); }
+  });
+
+  /* 제호 폭 맞춤 */
+  function fitAll() {
+    $$('.fit').forEach(s => {
+      const p = s.parentElement;
+      const cs = getComputedStyle(p);
+      const avail = p.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      s.style.fontSize = '100px';
+      const w = s.getBoundingClientRect().width;
+      if (!w || !avail) return;
+      s.style.fontSize = Math.min(+(s.dataset.max || 120), 100 * avail / w).toFixed(2) + 'px';
+    });
+  }
+  let fitRaf = 0;
+  window.addEventListener('resize', () => { cancelAnimationFrame(fitRaf); fitRaf = requestAnimationFrame(fitAll); });
+  if (doc.fonts) { doc.fonts.ready.then(fitAll); if (doc.fonts.addEventListener) doc.fonts.addEventListener('loadingdone', fitAll); }
+  fitAll();
+
+  /* 바코드 (장식) */
+  $$('svg.bars').forEach(svg => {
+    const digits = svg.dataset.digits || '';
+    let x = 0; const rects = [];
+    const add = (w, on, tall) => { if (on) rects.push(`<rect x="${x}" y="0" width="${w}" height="${tall ? 40 : 34}"/>`); x += w; };
+    add(1, 1, 1); add(1, 0); add(1, 1, 1);
+    for (let i = 0; i < digits.length; i++) {
+      const d = +digits[i];
+      [(d % 3) + 1, ((d + 1) % 2) + 1, ((d + 2) % 3) + 1, (d % 2) + 1].forEach((w, j) => add(w, j % 2 === 0));
+      if (i === 3) { add(1, 0); add(1, 1, 1); add(1, 0); add(1, 1, 1); add(1, 0); }
+    }
+    add(1, 0); add(1, 1, 1); add(1, 0); add(1, 1, 1);
+    svg.setAttribute('viewBox', `0 0 ${x} 40`);
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.innerHTML = rects.join('');
+  });
+
+  /* D-day: 보는 사람의 오늘 날짜와 예식장 날짜의 차이 */
+  const ddayEl = $('#dday');
+  if (ddayEl) {
+    const now = new Date();
+    const diff = Math.round((Date.UTC(W.y, W.mo - 1, W.d) - Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())) / 864e5);
+    ddayEl.innerHTML = diff > 1 ? `<b>${diff}</b><span>days to go</span>`
+      : diff === 1 ? '<b>1</b><span>day to go. See you tomorrow.</span>'
+      : diff === 0 ? '<b>Today</b><span>See you there.</span>'
+      : `<b>${-diff}</b><span>${-diff === 1 ? 'day' : 'days'} married</span>`;
+  }
+
+  /* Google 캘린더 (Apple은 build.py가 만드는 .ics 파일) */
+  const gcal = $('#gcal');
+  if (gcal) {
+    const stamp = p => `${p.y}${pad(p.mo)}${pad(p.d)}T${pad(p.h)}${pad(p.mi)}00`;
+    const end = WE || { y: W.y, mo: W.mo, d: W.d, h: Math.min(W.h + 5, 23), mi: W.mi };
+    gcal.href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+      + '&text=' + encodeURIComponent(pair + '’s wedding')
+      + '&dates=' + stamp(W) + '/' + stamp(end)
+      + (C.timezone ? '&ctz=' + encodeURIComponent(C.timezone) : '')
+      + '&location=' + encodeURIComponent(tx(C.venue.name) + ', ' + tx(C.venue.address))
+      + '&details=' + encodeURIComponent('Details: ' + (C.share.url || location.href));
+  }
+  // .ics 파일이 없는 미리보기에서는 안내만 띄운다
+  const ical = $('#ical');
+  if (ical) fetch(ical.getAttribute('href')).then(r => { if (!r.ok) throw new Error(); })
+    .catch(() => { ical.dataset.demo = 'the Apple Calendar file is added when the invitation is built.'; });
+
+  /* ── 회신 엽서 ── */
+  function bindRsvp() {
+    const form = $('#rsvp');
+    if (!form) return;
+    const yesOnly = $('#yesOnly'), guestOnly = $('#guestOnly');
+    form.addEventListener('change', () => {
+      const att = (form.querySelector('input[name="attending"]:checked') || {}).value;
+      yesOnly.hidden = att !== 'yes';
+      if (guestOnly) guestOnly.hidden = (form.querySelector('input[name="plus"]:checked') || {}).value !== 'yes';
+      if (att) $('#e-att').textContent = '';
+    });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const name = String(fd.get('name') || '').trim();
+      const att = fd.get('attending');
+      $('#e-name').textContent = name ? '' : 'Please add your name.';
+      $('#e-att').textContent = att ? '' : 'Please choose one.';
+      if (!name) { $('#f-name').focus(); return; }
+      if (!att) { form.querySelector('input[name="attending"]').focus(); return; }
+      const yes = att === 'yes';
+      const guest = yes && fd.get('plus') === 'yes';
+      const data = {
+        type: 'rsvp', slug: String(C.share.url || '').split('/').filter(Boolean).pop() || '',
+        couple: C.share.url || '', submittedAt: new Date().toISOString(),
+        name, email: String(fd.get('email') || '').trim(), attending: yes ? 'yes' : 'no',
+        events: yes ? fd.getAll('events').join(', ') : '',
+        meal: yes ? (fd.get('meal') || '') : '',
+        guest: guest ? String(fd.get('guest') || '').trim() : '',
+        guestMeal: guest ? (fd.get('guestMeal') || '') : '',
+        dietary: yes ? String(fd.get('dietary') || '').trim() : '',
+        song: yes ? String(fd.get('song') || '').trim() : '',
+        note: String(fd.get('note') || '').trim()
+      };
+      const btn = $('#rsvpBtn');
+      const finish = sent => {
+        $('#card').innerHTML = `<div class="sent" tabindex="-1" id="sentMsg">
+          <p class="label" style="color:var(--accent)">Reply received</p>
+          <h3 class="h3">${yes ? 'See you in ' + esc(CITY) + ', ' + esc(name.split(' ')[0]) + '.' : 'We’ll miss you, ' + esc(name.split(' ')[0]) + '.'}</h3>
+          <p>${yes ? 'Your seat is saved.' + (data.email ? ' We’ll send updates to ' + esc(data.email) + '.' : '') : 'Thank you for letting us know.'}</p>
+          ${sent ? '' : `<p class="muted">${t('preview')}</p>`}
+          <button class="textbtn" type="button" id="again">Change my reply</button>
+        </div>`;
+        $('#sentMsg').focus();
+        $('#again').addEventListener('click', () => { $('#reply').innerHTML = R_.reply(NO('reply')); bindRsvp(); $('#f-name').focus(); });
+      };
+      const endpoint = C.rsvp && C.rsvp.endpoint;
+      if (!endpoint) { finish(false); return; }
+      btn.disabled = true; btn.textContent = 'Sending…';
+      // Apps Script 웹 앱으로 보낸다. no-cors라 응답 본문은 읽지 못한다.
+      fetch(endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) })
+        .then(() => finish(true))
+        .catch(() => { btn.disabled = false; btn.textContent = 'Send reply'; $('#e-send').textContent = 'Your reply didn’t go through. Check your connection and try again.'; });
+    });
+  }
+  bindRsvp();
+
+  /* ── 화보 크게 보기 ── */
+  const lb = $('#lb'), lbStage = $('#lbStage'), lbCap = $('#lbCap'), lbCount = $('#lbCount');
+  let lbI = 0, lbOpener = null;
+  function lbRender() {
+    const g = gallery[lbI];
+    lbStage.innerHTML = has(g.src) ? `<img src="${esc(g.src)}" alt="${T(g.caption)}">` : photo('', g.ratio || '4/5', '');
+    lbCap.textContent = tx(g.caption) || '';
+    lbCount.textContent = pad(lbI + 1) + ' / ' + pad(gallery.length);
+  }
+  function lbOpen(i, opener) { lbI = i; lbOpener = opener; lbRender(); lb.hidden = false; doc.body.style.overflow = 'hidden'; $('#lbClose').focus(); }
+  function lbClose() { lb.hidden = true; doc.body.style.overflow = ''; if (lbOpener) lbOpener.focus(); }
+  function lbStep(n) { lbI = (lbI + n + gallery.length) % gallery.length; lbRender(); }
+  app.addEventListener('click', e => { const b = e.target.closest('[data-lb]'); if (b) lbOpen(+b.dataset.lb, b); });
+  $('#lbClose').addEventListener('click', lbClose);
+  $('#lbPrev').addEventListener('click', () => lbStep(-1));
+  $('#lbNext').addEventListener('click', () => lbStep(1));
+  doc.addEventListener('keydown', e => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') lbClose();
+    else if (e.key === 'ArrowLeft') lbStep(-1);
+    else if (e.key === 'ArrowRight') lbStep(1);
+  });
+  let tx0 = null;
+  lb.addEventListener('touchstart', e => { tx0 = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => { if (tx0 == null) return; const dx = e.changedTouches[0].clientX - tx0; if (Math.abs(dx) > 40) lbStep(dx < 0 ? 1 : -1); tx0 = null; });
+
+  /* ── 독자 투고: 데모는 화면만 ── */
+  const upFiles = $('#upFiles');
+  if (upFiles) {
+    upFiles.addEventListener('change', () => {
+      const box = $('#thumbs'); box.innerHTML = '';
+      Array.from(upFiles.files).slice(0, 20).forEach(f => {
+        if (!/^image\//.test(f.type)) return;
+        const r = new FileReader();
+        r.onload = () => { const img = doc.createElement('img'); img.src = r.result; img.alt = ''; box.appendChild(img); };
+        r.readAsDataURL(f);
+      });
+    });
+    $('#upBtn').addEventListener('click', () => {
+      if (!(C.submissions && C.submissions.endpoint)) { toast('Preview: uploads are turned off. In the live version, photos go to the couple’s shared album.', 4200); return; }
+      toast('Uploading is set up when the couple’s album is connected.');
+    });
+  }
+
+  /* ── 공유 ── */
+  const shareUrl = C.share.url || location.href;
+  const shareText = tx(C.share.title) + ' ' + shareUrl;
+  const sms = $('#sh-sms'); if (sms) sms.href = 'sms:?&body=' + encodeURIComponent(shareText);
+  const wa = $('#sh-wa'); if (wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+  const ig = $('#sh-ig'); if (ig) ig.addEventListener('click', () => copy(shareUrl, 'Link copied. Paste it into an Instagram story or DM.'));
+  const cp = $('#sh-copy'); if (cp) cp.addEventListener('click', () => copy(shareUrl, 'Link copied.'));
+  const qrBox = $('#qr');
+  if (qrBox) {
+    if (window.qrcode) {
+      const qr = window.qrcode(0, 'M'); qr.addData(shareUrl); qr.make();
+      const n = qr.getModuleCount(); let d = '';
+      for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (qr.isDark(r, c)) d += `M${c},${r}h1v1h-1z`;
+      qrBox.innerHTML = `<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges" aria-hidden="true"><path d="${d}" fill="#141414"/></svg>`;
+    } else {
+      qrBox.innerHTML = '<p style="color:#141414;font-size:12px;padding:8px">QR code unavailable offline.</p>';
+    }
+  }
+
+  /* ── 사운드트랙 막대 ── */
+  const audio = $('#audio'), play = $('#play'), nowTitle = $('#nowTitle');
+  const M = C.music || {};
+  if (!has(M.src)) {
+    const dock = $('#dock');
+    dock.classList.add('dock--nomusic', 'dock--away');
+    // 표지가 화면 절반 넘게 보이는 동안에는 목차 버튼을 숨긴다 (표지 문구·바코드를 가리지 않게)
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => dock.classList.toggle('dock--away', e.intersectionRatio > 0.5), { threshold: [0, 0.5, 1] }).observe($('#cover'));
+    else dock.classList.remove('dock--away');
+  }
+  nowTitle.textContent = has(M.src) ? [tx(M.title), tx(M.artist)].filter(has).join(' · ') : '';
+  play.innerHTML = ICON.play;
+  play.addEventListener('click', () => {
+    if (!has(M.src)) { toast('Preview: this sample has no sound. Your chosen song plays here.'); return; }
+    if (!audio.src) audio.src = M.src;
+    if (audio.paused) audio.play().then(() => { play.innerHTML = ICON.pause; play.setAttribute('aria-label', 'Pause music'); }).catch(() => toast('Tap again to play.'));
+    else { audio.pause(); play.innerHTML = ICON.play; play.setAttribute('aria-label', 'Play music'); }
+  });
+})();
+</script>
+
+</body>
+</html>

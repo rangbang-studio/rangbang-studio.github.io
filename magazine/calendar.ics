@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//RANGBANG//Magazine//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20271016T230000Z-nora-theo@rangbang
+DTSTAMP:20261020T165218Z
+DTSTART:20271016T230000Z
+DTEND:20271017T050000Z
+SUMMARY:Nora & Theo’s wedding
+LOCATION:The Halden Room\, Chicago Riverwalk\, Chicago\, IL
+DESCRIPTION:Details: https://rangbang-studio.github.io/magazine/
+URL:https://rangbang-studio.github.io/magazine/
+END:VEVENT
+END:VCALENDAR
