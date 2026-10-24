@@ -1,0 +1,1527 @@
+<!doctype html>
+<html lang="en" data-theme="butter">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400&amp;family=Gowun+Batang:wght@400;700&amp;family=Jost:wght@300;400&amp;family=Newsreader:opsz,wght@72,300&amp;display=swap">
+
+<script>
+
+window.WEDDING = {
+  "draft": false,
+  "invited": "Together with our favorite people",
+  "bride": {
+    "name": "Sofia Rivera",
+    "en": "Sofia",
+    "role": "The Bride",
+    "parents": []
+  },
+  "groom": {
+    "name": "Mateo Cruz",
+    "en": "Mateo",
+    "role": "The Groom",
+    "parents": []
+  },
+  "date": "2027-02-27T17:00",
+  "offset": "-05:00",
+  "timezone": "ET",
+  "city": "Miami Beach, Florida",
+  "greeting": "A little salt air, a golden sky, and all our favorite people. Meet us by the ocean as we promise forever and celebrate into the evening.",
+  "greetingKo": "",
+  "playlist": {
+    "title": "",
+    "songs": []
+  },
+  "gallery": {
+    "title": "Our days in the sun",
+    "show": 6
+  },
+  "venue": {
+    "name": "Maravela Shore House",
+    "address": "Miami Beach, FL · Fictional demo venue",
+    "tel": "",
+    "latitude": null,
+    "longitude": null,
+    "photo": "",
+    "mapImage": "",
+    "maps": [
+      {
+        "label": "Google Maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Miami+Beach%2C+Florida"
+      },
+      {
+        "label": "Apple Maps",
+        "url": "https://maps.apple.com/?q=Maravela+Shore+House&address=Miami+Beach%2C+Florida"
+      },
+      {
+        "label": "Uber",
+        "url": "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Bnickname%5D=Maravela+Shore+House&dropoff%5Bformatted_address%5D=Miami+Beach%2C+FL+%C2%B7+Fictional+demo+venue"
+      }
+    ],
+    "mapTip": "Fictional venue for a design demo. Map links show the city only."
+  },
+  "ways": [
+    {
+      "title": "Parking",
+      "text": "Limited guest parking is planned at the shore house. We recommend the hotel shuttle or a rideshare so you can enjoy the evening."
+    },
+    {
+      "title": "Transit",
+      "text": "A guest shuttle is planned between the host hotel and the shore house. Pickup details and the return schedule will be shared before the wedding."
+    },
+    {
+      "title": "Rideshare",
+      "text": "Use the shore house driveway for drop-off. The beach ceremony is reached by the level boardwalk from the entrance."
+    }
+  ],
+  "dressCode": {
+    "label": "Dress Code",
+    "title": "Beach Formal",
+    "text": "Airy dresses, linen suits, and light colors are encouraged. Choose flats or sandals for the sand, and bring a light wrap for the ocean breeze."
+  },
+  "registry": null,
+  "rsvp": {
+    "label": "RSVP",
+    "text": "Kindly reply by January 30, 2027.",
+    "button": "Send your reply",
+    "endpoint": "",
+    "meals": [
+      "Citrus-roasted chicken",
+      "Grilled local-style fish",
+      "Roasted vegetable and white bean bowl (vegan)"
+    ]
+  },
+  "moments": {
+    "upload": ""
+  },
+  "bgm": [],
+  "share": {
+    "url": "https://rangbang-studio.github.io/seoul/butter/",
+    "title": "Sofia & Mateo · February 27, 2027",
+    "description": "Saturday, February 27, 2027 · Maravela Shore House · Miami Beach, Florida",
+    "image": "images/cover.jpg",
+    "text": "Celebrate our next chapter with us."
+  },
+  "theme": {
+    "random": false,
+    "list": [
+      "butter"
+    ],
+    "preview": []
+  },
+  "photos": {
+    "cover": "images/cover.jpg",
+    "intro": {
+      "src": "images/intro.jpg",
+      "pos": "50% 50%"
+    },
+    "playlist": {
+      "src": ""
+    },
+    "gallery": [
+      {
+        "src": "images/g01.jpg",
+        "thumb": "images/g01.jpg"
+      },
+      {
+        "src": "images/g02.jpg",
+        "thumb": "images/g02.jpg"
+      },
+      {
+        "src": "images/g03.jpg",
+        "thumb": "images/g03.jpg"
+      },
+      {
+        "src": "images/g04.jpg",
+        "thumb": "images/g04.jpg"
+      },
+      {
+        "src": "images/g05.jpg",
+        "thumb": "images/g05.jpg"
+      },
+      {
+        "src": "images/g06.jpg",
+        "thumb": "images/g06.jpg"
+      },
+      {
+        "src": "images/g07.jpg",
+        "thumb": "images/g07.jpg"
+      },
+      {
+        "src": "images/g08.jpg",
+        "thumb": "images/g08.jpg"
+      }
+    ]
+  }
+};
+
+(() => {
+  const T = window.WEDDING.theme || {};
+  const allowed = ['brown', 'emerald', 'butter', 'chartreuse'];
+  const candidates = [];
+  const list = (T.list || allowed).filter(x => allowed.includes(x));
+  if (!list.length) list.push(allowed[0]);
+  const preview = (T.preview || candidates).filter(x => candidates.includes(x));
+  const m = /[?&]theme=([a-z]+)/.exec(location.search);
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+  const nextFromBag = () => {
+    try {
+      let bag = JSON.parse(localStorage.getItem('themeBag') || '[]').filter(x => list.indexOf(x) >= 0);
+      const last = localStorage.getItem('themeLast');
+      if (!bag.length) {
+        bag = shuffle(list.slice());
+        if (bag.length > 1 && bag[0] === last) bag.push(bag.shift());
+      }
+      const next = bag.shift();
+      localStorage.setItem('themeBag', JSON.stringify(bag));
+      localStorage.setItem('themeLast', next);
+      return next;
+    } catch (e) { return list[Math.floor(Math.random() * list.length)]; }
+  };
+  const pick = m && list.concat(preview).includes(m[1]) ? m[1] : T.random ? nextFromBag() : list[0];
+  document.documentElement.setAttribute('data-theme', pick);
+  window.WEDDING.themeName = pick;
+})();
+</script>
+
+<style>
+
+:root {
+  --accent: #3b2c23;
+  --black: #1a1310;
+  --black-2: #130e0b;
+  --paper: #f2e8d5;
+  --peach: #c4a882;
+  --sunday: #f87171;
+  --dot: #c8c2b8;
+  --cream: #f4f2ed;
+  --backdrop: #130e0b;
+  
+  --on-accent: #f2e8d5;       
+  --on-paper: #1a1310;        
+  --accent-rgb: 59, 44, 35;
+  --paper-rgb: 242, 232, 213;
+  --cream-rgb: 244, 242, 237;
+  --accent-photo: #f2e8d5;   
+  --accent-line: transparent;      
+  --warn: #f4a28c;
+  --f-display: "Newsreader", "Gowun Batang", serif;
+  --f-caps: "Cinzel", "Gowun Batang", serif;
+  --f-body: "Gowun Batang", serif;
+  --f-num: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --gutter: 21px;
+  --col: 430px;
+  color-scheme: only light;
+}
+
+:root[data-theme="brown"] { --accent: #3b2c23; --accent-rgb: 59, 44, 35; --on-accent: #f2e8d5; --accent-line: rgba(242, 232, 213, .45);
+  --black: #1a1310; --black-2: #130e0b; --backdrop: #130e0b; --paper: #f2e8d5; --paper-rgb: 242, 232, 213; --peach: #c4a882;
+  --on-paper: #1a1310; --sunday: #f87171; --accent-photo: #f2e8d5; }
+
+:root[data-theme="forest"] { --accent: #2e3829; --accent-rgb: 46, 56, 41; --on-accent: #eae8e4; --accent-line: rgba(234, 232, 228, .45);
+  --black: #141a12; --black-2: #0e130c; --backdrop: #0e130c; --paper: #eae8e4; --paper-rgb: 234, 232, 228; --peach: #9ca69e;
+  --on-paper: #141a12; --sunday: #f87171; --accent-photo: #eae8e4; }
+
+:root[data-theme="emerald"] { --accent: #0f5c47; --accent-rgb: 15, 92, 71; --on-accent: #efe9d8; --black: #0c1813; --black-2: #08110d; --backdrop: #08110d;
+  --paper: #efe9d8; --paper-rgb: 239, 233, 216; --peach: #d6bd84; --on-paper: #0c1813; --sunday: #f87171; --accent-photo: #e4d3a6; }
+
+:root[data-theme="cherry"] { --accent: #9e1b32; --accent-rgb: 158, 27, 50; --on-accent: #f4e6dc; --black: #1a0a0d; --black-2: #12070a; --backdrop: #12070a;
+  --paper: #f4e6dc; --paper-rgb: 244, 230, 220; --peach: #f0a9b4; --on-paper: #1a0a0d; --sunday: #ff8a8a; --accent-photo: #f3b0b9; }
+
+:root[data-theme="sapphire"] { --accent: #1f3a8a; --accent-rgb: 31, 58, 138; --on-accent: #ece8de; --black: #0b1024; --black-2: #070b1a; --backdrop: #070b1a;
+  --paper: #ece8de; --paper-rgb: 236, 232, 222; --peach: #d9c08b; --on-paper: #0b1024; --sunday: #f87171; --accent-photo: #c4d4f7; }
+
+:root[data-theme="butter"] { --accent: #f1cf5e; --accent-rgb: 241, 207, 94; --on-accent: #1f1a0e; --black: #17140d; --black-2: #100e09; --backdrop: #100e09;
+  --paper: #f4ecd4; --paper-rgb: 244, 236, 212; --peach: #f1cf5e; --on-paper: #17140d; --sunday: #f87171; --accent-photo: #f1cf5e; }
+
+:root[data-theme="chartreuse"] { --accent: #d4de4a; --accent-rgb: 212, 222, 74; --on-accent: #2b0b13; --black: #2b0b13; --black-2: #1f070d; --backdrop: #1f070d;
+  --paper: #f5ead9; --paper-rgb: 245, 234, 217; --peach: #d4de4a; --on-paper: #2b0b13; --sunday: #ff9a9a; --accent-photo: #d4de4a; }
+
+[hidden] { display: none !important; }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--backdrop);
+  color: var(--paper);
+  font-family: var(--f-body);
+  font-weight: 400;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+p, h1, h2, h3, h4, h5, ol, ul, figure { margin: 0; padding: 0; }
+img { max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font: inherit !important; }
+button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 1px solid var(--peach); outline-offset: 3px; }
+
+.stage { position: relative; max-width: var(--col); margin: 0 auto; background: var(--black); overflow: hidden; }
+
+.label {
+  font-family: var(--f-caps);
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: 400;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--peach);
+  text-align: right;
+}
+
+.bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  max-width: var(--col); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: calc(46px + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) 17px 0 21px;
+  color: var(--peach);
+  background: rgba(var(--accent-rgb), 0);
+  transition: background-color .3s cubic-bezier(.4, 0, .2, 1), color .3s cubic-bezier(.4, 0, .2, 1);
+}
+.bar.is-solid { background: rgba(var(--accent-rgb), .95); color: var(--on-accent); }
+
+.bar__dday { font-family: var(--f-display); font-size: 17px; line-height: 20px; font-weight: 300; letter-spacing: .01em; white-space: nowrap; color: var(--on-accent); }
+.bar__btn { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; }
+.bar__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; }
+
+.cover { background: var(--accent); color: var(--on-accent); padding: 70px 0; }
+.cover__text { padding: 0 var(--gutter); container-type: inline-size; }
+.invited { font-family: var(--f-caps); font-size: 11px; line-height: 14px; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; }
+
+.names { margin-top: 11px; font-family: var(--f-display); font-size: 36.8px; font-size: clamp(12.47px, 11.583cqi, 37.42px); line-height: 1; font-weight: 300; letter-spacing: -0.025em; }
+.names .amp { margin: 0 .3em; font-family: var(--f-caps); font-size: .5em; line-height: 1; font-weight: 400; letter-spacing: 0; }
+.cover__meta { margin-top: 24px; opacity: .75; }
+.meta { font-size: 12.5px; line-height: 19px; font-weight: 400; letter-spacing: .01em; }
+.meta + .meta { margin-top: 7px; }
+.cover__photo { position: relative; margin-top: 35px; overflow: hidden; background: var(--cream); }
+.cover__photo::before { content: ""; display: block; padding-top: 116.667%; }
+.cover__photo > img, .cover__photo > .ph { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.cover__photo > img { object-fit: cover; }
+.ph { display: flex; align-items: center; justify-content: center; background: var(--cream); color: #b3ada3; font-family: var(--f-display); font-style: italic; font-size: 12px; }
+
+.intro { padding: 70px var(--gutter) 26px; }
+.greeting { font-family: var(--f-display); font-size: 28px; line-height: 1.375; font-weight: 300; letter-spacing: -0.04em; text-align: right; text-wrap: balance; }
+.greeting__ko { margin-top: 14px; font-size: 14.5px; line-height: 24px; font-weight: 400; opacity: .8; text-align: right; }
+.people { margin-top: 157px; text-align: right; }
+.person + .person { margin-top: 17px; }
+.person__name { font-size: 13px; line-height: 22px; font-weight: 400; }
+.person__name b { margin-left: 7px; font-size: 15.5px; font-weight: 700; }
+.person__parents { margin-top: 3px; font-size: 13px; line-height: 19px; font-weight: 400; }
+
+.intro--photo { position: relative; overflow: hidden; background: #262626; }
+.intro__bg, .intro__shade { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+.intro__bg img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.35); transform-origin: 100% 15%; filter: grayscale(1); }  /* 원본처럼 흑백: 구매자 사진이 컬러여도 같은 분위기 */
+
+.intro__shade { background: linear-gradient(180deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, .3)), linear-gradient(90deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, .68)); }
+.intro--photo > [data-reveal] { position: relative; }
+.intro--photo .greeting, .intro--photo .greeting__ko { color: var(--accent-photo); }
+.intro--photo .greeting__ko { font-weight: 400; opacity: 1; }
+.intro--photo .greeting, .intro--photo .greeting__ko, .intro--photo .people { text-shadow: 0 1px 10px rgba(0, 0, 0, .5); }
+
+.playlist { position: relative; min-height: 480px; overflow: hidden; color: #fff; background: #5a554f; }
+
+.playlist__bg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: #5a554f; }
+.playlist__bg img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.23); transform-origin: 50% 0%; }
+.playlist__shade { position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: linear-gradient(180deg, rgba(0, 0, 0, .58) 0%, rgba(0, 0, 0, .52) 52%, rgba(0, 0, 0, .12) 68%, rgba(0, 0, 0, 0) 100%); }
+.playlist__body { position: relative; padding: 64px var(--gutter) 300px; text-align: right; }
+
+.playlist .label { font-family: var(--f-display); font-size: 27px; line-height: 1.2; font-weight: 300; letter-spacing: -0.02em; text-transform: none; color: #fff; }
+
+.playlist__note { margin-top: 9px; font-size: 10.5px; line-height: 16px; font-weight: 300; color: rgba(255, 255, 255, .65); }
+.playlist__note span { display: block; font-size: 10px; }
+.songs { margin-top: 21px; list-style: none; font-size: 13.5px; line-height: 30px; font-weight: 400; }
+.songs__more { margin-top: 28px; font-size: 13.5px; line-height: 28px; font-weight: 400; }
+
+.cal { padding: 100px var(--gutter) 70px; text-align: right; }
+.cal__date { font-family: var(--f-display); font-size: 28px; line-height: 33px; font-weight: 300; letter-spacing: -0.04em; }
+.cal__time { margin-top: 11px; font-size: 15px; line-height: 21px; font-weight: 400; }
+.cal__en { margin-top: 6px; font-size: 13px; line-height: 20px; font-weight: 400; opacity: .8; }
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 44.5px; margin-top: 45px; font-family: var(--f-display); font-size: 14.5px; font-weight: 300; letter-spacing: -0.04em; text-align: center; }
+.cal__grid > span { display: flex; align-items: center; justify-content: center; }
+.cal__grid .sun { color: var(--sunday); }
+.cal__grid .is-wedding i { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: var(--on-accent); box-shadow: 0 0 0 1px var(--accent-line); font-style: normal; font-weight: 700; }
+
+.gallery { padding: 70px 17px 53px; }
+.gallery .label { margin-right: -3px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 6px; row-gap: 9px; margin-top: 45px; }
+.tile { position: relative; display: block; width: 100%; padding: 0; border: 0; background: var(--cream); overflow: hidden; cursor: pointer; }
+.tile::before { content: ""; display: block; padding-top: 133.333%; }
+.tile > img, .tile > .ph, .tile__more { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.tile > img { object-fit: cover; }
+.tile__more { display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 0, 0, .5); color: #fff; }
+.tile__more b { font-family: var(--f-num); font-size: 21px; line-height: 28px; font-weight: 400; }
+.tile__more small { font-family: var(--f-num); font-size: 11px; line-height: 15px; letter-spacing: .1em; text-transform: uppercase; }
+
+.venue { padding: 70px var(--gutter); text-align: right; }
+.venue__name { margin-top: 35px; font-size: 18.5px; line-height: 24.5px; font-weight: 400; }
+
+.venue__photo { position: relative; width: 80%; margin: 34px auto 0; background: #1b1b1b; }
+.venue__photo::before { content: ""; display: block; padding-top: 56.25%; }
+.venue__photo img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.venue__photo + .venue__name { margin-top: 30px; }
+
+.framed { outline: 1px solid rgba(var(--cream-rgb), .7); outline-offset: 6px; box-shadow: 0 0 0 1px rgba(var(--cream-rgb), .2); }
+.venue__photo + .mapbox { margin-top: 12px; }
+.venue__line { font-size: 13.5px; line-height: 21px; font-weight: 400; }
+.venue__name + .venue__line { margin-top: 7px; }
+.venue__line + .venue__line { margin-top: 4px; }
+.mapbox { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 179px; margin-top: 28px; border: 1px solid rgba(0, 0, 0, .05); border-radius: 1.75px; background: rgba(0, 0, 0, .05); }
+.mapbox svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .6; }
+.mapbox span { margin-top: 7px; font-family: var(--f-caps); font-size: 10px; line-height: 15px; letter-spacing: .1em; text-transform: uppercase; }
+.mapbox--img { display: block; height: auto; border: 0; background: none; }
+.mapbox--img img { display: block; width: 100%; height: auto; }
+.maplinks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 27px 4px 0; }
+
+.mapbtn { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50px; padding: 7px 4px; border: 1px solid rgba(var(--paper-rgb), .2); border-radius: 999px; background: rgba(var(--paper-rgb), .08); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); font-size: 11px; line-height: 15px; font-weight: 400; letter-spacing: .025em; white-space: nowrap; transition: all .3s cubic-bezier(.4, 0, .2, 1); }
+.mapbtn:active { transform: scale(.95); }
+.mapbtn__ko { display: flex; align-items: center; opacity: .8; transition: opacity .15s cubic-bezier(.4, 0, .2, 1); }
+
+.mapbtn__en { margin-top: 3px; padding-left: .06em; font-family: var(--f-caps); font-size: 10.5px; font-size: clamp(8.6px, 2.8vw, 10.5px); line-height: 14px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; opacity: .85; transition: opacity .15s cubic-bezier(.4, 0, .2, 1); }
+.mapbtn svg { width: 9px; height: 9px; margin-left: 4px; fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .6; transition: opacity .15s cubic-bezier(.4, 0, .2, 1); }
+.mapbtn:hover .mapbtn__ko, .mapbtn:hover .mapbtn__en, .mapbtn:hover svg { opacity: 1; }
+.ways { margin-top: 36px; }
+.way + .way { margin-top: 28px; }
+.way h5 { font-size: 13.5px; line-height: 19px; font-weight: 700; }
+.way p { margin-top: 7px; font-size: 13.5px; line-height: 25px; font-weight: 400; }
+
+.way p.way__en { margin-top: 10px; font-size: 13px; line-height: 21px; opacity: .8; }
+.way__en span { display: block; margin-bottom: 2px; font-family: var(--f-caps); font-weight: 400; font-size: 11px; line-height: 16px; letter-spacing: .15em; text-transform: uppercase; }
+
+.maptip { margin: 14px 4px 0; font-size: 12.5px; line-height: 20px; font-weight: 400; opacity: .8; text-wrap: balance; }
+
+.way p, .party__text, .party__en, .songs li { text-wrap: balance; }
+
+.dress-code { padding: 70px var(--gutter); text-align: right; }
+.dress-code__title { margin-top: 35px; font-size: 18.5px; line-height: 24.5px; font-weight: 400; }
+.dress-code__text { margin-top: 10px; font-size: 13.5px; line-height: 24.5px; font-weight: 400; text-wrap: balance; }
+
+.gifts { padding: 70px var(--gutter) 69px; }
+.registry { margin-top: 44px; }
+.registry__img { position: relative; width: 62%; margin: 26px auto 0; overflow: hidden; background: #f4f2ed; }
+.registry__img + .registry__btn { margin-top: 26px; }
+.registry__img::before { content: ""; display: block; padding-top: 100%; }
+.registry__img img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.registry__btn { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; min-height: 54px; margin-top: 16px; padding: 8px 12px; border: 1px solid var(--accent-line); border-radius: 999px; background: var(--accent); color: var(--on-accent); cursor: pointer; transition: all .3s cubic-bezier(.4, 0, .2, 1); }
+.registry__btn:active { transform: scale(.97); }
+.registry__title { font-family: var(--f-display); font-size: 18px; line-height: 22px; font-weight: 300; letter-spacing: -0.02em; }
+.registry__sub { margin-top: 2px; padding-left: .15em; font-family: var(--f-caps); font-weight: 400; font-size: 10.5px; line-height: 13px; letter-spacing: .15em; text-transform: uppercase; opacity: .9; }
+
+.fund { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 85; display: flex; align-items: center; justify-content: center; padding: 24px 18px; background: rgba(0, 0, 0, .72); animation: fadeIn .3s ease-in-out; }
+.fund.is-leaving { animation: fadeOut .3s ease-in-out forwards; }
+.fund__panel { position: relative; width: 100%; max-width: 340px; max-height: 100%; overflow-y: auto; padding: 36px 24px 24px; border: 1px solid rgba(var(--paper-rgb), .18); background: var(--black); color: var(--paper); text-align: center; }
+.fund__close { position: absolute; top: 6px; right: 6px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 0; background: none; color: var(--paper); cursor: pointer; }
+.fund__close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; }
+.fund__label { padding-left: .3em; font-family: var(--f-caps); font-size: 11px; line-height: 15px; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: var(--peach); }
+.fund__title { margin-top: 10px; font-family: var(--f-display); font-size: 28px; line-height: 1.2; font-weight: 300; letter-spacing: -0.03em; }
+.fund__text { margin-top: 12px; font-size: 13.5px; line-height: 1.75; font-weight: 400; opacity: .85; }
+.fund__amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 22px; }
+.fund__amt { height: 40px; padding: 0; border: 1px solid rgba(var(--paper-rgb), .25); border-radius: 999px; background: transparent; color: var(--paper); font-family: var(--f-num); font-size: 13px; cursor: pointer; transition: all .2s ease; }
+.fund__amt[aria-pressed="true"] { border-color: var(--paper); background: var(--paper); color: var(--on-paper); }
+.fund__custom { display: flex; align-items: center; margin-top: 14px; border-bottom: 1px solid rgba(var(--paper-rgb), .35); }
+.fund__custom span { padding-left: 4px; font-family: var(--f-num); font-size: 18px; opacity: .7; }
+.fund__custom input { flex: 1; min-width: 0; padding: 8px 6px; border: 0; background: transparent; color: var(--paper); font-family: var(--f-num); font-size: 18px; outline: none; }
+.fund__custom input::placeholder { color: rgba(var(--paper-rgb), .4); font-size: 14px; }
+.fund__note { min-height: 18px; margin-top: 8px; font-size: 12px; line-height: 18px; color: var(--warn); }
+.fund__actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 8px; margin-top: 6px; }
+.fund__cancel { height: 46px; padding: 0; border: 1px solid rgba(var(--paper-rgb), .25); border-radius: 999px; background: transparent; color: var(--paper); font-family: var(--f-caps); font-weight: 400; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; }
+.fund__gift { display: flex; align-items: center; justify-content: center; height: 46px; border-radius: 999px; background: var(--accent); color: var(--on-accent); box-shadow: 0 0 0 1px var(--accent-line); font-family: var(--f-display); font-size: 18px; font-weight: 300; letter-spacing: -0.01em; }
+.fund__fine { margin-top: 14px; font-size: 11.5px; line-height: 1.6; opacity: .7; }
+
+.party { padding: 70px var(--gutter) 80px; text-align: right; }
+.party__text { margin-top: 35px; font-size: 13.5px; line-height: 24.5px; font-weight: 400; }
+.party__en { margin-top: 10px; font-size: 13px; line-height: 21px; font-weight: 400; opacity: .8; }
+.party__note { margin-top: 24px; font-size: 13.5px; line-height: 21px; font-weight: 400; }
+.party__note span { display: block; margin-top: 2px; font-size: 13px; line-height: 21px; font-weight: 400; opacity: .8; }
+.party__btn { margin-top: 34px; }
+
+.party__sub { margin-top: 6px; font-family: var(--f-display); font-size: 17px; line-height: 1.3; font-weight: 300; letter-spacing: -0.01em; opacity: .85; }
+
+.party__info { text-wrap: balance; }
+.party__info span { display: block; margin-top: 6px; font-size: 13px; }
+.pf { display: block; margin-top: 18px; text-align: left; }
+.party__info + .pf { margin-top: 24px; }
+.pf__head { display: flex; align-items: baseline; justify-content: space-between; font-size: 13px; line-height: 18px; font-weight: 400; }
+.pf__head em { margin-left: 5px; font-family: var(--f-caps); font-weight: 400; font-size: 10px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+.pf__head b, .pf__head i { font-size: 11px; font-style: normal; font-weight: 400; letter-spacing: .02em; }
+.pf__head b { color: var(--peach); }
+.pf__head i { opacity: .7; }
+.pf__box { display: flex; align-items: center; margin-top: 2px; border-bottom: 1px solid rgba(var(--paper-rgb), .35); transition: border-color .2s ease; }
+.pf__box:focus-within { border-bottom-color: var(--paper); }
+.pf__box--num { width: 112px; }
+
+.pf input, .pf select, .pf textarea { flex: 1; min-width: 0; width: 100%; padding: 8px 2px; border: 0; border-radius: 0; background: transparent; color: var(--paper); font-family: var(--f-body); font-size: 16px; line-height: 1.4; outline: none; -webkit-appearance: none; appearance: none; }
+.pf input:-webkit-autofill { -webkit-text-fill-color: var(--paper); -webkit-box-shadow: 0 0 0 40px var(--black) inset; }
+.pf__unit { flex: none; padding: 0 4px 0 8px; font-size: 13px; opacity: .7; }
+.pf select option { background: var(--black); color: var(--paper); }
+.pf textarea { resize: vertical; }
+.pf input::placeholder, .pf textarea::placeholder { color: rgba(var(--paper-rgb), .4); font-size: 13px; }
+.pf__hint { display: block; margin-top: 7px; font-size: 11.5px; line-height: 1.6; opacity: .7; }
+
+.moments { padding: 70px var(--gutter) 80px; text-align: right; }
+.mf__pick { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 66px; margin-top: 18px; padding: 10px; border: 1px dashed rgba(var(--paper-rgb), .45); border-radius: 12px; font-size: 13px; line-height: 1.4; cursor: pointer; }
+.mf__pick span { margin-top: 2px; font-size: 11.5px; opacity: .75; }
+.mf__pick input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.mf__list { list-style: none; max-height: 30vh; overflow-y: auto; margin-top: 10px; text-align: left; }
+.mf__item { display: flex; flex-wrap: wrap; align-items: baseline; padding: 7px 0; border-bottom: 1px solid rgba(var(--paper-rgb), .12); font-size: 12.5px; line-height: 16px; }
+.mf__name { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.mf__size { flex: none; margin-left: 8px; font-family: var(--f-num); font-size: 11.5px; opacity: .7; }
+.mf__bar { flex: 0 0 100%; height: 6px; margin-top: 6px; border-radius: 999px; overflow: hidden; background: rgba(var(--paper-rgb), .15); }
+.mf__bar i { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--accent); transition: width .2s linear; }
+
+.mf__total { margin-top: 14px; text-align: left; }
+.mf__total-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; line-height: 18px; font-weight: 400; }
+.mf__total-head b { font-family: var(--f-num); font-weight: 400; }
+.mf__total .mf__bar { display: block; height: 10px; margin-top: 6px; }
+.mf__state { flex: 0 0 100%; margin-top: 3px; font-size: 11px; opacity: .8; }
+.mf__item.is-done .mf__bar i { background: #7bc67b; }
+.mf__item.is-fail .mf__state { color: var(--warn); opacity: 1; }
+.party__send { width: 100%; padding: 0; border: 0; cursor: pointer; }
+.party__send:disabled { opacity: .6; cursor: default; }
+
+.share { padding: 70px var(--gutter) 120px; background: var(--black-2); text-align: right; }
+.share__rule { display: block; width: 20px; height: 1px; margin-left: auto; background: rgba(var(--paper-rgb), .35); }
+.share .label { margin-top: 35px; }
+.share__text { margin-top: 14px; font-size: 13.5px; line-height: 24.5px; font-weight: 400; }
+
+.share__btns { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 16px 14px; margin-top: 42px; }
+.share__btn { display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: none; cursor: pointer; transition: all .3s cubic-bezier(.4, 0, .2, 1); }
+.share__btn { min-width: 38.5px; color: inherit; }
+.share__btn i { display: flex; align-items: center; justify-content: center; width: 38.5px; height: 38.5px; border-radius: 50%; background: rgba(var(--paper-rgb), .08); transition: all .3s cubic-bezier(.4, 0, .2, 1); }
+.share__btn svg { width: 18px; height: 18px; opacity: .6; transition: opacity .15s cubic-bezier(.4, 0, .2, 1); }
+.share__btn span { margin-top: 9px; padding-left: .08em; font-family: var(--f-caps); font-weight: 400; font-size: 10px; line-height: 13.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .9; transition: opacity .15s cubic-bezier(.4, 0, .2, 1); }
+.share__btn:hover svg, .share__btn:hover span { opacity: 1; }
+
+.grain {
+  position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 90;
+  max-width: var(--col); margin: 0 auto; pointer-events: none; opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.menu { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 80; max-width: var(--col); margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--accent); color: var(--on-accent); animation: fadeIn .3s ease-in-out; }
+.menu__close { position: absolute; top: calc(6px + env(safe-area-inset-top, 0px)); right: 17px; }
+.menu__item { padding: 6px 18px; border: 0; background: none; font-family: var(--f-display); font-size: 22px; line-height: 1.3; font-weight: 300; letter-spacing: -0.04em; cursor: pointer; }
+
+.menu__list { display: flex; flex-direction: column; align-items: center; margin: auto 0; padding: calc(60px + env(safe-area-inset-top, 0px)) 0 40px; }
+.menu__item { display: flex; flex-direction: column; align-items: center; }
+.menu__item + .menu__item { margin-top: 3px; }
+
+.gpage { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 82; max-width: var(--col); margin: 0 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--black); padding: calc(70px + env(safe-area-inset-top, 0px)) 17px 60px; animation: fadeIn .4s ease-in-out; }
+.gpage__close { position: absolute; top: calc(6px + env(safe-area-inset-top, 0px)); right: 17px; color: var(--paper); }
+.gpage .label { margin-right: -3px; }
+.gpage .grid { margin-top: 30px; }
+
+.lb { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 100; background: rgba(6, 6, 6, .97); animation: fadeIn .25s ease; }
+.lb__stage { position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center; padding: calc(56px + env(safe-area-inset-top, 0px)) 10px calc(56px + env(safe-area-inset-bottom, 0px)); touch-action: pan-y; }
+.lb__stage img { max-width: 100%; max-height: 100%; object-fit: contain; -webkit-user-select: none; user-select: none; }
+.lb__btn { position: absolute; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 0; background: none; color: #eee9e2; cursor: pointer; }
+.lb__btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 2px rgba(0, 0, 0, .65)); }
+.lb__close { top: calc(6px + env(safe-area-inset-top, 0px)); right: 8px; }
+.lb__prev { top: 50%; left: 2px; margin-top: -22px; }
+.lb__next { top: 50%; right: 2px; margin-top: -22px; }
+.lb__count { position: absolute; left: 0; right: 0; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); text-align: center; color: #bdb7ae; font-family: var(--f-caps); font-weight: 400; font-size: 11px; letter-spacing: .3em; }
+
+.player { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; max-width: var(--col); margin: 0 auto; display: flex; align-items: center; height: calc(58px + env(safe-area-inset-bottom, 0px)); padding: 0 10px env(safe-area-inset-bottom, 0px) 21px; background: rgba(var(--accent-rgb), .95); color: var(--on-accent); }
+.player__progress { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: rgba(0, 0, 0, .12); }
+.player__progress i { display: block; width: 0; height: 100%; background: var(--on-accent); transition: width .25s linear; }
+
+.player__eq { display: flex; align-items: flex-end; flex: none; width: 13px; height: 13px; margin-right: 11px; }
+.player__eq i { flex: 1; height: 30%; margin-right: 2px; background: var(--on-accent); border-radius: 1px; }
+.player__eq i:last-child { margin-right: 0; }
+.player.is-playing .player__eq i { animation: playerEq .9s ease-in-out infinite alternate; }
+.player.is-playing .player__eq i:nth-child(2) { animation-delay: -.3s; }
+.player.is-playing .player__eq i:nth-child(3) { animation-delay: -.6s; }
+@keyframes playerEq { from { height: 25%; } to { height: 100%; } }
+.player__info { flex: 1; min-width: 0; }
+.player__title, .player__artist { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.player__title { font-family: var(--f-display); font-size: 15px; line-height: 19px; font-weight: 300; letter-spacing: -0.01em; }
+.player__artist { margin-top: 1px; font-family: var(--f-caps); font-weight: 400; font-size: 10px; line-height: 13px; letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+.player__ctrls { display: flex; align-items: center; flex: none; margin-left: 8px; }
+.player__btn { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--on-accent); cursor: pointer; }
+.player__btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+.player__play { width: 38px; height: 38px; margin: 0 2px; background: var(--on-accent); color: var(--accent); }
+.player__play svg { width: 15px; height: 15px; }
+
+.player__play.is-waiting { animation: playerPulse 2s ease-out infinite; }
+@keyframes playerPulse { 0% { box-shadow: 0 0 0 0 rgba(0, 0, 0, .45); } 70% { box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); } }
+
+.toast { position: fixed; left: 50%; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); z-index: 110; max-width: calc(100% - 40px); padding: 10px 16px; border-radius: 999px; background: rgba(var(--paper-rgb), .96); color: var(--on-paper); font-family: var(--f-body); font-size: 13px; line-height: 1.5; font-weight: 400; text-align: center; transform: translateX(-50%); box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .6); }
+
+.can-reveal [data-reveal] { opacity: 0; transform: translateY(30px); }
+.can-reveal [data-reveal].is-in { opacity: 1; transform: none; transition: opacity 2.2s cubic-bezier(.16, 1, .3, 1), transform 2.2s cubic-bezier(.16, 1, .3, 1); }
+
+.can-reveal [data-stagger] > * { opacity: 0; transform: translateY(20px) scale(.95); }
+.can-reveal [data-stagger].is-in > * { opacity: 1; transform: none; transition: opacity 1.2s cubic-bezier(.16, 1, .3, 1), transform 1.2s cubic-bezier(.16, 1, .3, 1); }
+
+.fade-img { opacity: 0; transition: opacity .3s cubic-bezier(0, 0, .2, 1); }
+.fade-img.is-loaded { opacity: 1; }
+.tile > .fade-img { transition-duration: .5s; }
+
+@keyframes fadeIn { from { opacity: 0; } }
+@keyframes fadeOut { to { opacity: 0; } }
+.is-leaving { pointer-events: none; }
+.menu.is-leaving { animation: fadeOut .3s ease-in-out forwards; }
+.gpage.is-leaving { animation: fadeOut .4s ease-in-out forwards; }
+.lb.is-leaving { animation: fadeOut .25s ease forwards; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+<title>Sofia &amp; Mateo · February 27, 2027</title>
+<meta name="description" content="Saturday, February 27, 2027 · Maravela Shore House · Miami Beach, Florida">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sofia &amp; Mateo · February 27, 2027">
+<meta property="og:description" content="Saturday, February 27, 2027 · Maravela Shore House · Miami Beach, Florida">
+<meta property="og:url" content="https://rangbang-studio.github.io/seoul/butter/">
+<meta property="og:image" content="https://rangbang-studio.github.io/seoul/butter/images/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <span class="bar__dday" id="dday"></span>
+  <button type="button" class="bar__btn" id="menuOpen" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+    <svg viewBox="0 0 22 22" aria-hidden="true"><path d="M4 6h14M4 11h14M4 17h14"/></svg>
+  </button>
+</header>
+
+<main class="stage" id="app"></main>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="menu" id="menu" aria-label="Menu" hidden>
+  <button type="button" class="bar__btn menu__close" data-menu="close" aria-label="Close menu">
+    <svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11"/></svg>
+  </button>
+  <div class="menu__list" id="menuList"></div>
+</nav>
+
+<section class="gpage" id="gpage" aria-label="Full gallery" hidden>
+  <button type="button" class="bar__btn gpage__close" data-gpage="close" aria-label="Close gallery">
+    <svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11"/></svg>
+  </button>
+  <h3 class="label" id="gpageTitle"></h3>
+  <div class="grid" id="gpageGrid"></div>
+</section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="View photo" hidden>
+  <div class="lb__stage" id="lbStage"><img id="lbImg" alt=""></div>
+  <button type="button" class="lb__btn lb__close" data-lb="close" aria-label="Close"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11"/></svg></button>
+  <button type="button" class="lb__btn lb__prev" data-lb="prev" aria-label="Previous photo"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M13.5 5l-6 6 6 6"/></svg></button>
+  <button type="button" class="lb__btn lb__next" data-lb="next" aria-label="Next photo"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M8.5 5l6 6-6 6"/></svg></button>
+  <p class="lb__count" id="lbCount"></p>
+</div>
+
+<div class="fund" id="fund" role="dialog" aria-modal="true" aria-labelledby="fundTitle" lang="en" hidden>
+  <div class="fund__panel">
+    <button type="button" class="fund__close" data-fund="close" aria-label="Close"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11"/></svg></button>
+    <p class="fund__label" id="fundLabel"></p>
+    <h3 class="fund__title" id="fundTitle"></h3>
+    <p class="fund__text" id="fundText"></p>
+    <div class="fund__amounts" id="fundAmounts" role="group" aria-label="Suggested amounts"></div>
+    <label class="fund__custom" for="fundAmount"><span aria-hidden="true">$</span><input id="fundAmount" inputmode="decimal" autocomplete="off" placeholder="Other amount" aria-label="Gift amount in US dollars"></label>
+    <p class="fund__note" id="fundNote" role="alert"></p>
+    <div class="fund__actions">
+      <button type="button" class="fund__cancel" data-fund="close">Cancel</button>
+      <a class="fund__gift" id="fundGift" href="#" target="_blank" rel="noopener">Gift it!</a>
+    </div>
+    <p class="fund__fine">You'll finish your gift securely on PayPal.</p>
+  </div>
+</div>
+
+<div class="fund" id="party" role="dialog" aria-modal="true" aria-labelledby="partyTitle" hidden>
+  <form class="fund__panel" id="partyForm" novalidate>
+    <button type="button" class="fund__close" data-party="close" aria-label="Close"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11"/></svg></button>
+    <p class="fund__label" id="partyLabel"></p>
+    <h3 class="fund__title" id="partyTitle">Send your reply</h3>
+    <p class="fund__text party__info" id="partyInfo"></p>
+    <label class="pf"><span class="pf__head"><span>Name</span><b>Required</b></span><span class="pf__box"><input id="pfName" name="name" autocomplete="name" maxlength="100" required aria-required="true"></span></label>
+    <label class="pf"><span class="pf__head"><span>Attendance</span><b>Required</b></span><span class="pf__box"><select id="pfAttending" name="attending" required aria-required="true"><option value="">Please select</option><option value="yes">Joyfully accepts</option><option value="no">Regretfully declines</option></select></span></label>
+    <div id="pfAccepts" hidden>
+      <label class="pf"><span class="pf__head"><span>Number of guests</span></span><span class="pf__box"><select id="pfGuests" name="guests" disabled><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></span><span class="pf__hint">Including yourself</span></label>
+      <label class="pf"><span class="pf__head"><span>Meal choice</span></span><span class="pf__box"><select id="pfMeal" name="meal" disabled></select></span></label>
+    </div>
+    <label class="pf"><span class="pf__head"><span>Allergies &amp; dietary needs</span><i>Optional</i></span><span class="pf__box"><input id="pfDietary" name="dietary" maxlength="500"></span></label>
+    <label class="pf"><span class="pf__head"><span>Song request</span><i>Optional</i></span><span class="pf__box"><input id="pfSong" name="song" maxlength="200"></span></label>
+    <label class="pf"><span class="pf__head"><span>Note</span><i>Optional</i></span><span class="pf__box"><textarea id="pfNote" name="note" rows="3" maxlength="2000"></textarea></span></label>
+    <p class="fund__note" id="partyNote" role="alert"></p>
+    <div class="fund__actions">
+      <button type="button" class="fund__cancel" data-party="close">Cancel</button>
+      <button type="submit" class="fund__gift party__send" id="partySend">Send your reply</button>
+    </div>
+  </form>
+</div>
+
+<div class="fund" id="momentsDialog" role="dialog" aria-modal="true" aria-labelledby="momentsTitle momentsTitleEn" hidden>
+  <div class="fund__panel">
+    <button type="button" class="fund__close" data-moments="close" aria-label="Close"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11"/></svg></button>
+    <p class="fund__label" lang="en">Share Our Moments</p>
+    <h3 class="fund__title" id="momentsTitle">Upload photos &amp; videos</h3>
+    <p class="party__sub" id="momentsTitleEn" lang="en">Upload photos &amp; videos</p>
+    <label class="pf"><span class="pf__head"><span>Your name</span><i>Optional</i></span><span class="pf__box"><input id="mfName" maxlength="30" autocomplete="name"></span></label>
+    <label class="mf__pick" for="mfFiles">Choose photos &amp; videos<input type="file" id="mfFiles" accept="image/*,video/*" multiple></label>
+    <ul class="mf__list" id="mfList"></ul>
+    <div class="mf__total" id="mfTotal" hidden><div class="mf__total-head"><span id="mfTotalText"></span><b id="mfTotalPct"></b></div><span class="mf__bar"><i id="mfTotalBar"></i></span></div>
+    <p class="fund__note" id="mfNote" role="alert"></p>
+    <div class="fund__actions">
+      <button type="button" class="fund__cancel" data-moments="close">Close</button>
+      <button type="button" class="fund__gift party__send" id="mfSend">Upload</button>
+    </div>
+    <p class="fund__fine">Please keep this page open while uploading.</p>
+  </div>
+</div>
+
+<div class="player" id="player" role="region" aria-label="Background music" hidden>
+  <div class="player__progress" aria-hidden="true"><i id="playerProgress"></i></div>
+  <span class="player__eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  <div class="player__info" aria-live="polite">
+    <p class="player__title" id="playerTitle"></p>
+    <p class="player__artist" id="playerArtist" lang="en"></p>
+  </div>
+  <div class="player__ctrls">
+    <button type="button" class="player__btn" id="playerPrev" aria-label="Previous track"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M12.6 3.2v9.6L5.9 8z"/><path d="M3.2 3.4h1.7v9.2H3.2z"/></svg></button>
+    <button type="button" class="player__btn player__play" id="bgm" aria-label="Play background music" aria-pressed="false"></button>
+    <button type="button" class="player__btn" id="playerNext" aria-label="Next track"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.4 3.2v9.6L10.1 8z"/><path d="M11.1 3.4h1.7v9.2h-1.7z"/></svg></button>
+  </div>
+</div>
+<audio id="bgmAudio" preload="none"></audio>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(() => {
+  'use strict';
+  const W = window.WEDDING;
+  const doc = document;
+  const root = doc.documentElement;
+  const $ = (sel, el) => (el || doc).querySelector(sel);
+  const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+  const lines = v => esc(v).replace(/\n/g, '<br>');
+  const has = v => (typeof v === 'string' ? v.trim() !== '' : Array.isArray(v) ? v.length > 0 : v != null && v !== false);
+  const pad = n => (n < 10 ? '0' : '') + n;
+  root.lang = 'en';
+  const reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  const ICON = {
+    pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.6-6-10.5a6 6 0 0 1 12 0C18 15.4 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg>',
+    out: '<svg viewBox="0 0 9 9" aria-hidden="true"><path d="M2 7L7 2M3.2 2H7v3.8"/></svg>',
+    chev: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>',
+    copy: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V4a1 1 0 0 1 1-1h6.5"/></svg>',
+    bubble: '<svg viewBox="0 0 18 18" aria-hidden="true" fill="currentColor"><path d="M9 3C5.13 3 2 5.46 2 8.5c0 1.95 1.3 3.66 3.25 4.63l-.73 2.72c-.06.22.19.4.38.27L8.1 14c.3.02.6.03.9.03 3.87 0 7-2.46 7-5.5S12.87 3 9 3z"/></svg>',
+    link: '<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M6.6 9.4l2.8-2.8"/><path d="M7.4 4.6l1.1-1.1a2.6 2.6 0 0 1 3.7 3.7l-1.1 1.1"/><path d="M8.6 11.4l-1.1 1.1a2.6 2.6 0 0 1-3.7-3.7l1.1-1.1"/></svg>',
+    insta: '<svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="12" height="12" rx="3.6"/><circle cx="9" cy="9" r="2.8"/><circle cx="12.5" cy="5.5" r=".75" fill="currentColor" stroke="none"/></svg>',
+    whatsapp: '<svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M9 2.7a6.3 6.3 0 0 0-5.4 9.6l-.9 3 3.1-.8A6.3 6.3 0 1 0 9 2.7z"/><path d="M6.8 6.2c.3-.3.6-.3.8 0l.6 1.1c.1.2 0 .5-.1.6l-.4.4c.5.9 1.2 1.6 2.1 2.1l.4-.4c.2-.2.4-.2.6-.1l1.1.6c.3.2.3.5 0 .8-.5.5-1.2.7-1.9.4a6 6 0 0 1-3.4-3.4c-.3-.7-.1-1.4.4-1.9z" fill="currentColor" stroke="none"/></svg>',
+    sms: '<svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M3 4.3h12v8.2H8.6l-3.1 2.4v-2.4H3z"/><circle cx="6.6" cy="8.4" r=".75" fill="currentColor" stroke="none"/><circle cx="9" cy="8.4" r=".75" fill="currentColor" stroke="none"/><circle cx="11.4" cy="8.4" r=".75" fill="currentColor" stroke="none"/></svg>',
+    play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6l7.6-4.8z"/></svg>',
+    pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.6 3.4h2.2v9.2H4.6zM9.2 3.4h2.2v9.2H9.2z"/></svg>',
+    prev: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5L5.5 8l4.5 4.5"/></svg>',
+    next: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg>',
+  };
+
+  const dm = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(W.date);
+  const Y = +dm[1], MO = +dm[2], D = +dm[3], H = +dm[4], MI = +dm[5];
+  const weekday = new Date(Date.UTC(Y, MO - 1, D)).getUTCDay();
+  const dayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][weekday];
+  const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][MO - 1];
+  const time = (H % 12 || 12) + ':' + pad(MI) + ' ' + (H < 12 ? 'AM' : 'PM');
+  const shortTime = (H % 12 || 12) + (MI ? ':' + pad(MI) : '') + ' ' + (H < 12 ? 'AM' : 'PM');
+  const dotDate = pad(MO) + '.' + pad(D) + '.' + Y;
+  const enDate = dayName + ', ' + monthName + ' ' + D + ', ' + Y + ' · ' + shortTime;
+
+  const photos = (W.photos.gallery || []).map(p => (typeof p === 'string' ? { src: p, thumb: p, pos: '' } : { src: p.src, thumb: p.thumb || p.src, pos: p.pos || '' }));
+  const posStyle = pos => (pos ? ` style="object-position:${esc(pos)}"` : '');
+  const tileItems = photos.length ? photos : W.draft ? [null, null, null, null, null, null, null] : [];
+  const SHOW = W.gallery.show || 6;
+
+  const label = t => `<h3 class="label">${esc(t)}</h3>`;
+
+  const coverPhoto = has(W.photos.cover)
+    ? `<figure class="cover__photo"><img class="fade-img" src="${esc(W.photos.cover)}" alt="${esc(W.bride.en)} &amp; ${esc(W.groom.en)}"></figure>`
+    : W.draft ? '<figure class="cover__photo"><span class="ph">Photo</span></figure>' : '';
+
+  const cover = `
+  <section class="cover" id="home">
+    <div class="cover__text" data-reveal>
+      ${has(W.invited) ? `<p class="invited">${esc(W.invited)}</p>` : ''}
+      <h1 class="names">${esc(W.bride.en)}<span class="amp">&amp;</span>${esc(W.groom.en)}</h1>
+      <div class="cover__meta">
+        <p class="meta">${enDate}</p>
+        <p class="meta">${esc(W.venue.name)}</p>
+      </div>
+    </div>
+    ${coverPhoto}
+  </section>`;
+
+  const person = (role, p, relation) => {
+    const parents = (p.parents || []).filter(has);
+    return `
+    <div class="person">
+      <p class="person__name"><span>${esc(role)}</span><b>${esc(p.name)}</b></p>
+      ${parents.length ? `<p class="person__parents">${relation} of ${parents.map(esc).join(p.parentsBreak ? ' &amp;<br>' : ' &amp; ')}</p>` : ''}
+    </div>`;
+  };
+
+  const introPhoto = typeof W.photos.intro === 'string' ? { src: W.photos.intro, pos: '' } : (W.photos.intro || {});
+  const intro = `
+  <section class="intro${has(introPhoto.src) ? ' intro--photo' : ''}">
+    ${has(introPhoto.src) ? `<div class="intro__bg"><img class="fade-img" src="${esc(introPhoto.src)}" alt=""${posStyle(introPhoto.pos)} decoding="async"></div><div class="intro__shade"></div>` : ''}
+    <div data-reveal>
+      ${has(W.greeting) ? `<p class="greeting">${esc(W.greeting)}</p>` : ''}
+      ${has(W.greetingKo) ? `<p class="greeting__ko">${lines(W.greetingKo)}</p>` : ''}
+    </div>
+    <div class="people" data-reveal>${person(W.bride.role ?? 'The Bride', W.bride, 'Daughter')}${person(W.groom.role ?? 'The Groom', W.groom, 'Son')}</div>
+  </section>`;
+
+  const pl = W.playlist;
+  const plPhoto = typeof W.photos.playlist === 'string' ? { src: W.photos.playlist, pos: '' } : (W.photos.playlist || {});
+  const playlist = has(pl.songs) ? `
+  <section class="playlist" id="playlist">
+    <div class="playlist__bg">${has(plPhoto.src) ? `<img class="fade-img" src="${esc(plPhoto.src)}" alt=""${posStyle(plPhoto.pos)} loading="lazy" decoding="async">` : ''}</div>
+    <div class="playlist__shade"></div>
+    <div class="playlist__body" data-reveal>
+      ${label(pl.title)}
+      ${has(pl.note) || has(pl.noteEn) ? `<p class="playlist__note">${has(pl.note) ? esc(pl.note) : ''}${has(pl.noteEn) ? `<span lang="en">${esc(pl.noteEn)}</span>` : ''}</p>` : ''}
+      <ol class="songs">${pl.songs.map((s, i) => `<li>${i + 1}. ${esc(s)}</li>`).join('')}</ol>
+      ${has(pl.more) ? `<p class="songs__more">${esc(pl.more)}</p>` : ''}
+    </div>
+  </section>` : '';
+
+  function calendarCells() {
+    const first = new Date(Date.UTC(Y, MO - 1, 1)).getUTCDay();
+    const days = new Date(Date.UTC(Y, MO, 0)).getUTCDate();
+    let html = ['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => `<span${i === 0 ? ' class="sun"' : ''}>${d}</span>`).join('');
+    for (let i = 0; i < first; i++) html += '<span></span>';
+    for (let d = 1; d <= days; d++) {
+      const sun = (first + d - 1) % 7 === 0;
+      html += d === D ? `<span class="is-wedding"><i>${d}</i></span>` : `<span${sun ? ' class="sun"' : ''}>${d}</span>`;
+    }
+    return html;
+  }
+
+  const calendar = `
+  <section class="cal" id="date">
+    <div data-reveal>
+      <p class="cal__date">${dotDate}</p>
+      <p class="cal__time">${dayName} · ${time} ${esc(W.timezone)}</p>
+      <p class="cal__en">${esc(W.city)}</p>
+      <div class="cal__grid" aria-label="${monthName} ${Y} calendar, wedding on ${monthName} ${D}">${calendarCells()}</div>
+    </div>
+  </section>`;
+
+  const tileHtml = (p, i, moreCount) => {
+    const inner = p ? `<img class="fade-img" src="${esc(p.thumb)}" alt=""${posStyle(p.pos)} loading="lazy" decoding="async">` : '<span class="ph">Photo</span>';
+    const more = moreCount > 0 ? `<span class="tile__more"><b>+ ${moreCount}</b><small>More</small></span>` : '';
+    const name = moreCount > 0 ? 'View all photos' : `View photo ${i + 1}`;
+    return `<button type="button" class="tile" data-i="${i}"${moreCount > 0 ? ' data-more="1"' : ''} aria-label="${name}">${inner}${more}</button>`;
+  };
+
+  const gallery = tileItems.length ? `
+  <section class="gallery" id="gallery">
+    <div data-reveal>
+      ${label(W.gallery.title)}
+      <div class="grid" data-stagger>${tileItems.slice(0, SHOW).map((p, i) => tileHtml(p, i, i === SHOW - 1 ? tileItems.length - SHOW : 0)).join('')}</div>
+    </div>
+  </section>` : '';
+
+  const v = W.venue;
+  const venuePhoto = has(v.photo)
+    ? `<figure class="venue__photo framed"><img class="fade-img" src="${esc(v.photo)}" alt="${esc(v.photoAlt || '')}" loading="lazy" decoding="async"></figure>`
+    : '';
+  const venue = `
+  <section class="venue" id="venue">
+    <div data-reveal>
+      ${label('The Venue')}
+      ${v.photoAt === 'top' ? venuePhoto : ''}
+      <h4 class="venue__name">${esc(v.name)}</h4>
+      <p class="venue__line">${esc(v.address)}</p>
+      ${has(v.tel) ? `<p class="venue__line"><a href="tel:${v.tel.replace(/[^0-9]/g, '')}">${esc(v.tel)}</a></p>` : ''}
+      ${v.photoAt === 'map' ? venuePhoto : ''}
+      ${has(v.mapImage)
+        ? `<div class="mapbox mapbox--img"><img class="fade-img" src="${esc(v.mapImage)}" alt="${esc(v.mapAlt || 'Directions map')}" loading="lazy" decoding="async"></div>`
+        : W.draft ? `<div class="mapbox">${ICON.pin}<span>Map Preview</span></div>` : ''}
+      <div class="maplinks">${v.maps.map(m => `<a class="mapbtn" href="${esc(m.url)}" target="_blank" rel="noopener"><span class="mapbtn__ko">${esc(m.label)}${ICON.out}</span></a>`).join('')}</div>
+      ${has(v.mapTip) ? `<p class="maptip" lang="en">${lines(v.mapTip)}</p>` : ''}
+      <div class="ways">${W.ways.map(w => `<div class="way"><h5>[ ${esc(w.title)} ]</h5><p>${lines(w.text)}</p></div>`).join('')}</div>
+    </div>
+  </section>`;
+
+  const DC = W.dressCode;
+  const dressCodeOn = !!(DC && (has(DC.title) || has(DC.text)));
+  const dressCode = dressCodeOn ? `
+  <section class="dress-code" id="dress-code">
+    <div data-reveal>
+      ${label(DC.label || 'Dress Code')}
+      ${has(DC.title) ? `<h4 class="dress-code__title">${esc(DC.title)}</h4>` : ''}
+      ${has(DC.text) ? `<p class="dress-code__text">${lines(DC.text)}</p>` : ''}
+    </div>
+  </section>` : '';
+
+  const RG = W.registry;
+  const registryOn = !!RG;
+  const gifts = registryOn ? `
+  <section class="gifts" id="gifts">
+    <div data-reveal>
+      ${label('Gifts')}
+      <div class="registry" id="registry">
+        <p class="label">${esc(RG.label)}</p>
+        ${has(RG.image) ? `<figure class="registry__img framed"><img class="fade-img" src="${esc(RG.image)}" alt="${esc(RG.imageAlt || '')}" loading="lazy" decoding="async"></figure>` : ''}
+        ${has(RG.url) ? `<button type="button" class="registry__btn" id="openRegistry"><span class="registry__title">View our registry</span></button>` : ''}
+        ${has(RG.paypal) ? `<button type="button" class="registry__btn" id="openFund"><span class="registry__title">${esc(RG.title)}</span><span class="registry__sub">Gift any amount · PayPal</span></button>` : ''}
+      </div>
+    </div>
+  </section>` : '';
+
+  const RSVP = W.rsvp;
+  const partyOn = !!RSVP;
+  const party = partyOn ? `
+  <section class="party" id="rsvp">
+    <div data-reveal>
+      ${label(RSVP.label)}
+      <p class="party__text">${lines(RSVP.text)}</p>
+      <button type="button" class="registry__btn party__btn" id="openParty"><span class="registry__title">${esc(RSVP.button)}</span></button>
+    </div>
+  </section>` : '';
+
+  const shareUrl = W.share.url || location.href.split('#')[0];
+  const shareMsg = `${W.share.title}\n${W.bride.en} & ${W.groom.en} · ${enDate}\n${shareUrl}`;
+  const share = `
+  <section class="share" id="share">
+    <div data-reveal>
+      <span class="share__rule"></span>
+      ${label('Share')}
+      ${has(W.share.text) ? `<p class="share__text">${esc(W.share.text)}</p>` : ''}
+      <div class="share__btns">
+        <button type="button" class="share__btn" id="shareInsta"><i>${ICON.insta}</i><span>Instagram</span></button>
+        <a class="share__btn" href="https://wa.me/?text=${encodeURIComponent(shareMsg)}" target="_blank" rel="noopener"><i>${ICON.whatsapp}</i><span>WhatsApp</span></a>
+        <a class="share__btn" href="sms:?&amp;body=${encodeURIComponent(shareMsg)}"><i>${ICON.sms}</i><span>SMS</span></a>
+        <button type="button" class="share__btn" id="shareLink"><i>${ICON.link}</i><span>Link</span></button>
+      </div>
+    </div>
+  </section>`;
+
+  const app = $('#app');
+  const MOM = W.moments;
+  const momentsOn = !!(MOM && has(MOM.upload));
+  const moments = momentsOn ? `
+  <section class="moments" id="moments">
+    <div data-reveal>
+      ${label(MOM.label)}
+      <p class="party__text">${lines(MOM.text)}</p>
+      ${has(MOM.en) ? `<p class="party__en" lang="en">${lines(MOM.en)}</p>` : ''}
+      <button type="button" class="registry__btn party__btn" id="openMoments"><span class="registry__title">Upload photos &amp; videos</span><span class="registry__sub" lang="en">Upload photos &amp; videos</span></button>
+    </div>
+  </section>` : '';
+
+  app.innerHTML = cover + intro + calendar + gallery + venue + dressCode + gifts + moments + party + playlist + share;
+
+  function fadeImages(scope) {
+    scope.querySelectorAll('img.fade-img').forEach(img => {
+      const show = () => img.classList.add('is-loaded');
+      if (img.complete && img.naturalWidth) show();
+      else { img.addEventListener('load', show); img.addEventListener('error', show); }
+    });
+  }
+  fadeImages(app);
+
+  const toastEl = $('#toast');
+  let toastTimer = 0;
+  function toast(msg, ms) {
+    toastEl.textContent = msg;
+    toastEl.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toastEl.hidden = true; }, ms || 2400);
+  }
+  function legacyCopy(text) {
+    const active = doc.activeElement;
+    const ta = doc.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;padding:0;border:0;opacity:0;font-size:16px;';
+    doc.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    let ok = false;
+    try { ok = doc.execCommand('copy'); } catch (e) { ok = false; }
+    doc.body.removeChild(ta);
+    if (active && active.focus) active.focus();
+    return ok;
+  }
+  function copy(text, msg, selectEl) {
+    const legacyOk = legacyCopy(text);
+    const done = ok => {
+      if (ok) return toast(msg);
+      if (selectEl) {
+        const range = doc.createRange();
+        range.selectNodeContents(selectEl);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      toast('Automatic copying is unavailable. Press and hold to copy: ' + text, 5000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => done(true), () => done(legacyOk));
+    else done(legacyOk);
+  }
+
+  let locks = 0;
+  function lock(on) {
+    locks = Math.max(0, locks + (on ? 1 : -1));
+    root.style.overflow = locks ? 'hidden' : '';
+    doc.body.style.overflow = locks ? 'hidden' : '';
+  }
+  const stack = [];
+  const LEAVE_MS = { menu: 300, gpage: 400, lb: 250, fund: 300, party: 300, momentsDialog: 300 };
+  function openLayer(el, opener, focusSel) {
+    el.classList.remove('is-leaving');
+    el.hidden = false;
+    lock(true);
+    stack.push({ el, opener });
+    const f = $(focusSel, el);
+    if (f) f.focus();
+  }
+  function closeLayer(el) {
+    let i = stack.length - 1;
+    while (i >= 0 && stack[i].el !== el) i--;
+    if (el.hidden || i < 0) return;
+    const opener = stack[i].opener;
+    stack.splice(i, 1);
+    lock(false);
+    if (opener && opener.focus) opener.focus();
+    if (reduceMotion) { el.hidden = true; return; }
+    el.classList.add('is-leaving');
+    setTimeout(() => {
+      if (!el.classList.contains('is-leaving')) return;
+      el.classList.remove('is-leaving');
+      el.hidden = true;
+    }, LEAVE_MS[el.id] || 250);
+  }
+
+  const bar = $('#bar');
+  const onScroll = () => bar.classList.toggle('is-solid', (window.pageYOffset || root.scrollTop) > 24);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  const ddayEl = $('#dday');
+  function showDday() {
+    const offset = /^([+-])(\d{2}):(\d{2})$/.exec(W.offset);
+    const minutes = offset ? (offset[1] === '-' ? -1 : 1) * (+offset[2] * 60 + +offset[3]) : 0;
+    const k = new Date(Date.now() + minutes * 60000);
+    const days = Math.round((Date.UTC(Y, MO - 1, D) - Date.UTC(k.getUTCFullYear(), k.getUTCMonth(), k.getUTCDate())) / 86400000);
+    ddayEl.textContent = days > 0 ? 'D-' + days : days === 0 ? 'D-DAY' : 'D+' + -days;
+    ddayEl.setAttribute('aria-label', days > 0 ? days + ' days until the wedding' : days === 0 ? 'Wedding day' : -days + ' days since the wedding');
+  }
+  showDday();
+  setInterval(showDday, 60000);
+
+  const menu = $('#menu');
+  const menuBtn = $('#menuOpen');
+  const NAV = [
+    { id: 'home', en: 'Home' },
+    { id: 'date', en: 'The Date' },
+    { id: 'gallery', en: W.gallery.title },
+    { id: 'venue', en: 'The Venue' },
+    { id: 'dress-code', en: dressCodeOn ? DC.label || 'Dress Code' : '' },
+    { id: 'gifts', en: 'Gifts' },
+    { id: 'moments', en: momentsOn ? MOM.label : '' },
+    { id: 'rsvp', en: partyOn ? RSVP.label : '' },
+    { id: 'playlist', en: pl.title },
+    { id: 'share', en: 'Share' },
+  ].filter(n => has(n.en) && doc.getElementById(n.id));
+  $('#menuList').innerHTML = NAV.map(n => `<button type="button" class="menu__item" data-menu="go" data-target="${n.id}"><span>${esc(n.en)}</span></button>`).join('');
+  function goTo(id) {
+    const el = doc.getElementById(id);
+    if (!el) return;
+    const y = id === 'home' ? 0 : el.getBoundingClientRect().top + (window.pageYOffset || root.scrollTop) - bar.offsetHeight - (el.tagName === 'SECTION' ? 0 : 28);
+    window.scrollTo(0, Math.max(0, Math.round(y)));
+  }
+  menuBtn.addEventListener('click', () => { menuBtn.setAttribute('aria-expanded', 'true'); openLayer(menu, menuBtn, '.menu__close'); });
+  menu.addEventListener('click', e => {
+    const b = e.target.closest('[data-menu]');
+    if (!b) return;
+    menuBtn.setAttribute('aria-expanded', 'false');
+    closeLayer(menu);
+    if (b.dataset.menu === 'go') {  goTo(b.dataset.target); }
+  });
+
+  const gpage = $('#gpage');
+  $('#gpageTitle').textContent = W.gallery.title;
+  $('#gpageGrid').innerHTML = tileItems.map((p, i) => tileHtml(p, i, 0)).join('');
+  fadeImages($('#gpageGrid'));
+  function openGpage(opener) {  openLayer(gpage, opener, '.gpage__close'); }
+  gpage.addEventListener('click', e => {
+    if (e.target.closest('[data-gpage]')) return closeLayer(gpage);
+    const t = e.target.closest('.tile');
+    if (t) showPhoto(+t.dataset.i, t);
+  });
+
+  const lb = $('#lb');
+  const lbImg = $('#lbImg');
+  const lbStage = $('#lbStage');
+  let lbIndex = 0;
+  function renderLb() {
+    lbImg.src = photos[lbIndex].src;
+    lbImg.alt = `Photo ${lbIndex + 1}`;
+    $('#lbCount').textContent = `${lbIndex + 1} / ${photos.length}`;
+  }
+  function showPhoto(i, opener) {
+    if (!photos.length) return toast('Photos will appear here when added.');
+    
+    lbIndex = i;
+    renderLb();
+    openLayer(lb, opener, '.lb__close');
+  }
+  function stepLb(n) { lbIndex = (lbIndex + n + photos.length) % photos.length; renderLb(); }
+  lb.addEventListener('click', e => {
+    const b = e.target.closest('[data-lb]');
+    if (b) {
+      if (b.dataset.lb === 'close') closeLayer(lb);
+      else stepLb(b.dataset.lb === 'next' ? 1 : -1);
+    } else if (e.target === lbStage) closeLayer(lb);
+  });
+  let sx = null, sy = 0;
+  lbStage.addEventListener('touchstart', e => { const t = e.changedTouches[0]; sx = t.clientX; sy = t.clientY; }, { passive: true });
+  lbStage.addEventListener('touchend', e => {
+    if (sx === null) return;
+    const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    sx = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) stepLb(dx < 0 ? 1 : -1);
+  });
+
+  const fundEl = $('#fund');
+  const fundInput = $('#fundAmount');
+  const fundGift = $('#fundGift');
+  const fundNote = $('#fundNote');
+  const fundAmount = () => {
+    const n = parseFloat(String(fundInput.value).replace(/[^0-9.]/g, ''));
+    return n > 0 && n <= 10000 ? Math.round(n * 100) / 100 : 0;
+  };
+  function syncFund() {
+    const n = fundAmount();
+    fundGift.href = has(RG.paypal) ? (n ? `${RG.paypal.replace(/\/+$/, '')}/${n}USD` : RG.paypal) : '#';
+    fundGift.setAttribute('aria-disabled', !has(RG.paypal) || n ? 'false' : 'true');
+    fundGift.textContent = has(RG.paypal) ? 'Gift it!' : 'Preview gift';
+    fundEl.querySelectorAll('.fund__amt').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.amt === n)));
+    return n;
+  }
+  if (registryOn) {
+    $('#fundLabel').textContent = RG.label;
+    $('#fundTitle').textContent = RG.title;
+    $('#fundText').textContent = RG.text;
+    $('#fundAmounts').innerHTML = RG.amounts.map(a => `<button type="button" class="fund__amt" data-amt="${a}" aria-pressed="false">$${a}</button>`).join('');
+    syncFund();
+    fundEl.addEventListener('click', e => {
+      if (e.target === fundEl || e.target.closest('[data-fund="close"]')) return closeLayer(fundEl);
+      const chip = e.target.closest('.fund__amt');
+      if (chip) { fundInput.value = chip.dataset.amt; fundNote.textContent = ''; syncFund(); }
+    });
+    fundInput.addEventListener('input', () => { fundNote.textContent = ''; syncFund(); });
+    fundGift.addEventListener('click', e => {
+      const n = syncFund();
+      if (!has(RG.paypal)) {
+        e.preventDefault();
+        toast("Preview: the couple's gift link goes here.");
+        return;
+      }
+      if (!n) {
+        e.preventDefault();
+        fundNote.textContent = 'Please choose or enter an amount.';
+        return;
+      }
+      
+      setTimeout(() => closeLayer(fundEl), 300);
+      toast('Opening PayPal. Thank you so much!');
+    });
+  }
+  function openFund(opener) {
+    
+    fundNote.textContent = '';
+    openLayer(fundEl, opener, '.fund__close');
+  }
+
+  const partyEl = $('#party');
+  const partyForm = $('#partyForm');
+  const partyNote = $('#partyNote');
+  const partySend = $('#partySend');
+  const pfName = $('#pfName');
+  const pfAttending = $('#pfAttending');
+  const pfGuests = $('#pfGuests');
+  const pfMeal = $('#pfMeal');
+  const sendLabel = partySend.textContent;
+  let partyBusy = false;
+  const syncAttendance = () => {
+    const accepts = pfAttending.value === 'yes';
+    $('#pfAccepts').hidden = !accepts;
+    pfGuests.disabled = pfMeal.disabled = !accepts;
+  };
+  if (partyOn) {
+    $('#partyLabel').textContent = RSVP.label;
+    $('#partyInfo').textContent = RSVP.text;
+    $('#partyTitle').textContent = partySend.textContent = RSVP.button;
+    pfMeal.closest('label').hidden = !(RSVP.meals || []).length;
+    pfMeal.innerHTML = '<option value="">Please select</option>' + (RSVP.meals || []).map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('');
+    partyEl.addEventListener('click', e => {
+      if (e.target === partyEl || e.target.closest('[data-party="close"]')) closeLayer(partyEl);
+    });
+    pfAttending.addEventListener('change', syncAttendance);
+    partyForm.addEventListener('input', () => { partyNote.textContent = ''; });
+    partyForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (partyBusy) return;
+      const name = pfName.value.replace(/\s+/g, ' ').trim();
+      if (!name) {
+        partyNote.textContent = 'Please enter your name.';
+        pfName.focus();
+        return;
+      }
+      if (!['yes', 'no'].includes(pfAttending.value)) {
+        partyNote.textContent = 'Please select your attendance.';
+        pfAttending.focus();
+        return;
+      }
+      const accepts = pfAttending.value === 'yes';
+      const guests = accepts ? Number(pfGuests.value) : 0;
+      if (accepts && ![1, 2, 3, 4].includes(guests)) {
+        partyNote.textContent = 'Please select between 1 and 4 guests.';
+        pfGuests.focus();
+        return;
+      }
+      const endpoint = (RSVP.endpoint || '').trim();
+      if (!endpoint) {
+        partyForm.reset();
+        syncAttendance();
+        closeLayer(partyEl);
+        toast("Preview: your reply wasn't sent.");
+        return;
+      }
+      const slug = new URL(W.share.url).pathname.split('/').filter(Boolean).pop() || '';
+      const data = {
+        type: 'rsvp', slug, couple: W.share.url, submittedAt: new Date().toISOString(), name, email: '',
+        attending: pfAttending.value, events: '', meal: accepts ? pfMeal.value : '', guest: '', guestMeal: '', guests,
+        dietary: $('#pfDietary').value.trim(), song: $('#pfSong').value.trim(), note: $('#pfNote').value.trim(),
+      };
+      partyBusy = true;
+      partySend.disabled = true;
+      partySend.textContent = 'Sending…';
+      partyNote.textContent = '';
+      try {
+        await fetch(endpoint, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(data)});
+        partyForm.reset();
+        syncAttendance();
+        closeLayer(partyEl);
+        toast('Your reply has been submitted. Thank you!', 3200);
+      } catch (err) {
+        partyNote.textContent = "Couldn't send. Please try again.";
+      } finally {
+        partyBusy = false;
+        partySend.disabled = false;
+        partySend.textContent = RSVP.button || sendLabel;
+      }
+    });
+  }
+  function openParty(opener) {
+    partyNote.textContent = '';
+    syncAttendance();
+    openLayer(partyEl, opener, '#pfName');
+  }
+
+  const momentsEl = $('#momentsDialog');
+  const mfName = $('#mfName');
+  const mfFiles = $('#mfFiles');
+  const mfList = $('#mfList');
+  const mfNote = $('#mfNote');
+  const mfSend = $('#mfSend');
+  const mfSendLabel = mfSend.textContent;
+  const MF_CHUNK = 8 * 1024 * 1024;
+  const MF_MAX = 4 * 1024 * 1024 * 1024;
+  let mfQueue = [];
+  let mfBusy = false;
+  const fmtSize = n => (n >= 1073741824 ? (n / 1073741824).toFixed(1) + 'GB' : n >= 1048576 ? (n / 1048576).toFixed(1) + 'MB' : Math.max(1, Math.round(n / 1024)) + 'KB');
+  const mfType = f => {
+    if (/^(image|video)\//.test(f.type)) return f.type;
+    const ext = (f.name.split('.').pop() || '').toLowerCase();
+    const map = { heic: 'image/heic', heif: 'image/heif', jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', mov: 'video/quicktime', mp4: 'video/mp4', m4v: 'video/x-m4v', '3gp': 'video/3gpp' };
+    return map[ext] || '';
+  };
+  const mfItem = i => mfList.children[i];
+  function mfShow(i) {
+    const q = mfQueue[i], li = mfItem(i);
+    if (!li) return;
+    li.className = 'mf__item' + (q.state === 'done' ? ' is-done' : q.state === 'fail' ? ' is-fail' : '');
+    li.querySelector('.mf__bar i').style.width = q.pct + '%';
+    li.querySelector('.mf__state').textContent = q.state === 'done' ? 'Done' : q.state === 'fail' ? 'Failed — tap Upload to retry' : q.state === 'up' ? q.pct + '%' : 'Waiting';
+    mfShowTotal();
+  }
+  let mfBatch = [];
+  const mfTotal = $('#mfTotal');
+  function mfShowTotal() {
+    if (!mfBatch.length) { mfTotal.hidden = true; return; }
+    const qs = mfBatch.map(i => mfQueue[i]);
+    const size = qs.reduce((s, q) => s + q.file.size, 0);
+    const sent = qs.reduce((s, q) => s + (q.state === 'done' ? q.file.size : q.state === 'up' ? (q.bytes || 0) : 0), 0);
+    const done = qs.filter(q => q.state === 'done').length;
+    const failed = qs.filter(q => q.state === 'fail').length;
+    const finished = !qs.some(q => q.state === 'up' || q.state === 'wait');
+    const pct = finished && !failed ? 100 : Math.min(99, Math.floor(sent / size * 100));
+    mfTotal.hidden = false;
+    $('#mfTotalText').textContent = finished
+      ? `${done} / ${qs.length} done` + (failed ? ` (${failed} failed)` : '')
+      : `${Math.min(done + failed + 1, qs.length)} / ${qs.length} uploading`;
+    $('#mfTotalPct').textContent = pct + '%';
+    $('#mfTotalBar').style.width = pct + '%';
+  }
+  function mfRender() {
+    mfList.innerHTML = mfQueue.map(q => `<li class="mf__item"><span class="mf__name">${esc(q.file.name)}</span><span class="mf__size">${fmtSize(q.file.size)}</span><span class="mf__bar"><i></i></span><span class="mf__state"></span></li>`).join('');
+    mfQueue.forEach((q, i) => mfShow(i));
+  }
+  mfFiles.addEventListener('change', () => {
+    let skipped = 0;
+    Array.prototype.forEach.call(mfFiles.files || [], f => {
+      const type = mfType(f);
+      if (!type || !f.size || f.size > MF_MAX) { skipped++; return; }
+      if (mfQueue.some(q => q.file.name === f.name && q.file.size === f.size && q.file.lastModified === f.lastModified)) return;
+      mfQueue.push({ file: f, type: type, pct: 0, state: 'wait' });
+    });
+    mfFiles.value = '';
+    mfBatch = [];
+    mfRender();
+    mfNote.textContent = skipped ? 'Skipped ' + skipped + ' file(s): only photos or videos up to 4GB are supported.' : '';
+  });
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  function mfSession(q) {
+    return fetch(MOM.upload, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: q.file.name, type: q.type, size: q.file.size, guest: mfName.value.replace(/\s+/g, ' ').trim(), origin: location.origin }),
+    }).then(r => r.json()).then(d => { if (!d || !d.ok || !d.url) throw new Error((d && d.error) || 'session'); return d.url; });
+  }
+  function mfPut(url, q, start, onBytes) {
+    const end = Math.min(start + MF_CHUNK, q.file.size);
+    return new Promise((resolve, reject) => {
+      const x = new XMLHttpRequest();
+      x.open('PUT', url);
+      x.setRequestHeader('Content-Range', 'bytes ' + start + '-' + (end - 1) + '/' + q.file.size);
+      x.upload.onprogress = e => onBytes(start + e.loaded);
+      x.onload = () => (x.status === 308 || x.status === 200 || x.status === 201 ? resolve(end) : reject(new Error('http ' + x.status)));
+      x.onerror = () => reject(new Error('network'));
+      x.send(q.file.slice(start, end));
+    });
+  }
+  async function mfUpload(i) {
+    const q = mfQueue[i];
+    q.state = 'up'; q.pct = 0; q.bytes = 0; mfShow(i);
+    try {
+      const url = await mfSession(q);
+      let start = 0;
+      while (start < q.file.size) {
+        let tries = 0;
+        for (;;) {
+          try {
+            start = await mfPut(url, q, start, b => { q.bytes = b; q.pct = Math.min(99, Math.floor(b / q.file.size * 100)); mfShow(i); });
+            break;
+          } catch (err) {
+            if (++tries >= 3) throw err;
+            await wait(tries * 1500);
+          }
+        }
+      }
+      q.state = 'done'; q.pct = 100;
+    } catch (err) {
+      q.state = 'fail';
+    }
+    mfShow(i);
+  }
+  mfSend.addEventListener('click', async () => {
+    if (mfBusy) return;
+    const todo = mfQueue.map((q, i) => (q.state === 'wait' || q.state === 'fail' ? i : -1)).filter(i => i >= 0);
+    if (!todo.length) { mfNote.textContent = 'Please choose photos or videos first.'; return; }
+    mfBusy = true;
+    mfSend.disabled = true;
+    mfSend.textContent = 'Uploading…';
+    mfNote.textContent = '';
+    mfBatch = todo;
+    mfShowTotal();
+    let lock = null;
+    try { if (navigator.wakeLock) lock = await navigator.wakeLock.request('screen'); } catch (e) { lock = null; }
+    for (const i of todo) await mfUpload(i);
+    if (lock) lock.release().catch(() => {});
+    mfBusy = false;
+    mfSend.disabled = false;
+    mfSend.textContent = mfSendLabel;
+    const failed = mfQueue.filter(q => q.state === 'fail').length;
+    
+    mfNote.textContent = failed ? failed + ' failed. Tap Upload to retry.' : '';
+    if (!failed) toast('All files uploaded. Thank you!', 3200);
+  });
+  if (momentsOn) {
+    momentsEl.addEventListener('click', e => {
+      if (e.target === momentsEl || e.target.closest('[data-moments="close"]')) closeLayer(momentsEl);
+    });
+  }
+  function openMoments(opener) {
+    
+    openLayer(momentsEl, opener, '.fund__close');
+  }
+
+  const pageUrl = () => W.share.url || location.href.split('#')[0];
+  app.addEventListener('click', e => {
+    const t = e.target.closest('button');
+    if (!t) return;
+    if (t.classList.contains('tile')) return t.dataset.more ? openGpage(t) : showPhoto(+t.dataset.i, t);
+    if (t.id === 'openFund') return openFund(t);
+    if (t.id === 'openRegistry') {
+      if (!has(RG.url)) return toast("Preview: the couple's gift link goes here.");
+      window.open(RG.url, '_blank', 'noopener');
+      return;
+    }
+    if (t.id === 'openParty') return openParty(t);
+    if (t.id === 'openMoments') return openMoments(t);
+    if (t.id === 'shareLink') return copy(pageUrl(), 'Link copied.');
+    if (t.id === 'shareInsta') return copy(pageUrl(), 'Link copied. Paste it into an Instagram DM or story.');
+  });
+
+  const bgm = $('#bgm');
+  const audio = $('#bgmAudio');
+  const setBgmIcon = playing => {
+    bgm.innerHTML = playing ? ICON.pause : ICON.play;
+    bgm.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    bgm.setAttribute('aria-label', playing ? 'Pause background music' : 'Play background music');
+  };
+  const tracks = (Array.isArray(W.bgm) ? W.bgm : has(W.bgm) ? [W.bgm] : [])
+    .map(t => (typeof t === 'string' ? { src: t, title: '' } : t)).filter(t => t && has(t.src));
+  for (let i = tracks.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = tracks[i]; tracks[i] = tracks[j]; tracks[j] = t;
+  }
+  let track = 0, wantPlay = false, fails = 0, userStopped = false;
+  const player = $('#player');
+  const playerTitle = $('#playerTitle');
+  const playerArtist = $('#playerArtist');
+  const playerProgress = $('#playerProgress');
+  const showTrack = () => {
+    const t = tracks[track].title || '';
+    const k = t.lastIndexOf(' - ');
+    playerTitle.textContent = k > 0 ? t.slice(0, k) : t;
+    playerArtist.textContent = k > 0 ? t.slice(k + 3) : '';
+    playerProgress.style.width = '0';
+  };
+  const loadTrack = i => { track = (i + tracks.length) % tracks.length; audio.src = tracks[track].src; showTrack(); };
+  const playNext = () => { loadTrack(track + 1); audio.play().catch(() => {}); };
+  if (tracks.length) {
+    player.hidden = false;
+    setBgmIcon(false);
+    audio.loop = tracks.length === 1;
+    loadTrack(0);
+    let sounding = false;
+    const markPlaying = on => { sounding = on; setBgmIcon(on); player.classList.toggle('is-playing', on); };
+    audio.addEventListener('playing', () => {
+      fails = 0; markPlaying(true);
+    });
+    audio.addEventListener('pause', () => markPlaying(false));
+    audio.addEventListener('ended', () => { if (tracks.length > 1) playNext(); });
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) playerProgress.style.width = (audio.currentTime / audio.duration * 100).toFixed(2) + '%';
+    });
+    audio.addEventListener('error', () => { if (wantPlay && tracks.length > 1 && ++fails < tracks.length) playNext(); });
+    const startMusic = how => {
+      if (sounding || userStopped) return Promise.resolve(false);
+      if (!audio.paused) audio.pause();
+      wantPlay = true;
+      return audio.play().then(() => {
+        bgm.classList.remove('is-waiting');
+        
+        return true;
+      }, () => { wantPlay = false; return false; });
+    };
+    bgm.addEventListener('click', () => {
+      if (!sounding) {
+        userStopped = false;
+        startMusic('button').then(ok => { if (!ok) toast('Could not play background music.'); });
+      } else {
+        
+        userStopped = true;
+        wantPlay = false;
+        audio.pause();
+      }
+    });
+    const skip = dir => {
+      
+      userStopped = false;
+      wantPlay = true;
+      if (dir < 0 && audio.currentTime > 3) audio.currentTime = 0;
+      else loadTrack(track + dir);
+      audio.play().then(() => bgm.classList.remove('is-waiting'), () => {});
+    };
+    $('#playerPrev').addEventListener('click', () => skip(-1));
+    $('#playerNext').addEventListener('click', () => skip(1));
+    const GESTURES = ['pointerup', 'touchend', 'click', 'keydown'];
+    const stopListening = () => GESTURES.forEach(ev => doc.removeEventListener(ev, onFirstTouch, true));
+    const onFirstTouch = e => {
+      if (e.target && e.target.closest && e.target.closest('#player')) return;
+      startMusic('tap').then(ok => { if (ok || userStopped) stopListening(); });
+    };
+    const listenForTap = () => GESTURES.forEach(ev => doc.addEventListener(ev, onFirstTouch, true));
+    listenForTap();
+    bgm.classList.add('is-waiting');
+    audio.addEventListener('playing', () => { bgm.classList.remove('is-waiting'); stopListening(); });
+    if (!doc.hidden) {
+      startMusic('auto').then(ok => { if (!ok && audio.paused && !userStopped) toast('♪ Tap anywhere for music', 2800); });
+    }
+    let wentAway = false;
+    const stopForAway = () => { if (!audio.paused) audio.pause(); markPlaying(false); };
+    doc.addEventListener('visibilitychange', () => {
+      if (doc.hidden) { wentAway = true; stopForAway(); }
+      else if (wentAway) { wentAway = false; stopForAway(); }
+    });
+    window.addEventListener('pagehide', () => { wentAway = true; stopForAway(); });
+    window.addEventListener('pageshow', e => { if (e.persisted || wentAway) { wentAway = false; stopForAway(); } });
+    let lastT = -1, stuck = 0;
+    setInterval(() => {
+      if (!sounding || doc.hidden) { stuck = 0; lastT = -1; return; }
+      if (audio.currentTime === lastT && audio.readyState >= 3) { if (++stuck >= 3) { stuck = 0; stopForAway(); } }
+      else stuck = 0;
+      lastT = audio.currentTime;
+    }, 1000);
+  }
+
+  doc.addEventListener('keydown', e => {
+    if (!stack.length) return;
+    const top = stack[stack.length - 1].el;
+    if (e.key === 'Escape') {
+      if (top === menu) menuBtn.setAttribute('aria-expanded', 'false');
+      closeLayer(top);
+    } else if (top === lb && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) stepLb(e.key === 'ArrowRight' ? 1 : -1);
+  });
+
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    root.classList.add('can-reveal');
+    app.querySelectorAll('[data-stagger]').forEach(grid => {
+      Array.prototype.forEach.call(grid.children, (child, i) => { child.style.transitionDelay = (i * 0.12).toFixed(2) + 's'; });
+    });
+    const watch = (sel, margin) => {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: margin });
+      app.querySelectorAll(sel).forEach(el => io.observe(el));
+    };
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      watch('[data-reveal]', '-5%');
+      watch('[data-stagger]', '-10%');
+    };
+    if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(start, start);
+    else start();
+    setTimeout(start, 3000);
+  }
+
+})();
+</script>
+
+</body>
+</html>
