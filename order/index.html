@@ -233,7 +233,10 @@ textarea.in{ min-height:84px; resize:vertical }
   const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
   const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const form = $('#order');
-  const KEY = 'rangbang-order-draft';
+  const SEOUL = new URLSearchParams(location.search).get('design') === 'seoul';
+  const SEOUL_THEMES = ['brown', 'emerald', 'butter', 'chartreuse', 'random'];
+  const requestedTheme = new URLSearchParams(location.search).get('theme');
+  const KEY = SEOUL ? 'rangbang-order-draft-seoul' : 'rangbang-order-draft';
   $('#turn').textContent = CFG.turnaround;
 
   /* ── 반복 칸 ── */
@@ -282,6 +285,51 @@ textarea.in{ min-height:84px; resize:vertical }
   $('#faq').innerHTML = `<div class="card"><div class="card-h"><b>Questions guests ask</b></div><p class="hint">Answer the ones that apply. Blank answers are left out.</p>${FAQ.map((q, i) => `
       <div class="f"><label for="q${i}-q">Question</label><input class="in" id="q${i}-q" name="q${i}-q" value="${esc(q[0])}"></div>
       <div class="f"><label for="q${i}-a">Answer</label><textarea class="in" id="q${i}-a" name="q${i}-a" rows="2"></textarea></div>`).join('')}</div>`;
+
+  // Seoul은 WEDDING에 있는 질문만 받는다. Magazine DOM·설정은 그대로 둔다.
+  if (SEOUL) {
+    document.title = 'RANGBANG · Seoul order form';
+    $('.brand span:last-child').textContent = 'Seoul order form';
+    const hide = el => { el.style.display = 'none'; };
+    ['#events', '#hotels'].forEach(s => hide($(s).closest('section')));
+    ['end', 'story'].forEach(n => { const el = form.elements.namedItem(n); if (el) hide(el.closest('.f')); });
+    ['plusOne', 'song', 'writeForUs'].forEach(n => hide(form.elements.namedItem(n)[0]?.closest('.f') || form.elements.namedItem(n).closest('.toggle')));
+    const dressSec = $('#s-code').closest('section');
+    $('h2', dressSec).textContent = 'Dress code';
+    $('label[for="s-weather"]').innerHTML = 'Dress code note <span class="opt">(optional)</span>';
+    $('#s-weather').placeholder = 'Our evening celebration is outdoors; bring a light jacket.';
+    hide($('#s-yes').closest('.row2'));
+    hide($('#faq'));
+    const words = $('#w-letter').closest('section');
+    $('h2', words).textContent = 'Your invitation';
+    $('.sec-h p', words).textContent = 'A short greeting for your guests. Leave blank to show just your names.';
+    $('label[for="w-letter"]').innerHTML = 'Greeting for your guests <span class="opt">(optional)</span>';
+    const field = (id, name, label, extra = '') => '<div class="f"><label for="' + id + '">' + label + '</label><input class="in" id="' + id + '" name="' + name + '" ' + extra + '></div>';
+    // 이름 옆 호칭: 동성 커플도 주문할 수 있게 고른다 (빈 값이면 호칭 없이 이름만)
+    const roleSel = (id, name, label, pick) => '<div class="f"><label for="' + id + '">' + label + '</label><select class="in" id="' + id + '" name="' + name + '">' + [['The Bride', 'Bride'], ['The Groom', 'Groom'], ['The Partner', 'Partner'], ['', 'No title']].map(([v, t]) => '<option value="' + v + '"' + (v === pick ? ' selected' : '') + '>' + t + '</option>').join('') + '</select></div>';
+    $('#c-bf').closest('.f').insertAdjacentHTML('afterend', roleSel('s-role-a', 'roleA', 'Shown as', 'The Bride') + roleSel('s-role-b', 'roleB', 'Shown as', 'The Groom'));
+    $('#w-letter').closest('.f').insertAdjacentHTML('beforebegin', field('s-invited', 'invited', 'Opening line <span class="opt">(optional)</span>', 'placeholder="Together with their families"'));
+    $('#gifts').innerHTML = '<div class="card">' +
+      field('gf0-name', 'gf0-name', 'Gift section title', 'placeholder="Honeymoon Fund"') +
+      field('gf0-url', 'gf0-url', 'Registry link <span class="opt">(optional)</span>', 'type="url" placeholder="https://"') +
+      field('s-paypal', 'paypal', 'PayPal.Me link <span class="opt">(optional)</span>', 'type="url" placeholder="https://paypal.me/yourname"') +
+      field('gf0-note', 'gf0-note', 'A note about gifts <span class="opt">(optional)</span>') +
+      field('s-amounts', 'amounts', 'Suggested gifts in USD <span class="opt">(optional, one amount per comma)</span>', 'placeholder="50, 100, 200, 300"') +
+      '<p class="hint">Leave both links blank to leave gifts out. PayPal amounts are in USD.</p></div>';
+    const photoSec = $('#p-cover').closest('section');
+    $('.sec-h p', photoSec).textContent = 'One cover photo, an optional introduction photo, then up to eight gallery photos in the order you choose them.';
+    $('#p-feature').closest('.f').querySelector('.lab').innerHTML = 'Introduction photo <span class="opt">(optional)</span>';
+    $('#p-feature').nextElementSibling.textContent = 'Choose an introduction photo';
+    $('#p-feature').closest('.drop').querySelector('.hint').textContent = 'Portrait photos work best';
+    $('#p-gallery').closest('.f').querySelector('.lab').innerHTML = 'Gallery photos <span class="opt">(up to 8, kept in upload order)</span>';
+    $('#p-gallery').closest('.f').insertAdjacentHTML('afterend', '<div class="f"><label for="s-show">Photos visible before “More”</label><select class="in" id="s-show" name="galleryShow"><option value="3">3</option><option value="6" selected>6</option><option value="8">8 (all)</option></select></div>');
+    const accent = $('input[name="accent"]').closest('.f');
+    $('.lab', accent).textContent = 'Seoul theme';
+    $('.choices', accent).innerHTML = [['brown', 'Brown', '#5b371e'], ['emerald', 'Emerald', '#176947'], ['butter', 'Butter', '#f5df84'], ['chartreuse', 'Chartreuse', '#c8dc4d'], ['random', 'Rotate all four on each visit', 'linear-gradient(90deg,#5b371e 25%,#176947 25% 50%,#f5df84 50% 75%,#c8dc4d 75%)']].map(([v, label, color]) => '<label class="choice"><input type="radio" name="theme" value="' + v + '"' + (v === 'brown' ? ' checked' : '') + '><span class="sw" style="background:' + color + '"></span>' + label + '</label>').join('');
+    accent.insertAdjacentHTML('afterend', field('s-share', 'shareText', 'Sharing message <span class="opt">(optional)</span>', 'placeholder="Share our celebration with the ones you love."'));
+    const sections = $$('.sec', form).filter(el => el.style.display !== 'none');
+    sections.forEach((el, i) => $('.sec-h span', el).textContent = (i + 1) + ' of ' + sections.length);
+  }
 
   /* ── 입력 연동 ── */
   form.addEventListener('change', e => {
@@ -345,6 +393,11 @@ textarea.in{ min-height:84px; resize:vertical }
     showSlug();
   } catch (e) { /* 저장된 초안이 없거나 읽을 수 없음 */ }
 
+  // 구매한 색은 이 기기에 남은 초안보다 우선한다. 이후 구매자가 바꿀 수 있다.
+  if (SEOUL && SEOUL_THEMES.includes(requestedTheme)) {
+    form.querySelector('input[name="theme"][value="' + requestedTheme + '"]').checked = true;
+  }
+
   /* ── 사진: 브라우저에서 줄여 보낸다 ── */
   const photos = { cover: [], feature: [], gallery: [] };
   const LIMIT = { cover: 1, feature: 1, gallery: 8 };
@@ -363,7 +416,7 @@ textarea.in{ min-height:84px; resize:vertical }
   function renderThumbs(kind) {
     $('#t-' + kind).innerHTML = photos[kind].map((p, i) => `
       <div class="thumb"><img src="${p.dataUrl}" alt="">
-        ${kind === 'gallery' ? `<div class="f"><label for="cap-${i}">Caption</label><input class="in" id="cap-${i}" data-cap="${i}" value="${esc(p.caption || '')}" placeholder="Where and when"></div>` : `<span class="hint">${p.w} × ${p.h}</span>`}
+        ${kind === 'gallery' && !SEOUL ? `<div class="f"><label for="cap-${i}">Caption</label><input class="in" id="cap-${i}" data-cap="${i}" value="${esc(p.caption || '')}" placeholder="Where and when"></div>` : `<span class="hint">${p.w} × ${p.h}</span>`}
         <button class="x" type="button" data-rm="${kind}:${i}" aria-label="Remove photo">✕</button></div>`).join('');
   }
   ['cover', 'feature', 'gallery'].forEach(kind => {
@@ -450,6 +503,23 @@ textarea.in{ min-height:84px; resize:vertical }
       calendarFile: 'calendar.ics', footer: 'Made with RANGBANG'
     };
     Object.keys(cfg).forEach(k => { if (cfg[k] === null) delete cfg[k]; });
+    if (SEOUL) {
+      const theme = (form.querySelector('input[name=theme]:checked') || {}).value || 'brown';
+      // 공통 주문 모양을 쓰되 Magazine 전용 답은 Seoul에 보내지 않는다.
+      ['accent', 'issue', 'dateEnd', 'letter', 'story', 'events', 'stay', 'style', 'faq', 'submissions', 'music', 'calendarFile'].forEach(k => delete cfg[k]);
+      cfg.design = 'seoul';
+      cfg.theme = theme;
+      cfg.invited = val('invited');
+      cfg.roles = [form.roleA ? form.roleA.value : 'The Bride', form.roleB ? form.roleB.value : 'The Groom'];
+      cfg.greeting = val('letter');
+      cfg.dressCode = val('dress') || val('weather') ? { label: 'Dress Code', title: val('dress'), text: val('weather') } : null;
+      cfg.registry = { title: val('gf0-name'), url: val('gf0-url'), paypal: val('paypal'), text: val('gf0-note'), currency: 'USD', amounts: val('amounts').split(/[,\s]+/).map(Number).filter(n => n > 0 && n <= 10000) };
+      cfg.gallery.show = Number(val('galleryShow')) || 6;
+      cfg.rsvp = { endpoint: CFG.endpoint || '', meals: lines('meals') };
+      cfg.share.title = A + ' & ' + B + ' · ' + MON[m - 1] + ' ' + d + ', ' + y;
+      cfg.share.text = val('shareText');
+      cfg.share.image = cfg.photos.cover || '';
+    }
     return { slug, cfg };
   }
 
@@ -466,6 +536,15 @@ textarea.in{ min-height:84px; resize:vertical }
       if (msg && !first) first = form[n];
     });
     if (first) { first.focus(); return; }
+    if (SEOUL) {
+      $('#sendErr').textContent = '';
+      for (const n of ['gf0-url', 'paypal']) {
+        if (!val(n)) continue;
+        let ok = false;
+        try { const u = new URL(val(n)); ok = ['https:', 'http:'].includes(u.protocol) && (n !== 'paypal' || ['paypal.me', 'www.paypal.me'].includes(u.hostname)); } catch (err) { /* invalid URL */ }
+        if (!ok) { $('#sendErr').textContent = n === 'paypal' ? 'Please use a PayPal.Me link, such as https://paypal.me/yourname.' : 'Please enter a complete registry link beginning with https://.'; form.elements.namedItem(n).focus(); return; }
+      }
+    }
     const { slug, cfg } = buildConfig();
     const pics = [];
     if (photos.cover[0]) pics.push(['cover.jpg', photos.cover[0]]);
@@ -477,6 +556,7 @@ textarea.in{ min-height:84px; resize:vertical }
       notes: { writeStoryForUs: form.writeForUs.checked, other: val('notes') },
       photos: pics.map(([name, p]) => ({ name, mime: 'image/jpeg', b64: p.dataUrl.split(',')[1] }))
     };
+    if (SEOUL) { payload.design = 'seoul'; payload.theme = cfg.theme; payload.notes.writeStoryForUs = false; }
     window.__lastOrder = payload; // 확인용
     const btn = $('#send');
     const finish = sent => {

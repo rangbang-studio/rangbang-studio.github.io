@@ -7,7 +7,7 @@
 <title>Nora &amp; Theo · October 16, 2027</title>
 <meta property="og:title" content="Nora &amp; Theo · October 16, 2027">
 <meta property="og:description" content="Saturday, October 16, 2027 · Chicago">
-<meta property="og:image" content="https://rangbang-studio.github.io/seoul/images/cover.jpg">
+<meta property="og:image" content="https://rangbang-studio.github.io/seoul/images/og.jpg">
 <link rel="icon" href="../magazine/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -98,6 +98,11 @@ window.WEDDING = {
       "text": "Ask your driver for the Riverwalk entrance at Wabash Avenue."
     }
   ],
+  "dressCode": {
+    "label": "Dress Code",
+    "title": "Black Tie Optional",
+    "text": "Our celebration will be outdoors by the river, so we recommend bringing a light jacket for the evening."
+  },
   "registry": {
     "label": "Registry",
     "title": "Honeymoon Fund",
@@ -146,11 +151,7 @@ window.WEDDING = {
       "butter",
       "chartreuse"
     ],
-    "preview": [
-      "forest",
-      "cherry",
-      "sapphire"
-    ]
+    "preview": []
   },
   "photos": {
     "cover": "images/cover.jpg",
@@ -203,7 +204,7 @@ window.WEDDING = {
 (() => {
   const T = window.WEDDING.theme || {};
   const allowed = ['brown', 'emerald', 'butter', 'chartreuse'];
-  const candidates = ['forest', 'cherry', 'sapphire'];
+  const candidates = [];
   const list = (T.list || allowed).filter(x => allowed.includes(x));
   if (!list.length) list.push(allowed[0]);
   const preview = (T.preview || candidates).filter(x => candidates.includes(x));
@@ -439,6 +440,10 @@ button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent
 .maptip { margin: 14px 4px 0; font-size: 12.5px; line-height: 20px; font-weight: 400; opacity: .8; text-wrap: balance; }
 
 .way p, .party__text, .party__en, .songs li { text-wrap: balance; }
+
+.dress-code { padding: 70px var(--gutter); text-align: right; }
+.dress-code__title { margin-top: 35px; font-size: 18.5px; line-height: 24.5px; font-weight: 400; }
+.dress-code__text { margin-top: 10px; font-size: 13.5px; line-height: 24.5px; font-weight: 400; text-wrap: balance; }
 
 .gifts { padding: 70px var(--gutter) 69px; }
 .registry { margin-top: 44px; }
@@ -804,7 +809,7 @@ button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent
       <p class="greeting">${esc(W.greeting)}</p>
       ${has(W.greetingKo) ? `<p class="greeting__ko">${lines(W.greetingKo)}</p>` : ''}
     </div>
-    <div class="people" data-reveal>${person('The Bride', W.bride, 'Daughter')}${person('The Groom', W.groom, 'Son')}</div>
+    <div class="people" data-reveal>${person(W.bride.role ?? 'The Bride', W.bride, 'Daughter')}${person(W.groom.role ?? 'The Groom', W.groom, 'Son')}</div>
   </section>`;
 
   const pl = W.playlist;
@@ -880,6 +885,17 @@ button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent
     </div>
   </section>`;
 
+  const DC = W.dressCode;
+  const dressCodeOn = !!(DC && (has(DC.title) || has(DC.text)));
+  const dressCode = dressCodeOn ? `
+  <section class="dress-code" id="dress-code">
+    <div data-reveal>
+      ${label(DC.label || 'Dress Code')}
+      ${has(DC.title) ? `<h4 class="dress-code__title">${esc(DC.title)}</h4>` : ''}
+      ${has(DC.text) ? `<p class="dress-code__text">${lines(DC.text)}</p>` : ''}
+    </div>
+  </section>` : '';
+
   const RG = W.registry;
   const registryOn = !!RG;
   const gifts = registryOn ? `
@@ -936,7 +952,7 @@ button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent
     </div>
   </section>` : '';
 
-  app.innerHTML = cover + intro + calendar + gallery + venue + gifts + moments + party + playlist + share;
+  app.innerHTML = cover + intro + calendar + gallery + venue + dressCode + gifts + moments + party + playlist + share;
 
   function fadeImages(scope) {
     scope.querySelectorAll('img.fade-img').forEach(img => {
@@ -1043,6 +1059,7 @@ button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent
     { id: 'date', en: 'The Date' },
     { id: 'gallery', en: W.gallery.title },
     { id: 'venue', en: 'The Venue' },
+    { id: 'dress-code', en: dressCodeOn ? DC.label || 'Dress Code' : '' },
     { id: 'gifts', en: 'Gifts' },
     { id: 'moments', en: momentsOn ? MOM.label : '' },
     { id: 'rsvp', en: partyOn ? RSVP.label : '' },
